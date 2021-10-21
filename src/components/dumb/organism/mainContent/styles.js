@@ -1,0 +1,24 @@
+import styled from "styled-components";
+
+export const MainContent = styled.div`
+display: flex;
+flex-direction: column;
+width: 100%;
+border: 1px solid black;
+background-color: lightcoral;
+`
+
+export const RightButtons = styled.div`
+
+`
+export const LeftButtons = styled.div`
+
+`
+export const CommandBar = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+padding: 5px;
+background-color: lightgray;
+`
+
