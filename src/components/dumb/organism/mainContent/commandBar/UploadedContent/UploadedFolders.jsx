@@ -1,7 +1,8 @@
 import { Checkbox, Spin } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Folder from "./Folder";
+import FolderGridView from "../../../folders/folderGridView/FolderGridView";
+import FolderListView from "../../../folders/folderListView/FolderListView";
 import * as S from "./styles";
 
 const UploadedFolders = () => {
@@ -29,13 +30,19 @@ const UploadedFolders = () => {
     }
   };
 
+
   return (
     <div>
       {isLoading ? (
         <Spin tip="Loading..." />
       ) : (
-        folders.map((folder) => <Folder id={folder.id} name={folder.title} />)
+        <FolderListView data={folders}/>
       )}
+      {/* {isLoading ? (
+        <Spin tip="Loading..." />
+      ) : (
+        <FolderGridView data={folders}/>
+      )} */}
     </div>
   );
 };
