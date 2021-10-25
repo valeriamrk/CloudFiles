@@ -5,6 +5,7 @@ import { Header } from "antd/lib/layout/layout";
 import Search from "antd/lib/input/Search";
 import * as S from "./styles";
 import { HolderOutlined, QuestionCircleOutlined, ToolOutlined, UserOutlined } from "@ant-design/icons";
+import { MainContent } from "../mainContent/styles";
 
 const onSearch = (value) => console.log(value);
 

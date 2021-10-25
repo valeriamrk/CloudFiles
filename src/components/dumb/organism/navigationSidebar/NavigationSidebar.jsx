@@ -1,23 +1,24 @@
-import { Layout, Menu } from "antd";
-import SubMenu from "antd/lib/menu/SubMenu";
 import React from "react";
-import {
-  UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-} from "@ant-design/icons";
-import * as S from './styles'
-
+import * as S from "./styles";
+import { NavLink } from "react-router-dom";
 
 const NavigationSidebar = () => {
   return (
     <S.Sidebar>
       <div>User Name</div>
       <ul>
-        <li>All files</li>
-        <li>Photos</li>
-        <li>Shared files</li>
-        <li>Recycle bin</li>
+        <li>
+          <NavLink to="/allfiles">All files</NavLink>
+        </li>
+        <li>
+          <NavLink to="/photos">Photos</NavLink>
+        </li>
+        <li>
+          <NavLink to="/sharedfiles">Shared files</NavLink>
+        </li>
+        <li>
+          <NavLink to="/recyclebin">Recycle bin</NavLink>
+        </li>
       </ul>
     </S.Sidebar>
   );

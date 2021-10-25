@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
+export const Content = styled.div`
+    /* grid-area: c; */
+`
+
 export const MainContent = styled.div`
+    grid-area: c;
+
 display: flex;
 flex-direction: column;
 width: 100%;

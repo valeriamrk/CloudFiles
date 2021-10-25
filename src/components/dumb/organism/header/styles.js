@@ -2,9 +2,13 @@ import styled from "styled-components";
 import { Button } from 'antd'
 import Search from 'antd/lib/input/Search'
 
-
+export const HeaderContainer = styled.div`
+    /* grid-area: h; */
+`
 
 export const Header = styled.div `
+    grid-area: h;
+
 display: flex;
 flex-direction: row;
 justify-content: space-between;
