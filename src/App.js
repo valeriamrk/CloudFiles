@@ -19,7 +19,6 @@ function App() {
           <Route path="/photos" render={Photos} />
           <Route path="/sharedfiles" render={SharedFiles} />
           <Route path="/recyclebin" render={RecycleBin} />
-        {/* <MainContent /> */}
       </div>
     </div>
   );

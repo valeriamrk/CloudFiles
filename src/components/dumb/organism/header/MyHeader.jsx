@@ -6,6 +6,7 @@ import Search from "antd/lib/input/Search";
 import * as S from "./styles";
 import { HolderOutlined, QuestionCircleOutlined, ToolOutlined, UserOutlined } from "@ant-design/icons";
 import { MainContent } from "../mainContent/styles";
+import MyButton from "../../atoms/MyButton";
 
 const onSearch = (value) => console.log(value);
 
@@ -17,9 +18,12 @@ const MyHeader = () => {
       </div>
       <S.MySearch placeholder="input search text" allowClear onSearch={onSearch}  />
       <S.BtnRight>
-        <S.MyButton icon={<ToolOutlined />}></S.MyButton>
+        <MyButton>Settings</MyButton>
+        <MyButton>Help</MyButton>
+        <MyButton>Login</MyButton>
+        {/* <S.MyButton icon={<ToolOutlined />}></S.MyButton>
         <S.MyButton icon={<QuestionCircleOutlined />}></S.MyButton>
-        <S.MyButton icon={<UserOutlined />}></S.MyButton>
+        <S.MyButton icon={<UserOutlined />}></S.MyButton> */}
       </S.BtnRight>
     </S.Header>
   );

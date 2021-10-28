@@ -18,8 +18,7 @@ background-color: lightblue;
 padding-right: 8px;
 padding-left: 8px;
 `
-export const MyButton = styled(Button) `
-`
+
 export const MySearch = styled(Search) `
 width: 250px;
 `
@@ -31,7 +30,7 @@ margin-left: 20px;
 export const BtnRight = styled.div `
 display: flex;
 justify-content: space-between;
-width: 100px;
+/* border: 1px solid black; */
 `
 
 

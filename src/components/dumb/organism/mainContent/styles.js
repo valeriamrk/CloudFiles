@@ -5,8 +5,7 @@ export const Content = styled.div`
 `
 
 export const MainContent = styled.div`
-    grid-area: c;
-
+grid-area: c;
 display: flex;
 flex-direction: column;
 width: 100%;
@@ -15,10 +14,13 @@ background-color: lightcoral;
 `
 
 export const RightButtons = styled.div`
-
+display: flex;
+flex-direction: row;
 `
 export const LeftButtons = styled.div`
-
+display: flex;
+flex-direction: row;
+/* border: 1px solid black; */
 `
 export const CommandBar = styled.div`
 display: flex;

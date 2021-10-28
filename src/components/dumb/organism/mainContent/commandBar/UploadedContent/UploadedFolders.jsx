@@ -33,16 +33,16 @@ const UploadedFolders = () => {
 
   return (
     <div>
-      {isLoading ? (
-        <Spin tip="Loading..." />
-      ) : (
-        <FolderListView data={folders}/>
-      )}
       {/* {isLoading ? (
         <Spin tip="Loading..." />
       ) : (
         <FolderGridView data={folders}/>
       )} */}
+      {isLoading ? (
+        <Spin tip="Loading..." />
+      ) : (
+        <FolderListView data={folders}/>
+      )}
     </div>
   );
 };

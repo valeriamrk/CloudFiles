@@ -1,5 +1,5 @@
 import React from 'react'
-import Folder from '../../mainContent/commandBar/UploadedContent/Folder'
+import FolderGridViewItem from './FolderGridViewItem';
 import * as S from './styles'
 
 
@@ -10,7 +10,7 @@ const FolderGridView = (props) => {
 
   return (
     <S.GridView>
-    {data.map((element) => <Folder id={element.id} name={element.title}/>)}
+    {data.map((element) => <FolderGridViewItem id={element.id} name={element.title}/>)}
   </S.GridView>
   )
 }
