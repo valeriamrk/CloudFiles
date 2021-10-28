@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { Button } from 'antd'
-import Search from 'antd/lib/input/Search'
 
 export const HeaderContainer = styled.div`
     /* grid-area: h; */
@@ -19,9 +17,6 @@ padding-right: 8px;
 padding-left: 8px;
 `
 
-export const MySearch = styled(Search) `
-width: 250px;
-`
 export const Logo = styled.img `
 width: 70px;
 margin-left: 20px;

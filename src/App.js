@@ -1,5 +1,3 @@
-import { Button, Layout } from "antd";
-import "antd/dist/antd.css";
 import MyHeader from "./components/dumb/organism/header/MyHeader";
 import MainContent from "./components/dumb/organism/mainContent/MainContent";
 import NavigationSidebar from "./components/dumb/organism/navigationSidebar/NavigationSidebar";

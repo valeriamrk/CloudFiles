@@ -1,6 +1,4 @@
-import { Checkbox } from 'antd'
 import React from 'react'
-import Folder from '../folderGridView/FolderGridViewItem';
 import FolderListViewItem from './FolderListViewItem';
 import * as S from './styles'
 

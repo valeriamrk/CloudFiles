@@ -56,3 +56,13 @@ export const Dropdown = styled.div`
     }
   }
 `;
+
+// 3. Input field
+export const InputField = styled.input`
+  width: 235px;
+  outline: none;
+  font-size: 13px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 10px;
+`;

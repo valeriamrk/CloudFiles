@@ -1,4 +1,3 @@
-import { Checkbox, Spin } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import FolderGridView from "../../../folders/folderGridView/FolderGridView";
@@ -34,12 +33,12 @@ const UploadedFolders = () => {
   return (
     <div>
       {/* {isLoading ? (
-        <Spin tip="Loading..." />
+        <h3>loading</h3>
       ) : (
         <FolderGridView data={folders}/>
       )} */}
       {isLoading ? (
-        <Spin tip="Loading..." />
+        <h3>loading</h3>
       ) : (
         <FolderListView data={folders}/>
       )}
