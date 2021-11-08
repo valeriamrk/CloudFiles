@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./styles";
 
-const SortDropdownBtn = () => {
+const SortDropdownBtn = (props) => {
   return (
     <div>
       <S.Dropdown>

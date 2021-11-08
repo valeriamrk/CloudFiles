@@ -3,10 +3,13 @@ import MyButton from "../../../atoms/MyButton";
 import NewFileDropdownBtn from "../../../atoms/NewFileDropdownBtn";
 import SortDropdownBtn from "../../../atoms/SortDropdownBtn";
 import UploadDropdownBtn from "../../../atoms/UploadDropdownBtn";
-import MyDropdownBtn from "../../../atoms/ViewDropdownBtn";
+import ViewDropdownBtn from "../../../atoms/ViewDropdownBtn";
 import * as S from "../styles";
 
-const CommandBar = () => {
+const CommandBar = (props) => {
+
+const {changeView, dropdownButtonsData} = props
+
   return (
     <S.CommandBar>
       <S.RightButtons>
@@ -15,8 +18,8 @@ const CommandBar = () => {
       </S.RightButtons>
 
       <S.LeftButtons>
-        <SortDropdownBtn />
-        <MyDropdownBtn />
+        <SortDropdownBtn/>
+        <ViewDropdownBtn buttonClick={changeView} dropdownButtonsData={dropdownButtonsData}/>
         <MyButton>Info</MyButton>
       </S.LeftButtons>
     </S.CommandBar>

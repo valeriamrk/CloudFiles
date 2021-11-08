@@ -15,4 +15,8 @@ export const ListStyle = styled.div`
 display: flex;
 flex-direction: row;
 align-items: center;
+&:hover {
+    background-color: #DEF2F1;
+    cursor: pointer;
+  }
 `

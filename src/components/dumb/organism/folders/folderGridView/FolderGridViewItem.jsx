@@ -1,17 +1,19 @@
-import React from 'react'
-import * as S from './styles'
-
+import React from "react";
+import * as S from "./styles";
 
 const FolderGridViewItem = (props) => {
   return (
-    <S.ListStyle>
-      <S.FolderImg src="https://s3.amazonaws.com/media-p.slid.es/uploads/644286/images/3450303/folder.png" alt="folder icon"/>
+    <S.GridStyle>
+      <S.FolderImg
+        src="https://s3.amazonaws.com/media-p.slid.es/uploads/644286/images/3450303/folder.png"
+        alt="folder icon"
+      />
       {/* <div>{props.id}.</div> */}
-      <div>{props.name}</div>
+      <S.FolderName>
+        <S.TextContainer>{props.name}</S.TextContainer>
+      </S.FolderName>
+    </S.GridStyle>
+  );
+};
 
-    </S.ListStyle>
-  )
-}
-
-export default FolderGridViewItem
-
+export default FolderGridViewItem;

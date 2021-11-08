@@ -1,18 +1,35 @@
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .App {
-    display: grid;
-    grid-template-rows: 60px 1fr;
-    grid-template-columns: 2fr 10fr;
-    grid-template-areas: "h h" "n c";
-    width: 1200px;
-    margin: 0 auto;
-  
-  }
+  display: grid;
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+  grid-template-areas: "h h" "n c";
+  width: 1200px;
+  height: 100vh;
+  margin: 0 auto;
+}
 
 .main-wrapper {
   grid-area: c;
   display: flex;
   flex-direction: row;
   width: 100%;
-  background-color: lightcoral;
+  /* background-color: lightcoral; */
+}
 
+.loginPage {
+  /* background: rgb(58,175,169);
+background: radial-gradient(circle, rgba(58,175,169,1) 0%, rgba(222,242,241,1) 100%); */
+/* background: rgb(58,175,169);
+background: radial-gradient(circle, rgba(58,175,169,0.7682423311121324) 0%, rgba(222,242,241,1) 100%); */
+background: rgb(58,175,169);
+background: radial-gradient(circle, rgba(58,175,169,0.6253851882549895) 0%, rgba(222,242,241,1) 100%);
 }

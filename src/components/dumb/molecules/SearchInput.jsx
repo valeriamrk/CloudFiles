@@ -3,7 +3,9 @@ import * as S from "./styles";
 import MyButton from "../atoms/MyButton";
 import InputField from "../atoms/InputField";
 
-const SearchInput = () => {
+const SearchInput = (props) => {
+
+
 
   return (
       <S.InputItem>

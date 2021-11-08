@@ -1,16 +1,21 @@
 import styled from "styled-components";
 
-export const Content = styled.div`
-    /* grid-area: c; */
-`
 
 export const MainContent = styled.div`
 grid-area: c;
 display: flex;
 flex-direction: column;
+position: relative;
 width: 100%;
-border: 1px solid black;
-background-color: lightcoral;
+/* height: 600px; */
+/* border: 1px solid black; */
+/* background-color: #fffffb; */
+background-color: #FEFFFF;
+
+`
+
+export const AllContent = styled.div `
+
 `
 
 export const RightButtons = styled.div`
@@ -27,6 +32,10 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 padding: 5px;
-background-color: lightgray;
+/* background-color: #fffffb; */
+background-color: #DEF2F1;
+/* background-color: lightgray; */
+border-bottom: 1px solid #2B7A78;
+
 `
 

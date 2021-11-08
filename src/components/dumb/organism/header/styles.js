@@ -11,8 +11,9 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 align-items: center;
-border: 1px solid black;
-background-color: lightblue;
+/* border: 1px solid black; */
+/* background-color: lightblue; */
+background-color: #3AAFA9;
 padding-right: 8px;
 padding-left: 8px;
 `
