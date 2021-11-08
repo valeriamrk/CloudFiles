@@ -3,7 +3,8 @@ import * as S from "./styles";
 
 const FolderGridViewItem = (props) => {
   return (
-    <S.GridStyle>
+    <S.GridStyle onDoubleClick={() => console.log("openfile")}>
+      <S.Checkbox type="checkbox"></S.Checkbox>
       <S.FolderImg
         src="https://s3.amazonaws.com/media-p.slid.es/uploads/644286/images/3450303/folder.png"
         alt="folder icon"

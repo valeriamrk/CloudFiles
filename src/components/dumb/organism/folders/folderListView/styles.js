@@ -3,6 +3,10 @@ import styled from "styled-components";
 export const FolderImg = styled.img`
 width: 50px;
 `
+export const Checkbox = styled.input`
+display: block;
+visibility: hidden;
+`
 
 export const ListView = styled.div`
 display: flex;
@@ -18,5 +22,8 @@ align-items: center;
 &:hover {
     background-color: #DEF2F1;
     cursor: pointer;
-  }
+    ${Checkbox} {
+      visibility: visible
+    };
+  };
 `

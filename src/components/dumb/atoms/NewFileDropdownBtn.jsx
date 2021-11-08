@@ -1,16 +1,24 @@
 import React from "react";
 import * as S from "./styles";
 
-const NewFileDropdownBtn = () => {
+const NewFileDropdownBtn = (props) => {
+
+  const { buttonClick, newFileButtonsData } = props;
+
+  const handleButtonClick = (id, value) => {
+    buttonClick(id, value);
+  };
+  
   return (
     <div>
       <S.Dropdown>
         <S.DropdownBtn>New file</S.DropdownBtn>
         <S.DropdownContent>
-          <S.DropdownLinks href="#">Folder</S.DropdownLinks>
-          <S.DropdownLinks href="#">MS Word</S.DropdownLinks>
-          <S.DropdownLinks href="#">MS Excel</S.DropdownLinks>
-          <S.DropdownLinks href="#">MS PowerPoint</S.DropdownLinks>
+        {newFileButtonsData.map((element) => (
+          <S.DropdownLinks onClick={() => handleButtonClick(element.id, element.value)} href="#">
+          <S.Value>{element.value}</S.Value>
+        </S.DropdownLinks>
+        ))}
         </S.DropdownContent>
       </S.Dropdown>
     </div>
