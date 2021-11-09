@@ -16,6 +16,13 @@ export const UserName = styled.div`
   margin-bottom: 24px;
 `;
 
+export const Icons = styled.div`
+padding-right: 10px;
+height: 100%;
+display: flex;
+align-items: center;
+`
+
 /* export const List = styled.ul`
   list-style: none;
   padding-left: 16px;
@@ -47,6 +54,7 @@ export const Links = styled(NavLink)`
 
 export const LinksWrapper = styled.div`
   display: flex;
+  flex-direction: row;
   align-items: center;
   padding-left: 16px;
   height: 36px;
@@ -56,7 +64,12 @@ export const LinksWrapper = styled.div`
     background-color: #3aafa9;
     ${Links} {
       color: #feffff;
+    };
+    ${Icons} {
+      color: #feffff;
+
     }
   };
   cursor: pointer;
 `;
+

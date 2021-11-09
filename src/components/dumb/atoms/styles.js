@@ -25,7 +25,10 @@ export const MyButton = styled.button`
 
 
 export const DropdownBtn = styled.button`
+  display: flex;
+  flex-direction: row;
   background-color: #FEFFFF;
+  /* background: none; */
   color: black;
   padding: 8px;
   border: none;

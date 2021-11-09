@@ -1,21 +1,22 @@
 import styled from "styled-components";
 
 export const FolderImg = styled.img`
-  width: 100px;
+  width: 120px;
 `;
 
 export const Checkbox = styled.input`
 display: block;
+/* visibility: visible; */
 visibility: hidden;
-align-self: flex-start;
-margin-left: 15px;
+align-self: flex-end;
+margin-right: 8px;
 `
 
 export const GridView = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   /* padding: 15px; */
-  margin: 15px;
+  margin: 16px 36px 36px 36px
 `;
 
 export const GridStyle = styled.div`
@@ -28,7 +29,7 @@ margin: 15px; */
   align-items: center;
   width: 140px;
   height: 140px;
-  padding: 6px;
+  margin: 8px;
   &:hover {
     background-color: #def2f1;
     cursor: pointer;

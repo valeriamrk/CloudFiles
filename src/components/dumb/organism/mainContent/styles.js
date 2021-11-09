@@ -31,7 +31,7 @@ export const CommandBar = styled.div`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
-padding: 5px;
+padding: 8px;
 /* background-color: #fffffb; */
 background-color: #DEF2F1;
 /* background-color: lightgray; */

@@ -13,3 +13,10 @@ width: 100%;
 export const Loader = styled.img`
 width: 50px;
 `
+
+export const Title = styled.div`
+font-size: 24px;
+margin: 36px 36px 16px 48px;
+/* margin-bottom: 8px; */
+
+`

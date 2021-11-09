@@ -10,6 +10,7 @@ const UploadedFolders = (props) => {
 
   return (
     <S.UploadedContent>
+      <S.Title>All files</S.Title>
       {gridView ? <FolderGridView data={data}/> : <FolderListView data={data} />}
     </S.UploadedContent>
   );

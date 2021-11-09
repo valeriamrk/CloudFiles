@@ -6,6 +6,7 @@ import UploadDropdownBtn from "../../../atoms/UploadDropdownBtn";
 import ViewDropdownBtn from "../../../atoms/ViewDropdownBtn";
 import * as S from "../styles";
 
+
 const CommandBar = (props) => {
   const {
     changeView,
