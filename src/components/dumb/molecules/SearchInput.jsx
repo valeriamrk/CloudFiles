@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import * as S from "./styles";
 import MyButton from "../atoms/MyButton";
 import InputField from "../atoms/InputField";
+import { BsSearch } from "react-icons/bs";
+
 
 const SearchInput = (props) => {
 
@@ -13,7 +15,7 @@ const SearchInput = (props) => {
           placeholder="search all you need"
           type="text"
         />
-        <MyButton>Search</MyButton>
+        <MyButton><BsSearch/></MyButton>
       </S.InputItem>
   );
 };

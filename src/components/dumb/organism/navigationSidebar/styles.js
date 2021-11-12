@@ -5,71 +5,54 @@ export const Sidebar = styled.div`
   grid-area: n;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   border-right: 1px solid #2b7a78;
   height: 100%;
   background-color: #def2f1;
-  /* background-color: lightyellow; */
 `;
 
+export const LinksContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+`
+
 export const UserName = styled.div`
-  margin: 16px;
-  margin-bottom: 24px;
+  margin: 16px 0px 24px 24px;
 `;
 
 export const Icons = styled.div`
-padding-right: 10px;
-height: 100%;
-display: flex;
-align-items: center;
-`
-
-/* export const List = styled.ul`
-  list-style: none;
-  padding-left: 16px;
-  padding-bottom: 16px;
-`
-
-export const ListItem = styled.li`
-  padding-left: 16px;
-  padding-bottom: 16px;
-  &:hover {
-    color: #FEFFFF;
-    background-color: #3AAFA9;
-  }
-` */
+  padding-right: 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+`;
 
 export const Links = styled(NavLink)`
-  /* display: flex;
-  flex-direction: column;
-  align-items: center; */
-  /* padding-left: 16px;
-  padding-bottom: 16px; */
   text-decoration: none;
   color: black;
-  /* &:hover {
-    color: #FEFFFF; */
-    /* background-color: #3AAFA9; */
-  }
 `;
 
 export const LinksWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-left: 16px;
-  height: 36px;
+  padding-left: 24px;
+  height: 40px;
   text-decoration: none;
   color: black;
   &:hover {
     background-color: #3aafa9;
     ${Links} {
       color: #feffff;
-    };
+    }
     ${Icons} {
       color: #feffff;
-
     }
-  };
+  }
   cursor: pointer;
 `;
 
+export const BottomContent = styled.div`
+  margin: 16px 0px 24px 24px;
+`

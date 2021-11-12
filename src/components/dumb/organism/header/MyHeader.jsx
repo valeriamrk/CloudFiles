@@ -3,6 +3,8 @@ import React from "react";
 import * as S from "./styles";
 import MyButton from "../../atoms/MyButton";
 import SearchInput from "../../molecules/SearchInput";
+import { BsGear, BsQuestionCircle, BsPerson } from "react-icons/bs";
+
 
 const MyHeader = (props) => {
   
@@ -14,9 +16,9 @@ const MyHeader = (props) => {
       </div>
       <SearchInput />
       <S.BtnRight>
-        <MyButton>Settings</MyButton>
-        <MyButton>Help</MyButton>
-        <MyButton>Login</MyButton>
+        <MyButton><BsGear/></MyButton>
+        <MyButton><BsQuestionCircle/></MyButton>
+        <MyButton><BsPerson/></MyButton>
       </S.BtnRight>
     </S.Header>
   );

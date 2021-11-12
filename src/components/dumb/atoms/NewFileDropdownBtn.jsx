@@ -1,6 +1,6 @@
 import React from "react";
 import * as S from "./styles";
-import { BsPlusLg, BsChevronDown } from "react-icons/bs";
+import { BsPlusLg, BsChevronDown, BsPlusSquare } from "react-icons/bs";
 
 const NewFileDropdownBtn = (props) => {
   const { buttonClick, newFileButtonsData } = props;
@@ -13,20 +13,20 @@ const NewFileDropdownBtn = (props) => {
     <div>
       <S.Dropdown>
         <S.DropdownBtn>
-          <div>
-            <BsPlusLg />
-          </div>
+          <S.Icons>
+            <BsPlusSquare />
+          </S.Icons>
           <div>New file</div>
-          <div><BsChevronDown/></div>
+          <S.Icons><BsChevronDown/></S.Icons>
         </S.DropdownBtn>
         <S.DropdownContent>
           {newFileButtonsData.map((element) => (
-            <S.DropdownLinks
+            <S.DropdownListItem
               onClick={() => handleButtonClick(element.id, element.value)}
               href="#"
             >
               <S.Value>{element.value}</S.Value>
-            </S.DropdownLinks>
+            </S.DropdownListItem>
           ))}
         </S.DropdownContent>
       </S.Dropdown>

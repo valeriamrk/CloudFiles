@@ -1,6 +1,8 @@
 import React from "react";
 import { BsCheck2 } from "react-icons/bs";
 import * as S from "./styles";
+import { BsSortDown, BsChevronDown, BsPlusSquare } from "react-icons/bs";
+
 
 const SortDropdownBtn = (props) => {
 
@@ -13,13 +15,18 @@ const SortDropdownBtn = (props) => {
   return (
     <div>
       <S.Dropdown>
-        <S.DropdownBtn>Sort</S.DropdownBtn>
+        <S.DropdownBtn>          <S.Icons>
+            <BsSortDown />
+          </S.Icons>
+          <div>Sort</div>
+          <S.Icons><BsChevronDown/></S.Icons>
+</S.DropdownBtn>
         <S.DropdownContent>
         {sortButtonsData.map((element) => (
-          <S.DropdownLinks onClick={() => handleButtonClick(element.id, element.value)} href="#">
+          <S.DropdownListItem onClick={() => handleButtonClick(element.id, element.value)} href="#">
           <S.Checked>{element.checked ? <BsCheck2/> : ""}</S.Checked>
           <S.Value>{element.value}</S.Value>
-        </S.DropdownLinks>
+        </S.DropdownListItem>
         ))}
         </S.DropdownContent>
       </S.Dropdown>

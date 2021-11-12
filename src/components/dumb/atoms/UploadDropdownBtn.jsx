@@ -1,8 +1,8 @@
 import React from "react";
 import * as S from "./styles";
+import { BsUpload, BsChevronDown } from "react-icons/bs";
 
 const UploadDropdownBtn = (props) => {
-
   const { buttonClick, uploadFileButtonsData } = props;
 
   const handleButtonClick = (id, value) => {
@@ -12,13 +12,25 @@ const UploadDropdownBtn = (props) => {
   return (
     <div>
       <S.Dropdown>
-        <S.DropdownBtn>Upload</S.DropdownBtn>
+        <S.DropdownBtn>
+          {" "}
+          <S.Icons>
+            <BsUpload />
+          </S.Icons>
+          <div>Upload</div>
+          <S.Icons>
+            <BsChevronDown />
+          </S.Icons>
+        </S.DropdownBtn>
         <S.DropdownContent>
-        {uploadFileButtonsData.map((element) => (
-          <S.DropdownLinks onClick={() => handleButtonClick(element.id, element.value)} href="#">
-          <S.Value>{element.value}</S.Value>
-        </S.DropdownLinks>
-        ))}
+          {uploadFileButtonsData.map((element) => (
+            <S.DropdownListItem
+              onClick={() => handleButtonClick(element.id, element.value)}
+              href="#"
+            >
+              <S.Value>{element.value}</S.Value>
+            </S.DropdownListItem>
+          ))}
         </S.DropdownContent>
       </S.Dropdown>
     </div>

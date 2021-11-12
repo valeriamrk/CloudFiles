@@ -1,13 +1,16 @@
-import React from 'react'
+import React from "react";
 import * as S from "./styles";
 
+const MyButton = (props) => {
+  const { startIcon, endIcon, children } = props;
 
-const MyButton = ({ children, ...props }) => {
   return (
-    <div>
-      <S.MyButton {...props}>{children}</S.MyButton>
-    </div>
-  )
-}
+    <S.MyButton>
+      {startIcon && <S.Icons>{startIcon}</S.Icons>}
+      <S.Value>{children}</S.Value>
+      {endIcon && <S.Icons>{endIcon}</S.Icons>}
+    </S.MyButton>
+  );
+};
 
-export default MyButton
+export default MyButton;

@@ -14,7 +14,7 @@ const MainContent = (props) => {
   const [folders, setFolders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [gridView, setGridView] = useState(true);
-  const [dropdownButtonsData, setDropdownButtonsData] = useState([
+  const [viewButtonsData, setViewButtonsData] = useState([
     { id: uuidv4(), value: "List", checked: false },
     { id: uuidv4(), value: "Tiles", checked: true },
   ]);
@@ -24,16 +24,36 @@ const MainContent = (props) => {
   ]);
   const [newFileButtonsData, setNewFileButtonsData] = useState([
     { id: uuidv4(), value: "Folder" },
-    { id: uuidv4(), value: "TXT file"},
-    { id: uuidv4(), value: "Word document"},
-    { id: uuidv4(), value: "Excel workbook"},
+    { id: uuidv4(), value: "TXT file" },
+    { id: uuidv4(), value: "Word document" },
+    { id: uuidv4(), value: "Excel workbook" },
   ]);
 
   const [uploadFileButtonsData, setUploadFileButtonsData] = useState([
     { id: uuidv4(), value: "File" },
-    { id: uuidv4(), value: "Folder"},
+    { id: uuidv4(), value: "Folder" },
   ]);
 
+  const [dropdownButtonsData, setDropdownButtonsData] = useState({
+      viewButtonsData: [
+        { id: uuidv4(), value: "List", checked: false },
+        { id: uuidv4(), value: "Tiles", checked: true },
+      ],
+      sortButtonsData: [
+        { id: uuidv4(), value: "A - Z", checked: true },
+        { id: uuidv4(), value: "Z - A", checked: false },
+      ],
+      newFileButtonsData: [
+        { id: uuidv4(), value: "Folder" },
+        { id: uuidv4(), value: "TXT file" },
+        { id: uuidv4(), value: "Word document" },
+        { id: uuidv4(), value: "Excel workbook" },
+      ],
+      uploadFileButtonsData: [
+        { id: uuidv4(), value: "File" },
+        { id: uuidv4(), value: "Folder" },
+      ],
+    });
 
   const sendGetRequest = async () => {
     try {
@@ -51,7 +71,7 @@ const MainContent = (props) => {
   };
 
   const changeView = (id, value) => {
-    const changedDropdownButtonsData = dropdownButtonsData.map((element) => {
+    const changedViewButtonsData = dropdownButtonsData.viewButtonsData.map((element) => {
       if (element.id === id) {
         element.checked = true;
       } else {
@@ -59,7 +79,7 @@ const MainContent = (props) => {
       }
       return element;
     });
-    setDropdownButtonsData(changedDropdownButtonsData);
+    setViewButtonsData(changedViewButtonsData);
 
     if (value === "Tiles") {
       setGridView(true);
@@ -69,22 +89,23 @@ const MainContent = (props) => {
   };
 
   const sortFilter = () => {
-    console.log("sort")
+    console.log("sort");
   };
 
   const addNewFile = () => {
-    console.log("newfile")
+    console.log("newfile");
   };
 
   const uploadFile = () => {
-    console.log("uploadfile")
+    console.log("uploadfile");
   };
 
   return (
     <S.MainContent>
       <CommandBar
-        changeView={changeView}
         dropdownButtonsData={dropdownButtonsData}
+        changeView={changeView}
+        viewButtonsData={viewButtonsData}
         sortButtonsData={sortButtonsData}
         sortFilter={sortFilter}
         addNewFile={addNewFile}
@@ -93,6 +114,7 @@ const MainContent = (props) => {
         uploadFile={uploadFile}
       />
       {/* <S.AllContent> */}
+      <S.Title>All files</S.Title>
       {isLoading ? (
         <Loader />
       ) : (

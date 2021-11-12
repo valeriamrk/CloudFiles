@@ -1,38 +1,50 @@
-import styled from "styled-components";
-import { AiOutlineUpload } from "react-icons/ai"
-
-
+import styled from "styled-components/macro";
 
 // 1. Button
 
 export const MyButton = styled.button`
-  background-color: #FEFFFF;
-  /* background-color: white; */
+  /* background: none;
   color: black;
   border: none;
   margin-left: 4px;
   padding: 8px;
+  padding: 16px 8px 16px 8px;
   font-size: 14px;
   &:hover {
     background-color: #2B7A78;
-    /* background-color: #ddd */
     color: #EDEAE5
   };
+  cursor: pointer; */
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* background-color: #FEFFFF; */
+  background: none;
+  color: black;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  /* padding: 16px 8px 16px 8px; */
+  border: none;
+  font-size: 14px;
   cursor: pointer;
-  `
+
+  &:hover {
+    background-color: #d1e8e2;
+  }
+`;
 
 // 2. Dropdown button
-
 
 export const DropdownBtn = styled.button`
   display: flex;
   flex-direction: row;
-  background-color: #FEFFFF;
-  /* background: none; */
+  /* background-color: #FEFFFF; */
+  background: none;
   color: black;
-  padding: 8px;
+  padding: 16px 8px 16px 8px;
   border: none;
-  margin-left: 4px;
   font-size: 14px;
   cursor: pointer;
 `;
@@ -40,43 +52,62 @@ export const DropdownBtn = styled.button`
 export const DropdownContent = styled.div`
   display: none;
   position: absolute;
-  background-color: #FEFFFF;
-  width: 100px;
+  width: 200px;
+  background-color: #feffff;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   cursor: pointer;
 `;
 
-export const DropdownLinks = styled.div`
+export const DropdownListItem = styled.div`
   color: black;
-  padding: 12px 16px;
+  padding: 8px 16px;
   text-decoration: none;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: center;
   &:hover {
-    background-color: #DEF2F1
+    background-color: #def2f1;
   }
-`
+`;
 export const Dropdown = styled.div`
   position: relative;
   display: inline-block;
+  height: 100%;
+
   &:hover {
     ${DropdownContent} {
-      display: block
-    };
-    ${DropdownBtn}{
-      background-color: #2B7A78;
-      color: #FEFFFF;
+      display: block;
+    }
+    ${DropdownBtn} {
+      /* background-color: #2B7A78; */
+      background-color: #d1e8e2;
+      /* color: #FEFFFF; */
+    }
+    ${MyButton} {
+      /* background-color: #2B7A78; */
+      background-color: #d1e8e2;
+      /* color: #FEFFFF; */
     }
   }
 `;
 
 export const Checked = styled.div`
-`
+  /* visibility: hidden; */
+  visibility: ${(element) => (element.checked ? "visible" : "")};
+`;
 export const Value = styled.div`
-margin-left: 5px;
-`
+
+  /* margin-left: 5px; */
+`;
+export const Icons = styled.div`
+  padding-right: 6px;
+  padding-left: 6px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+`;
 
 // 3. Input field
 export const InputField = styled.input`
@@ -87,5 +118,3 @@ export const InputField = styled.input`
   padding-bottom: 8px;
   padding-left: 10px;
 `;
-
-
