@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 import * as S from "./styles";
 import MyButton from "../../atoms/MyButton";
 import SearchInput from "../../molecules/SearchInput";
 import { BsGear, BsQuestionCircle, BsPerson } from "react-icons/bs";
+import MyModal from "../modal/MyModal";
 
 
 const MyHeader = (props) => {
   
+  const {handleOpen} = props
 
   return (
     <S.Header>
@@ -16,7 +18,7 @@ const MyHeader = (props) => {
       </div>
       <SearchInput />
       <S.BtnRight>
-        <MyButton><BsGear/></MyButton>
+        <MyButton clickButton={handleOpen}><BsGear/></MyButton>
         <MyButton><BsQuestionCircle/></MyButton>
         <MyButton><BsPerson/></MyButton>
       </S.BtnRight>

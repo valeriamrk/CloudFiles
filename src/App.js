@@ -7,15 +7,23 @@ import Photos from "./components/pages/Photos";
 import RecycleBin from "./components/pages/RecycleBin";
 import SharedFiles from "./components/pages/SharedFiles";
 import LoginPage from "./components/pages/LoginPage";
+import MyModal from "./components/dumb/organism/modal/MyModal";
+import { useState } from "react";
 
 function App() {
   const isAuth = true;
+  const [modalActive, setModalActive] = useState(false);
+  const handleOpen = () => {
+    setModalActive(true);
+    console.log("gregg");
+  };
+  const handleClose = () => setModalActive(false);
 
   return (
     <>
       {isAuth ? (
         <div className="App">
-          <MyHeader />
+          <MyHeader handleOpen={handleOpen} />
           <NavigationSidebar />
           <div className="main-wrapper">
             <Route path="/allfiles" render={() => <MainContent />} />
@@ -23,6 +31,7 @@ function App() {
             <Route path="/sharedfiles" render={SharedFiles} />
             <Route path="/recyclebin" render={RecycleBin} />
           </div>
+          <MyModal modalActive={modalActive} handleClose={handleClose} />
         </div>
       ) : (
         <div className="loginPage">

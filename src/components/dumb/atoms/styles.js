@@ -23,7 +23,7 @@ export const MyButton = styled.button`
   background: none;
   color: black;
   height: 100%;
-  padding: 0;
+  padding: ${props => props.justIcon ? "16px" : "0"};
   margin: 0;
   /* padding: 16px 8px 16px 8px; */
   border: none;
