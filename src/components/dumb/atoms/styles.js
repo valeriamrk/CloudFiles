@@ -9,7 +9,7 @@ export const MyButton = styled.button`
   background: none;
   color: black;
   height: 100%;
-  padding: ${props => props.justIcon ? "16px" : "0"};
+  padding: ${props => props.justIcon ? "16px" : "4"};
   margin: 0;
   /* padding: 16px 8px 16px 8px; */
   border: none;
@@ -85,12 +85,11 @@ export const Checked = styled.div`
   visibility: ${(element) => (element.checked ? "visible" : "")};
 `;
 export const Value = styled.div`
-
-  /* margin-left: 5px; */
+padding: 4px;
 `;
 export const Icons = styled.div`
-  padding-right: 6px;
-  padding-left: 6px;
+  padding-right: 4px;
+  padding-left: 4px;
   height: 100%;
   display: flex;
   align-items: center;

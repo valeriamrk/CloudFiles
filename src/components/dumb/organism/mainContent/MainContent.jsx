@@ -5,6 +5,7 @@ import CommandBar from "./commandBar/CommandBar";
 import UploadedFolders from "./commandBar/UploadedContent/UploadedFolders";
 import * as S from "./styles";
 import { v4 as uuidv4 } from "uuid";
+import CommandMenu from "./commandBar/CommandMenu";
 
 const MainContent = (props) => {
   useEffect(() => {
@@ -100,6 +101,25 @@ const MainContent = (props) => {
     console.log("uploadfile");
   };
 
+  const shareFile = () => {
+    console.log("sharefile");
+  };
+  const deleteFile = () => {
+    console.log("deletefile");
+  };
+  const moveFile = () => {
+    console.log("movefile");
+  };
+  const copyFile = () => {
+    console.log("copyfile");
+  };
+  const renameFile = () => {
+    console.log("renamefile");
+  };
+  const cancelCelectionFile = () => {
+    console.log("cancelCelectionfile");
+  };
+
   return (
     <S.MainContent>
       <CommandBar
@@ -113,6 +133,8 @@ const MainContent = (props) => {
         uploadFileButtonsData={uploadFileButtonsData}
         uploadFile={uploadFile}
       />
+      <CommandMenu shareFile={shareFile} deleteFile={deleteFile}  moveFile={moveFile} copyFile={copyFile} renameFile={renameFile} cancelCelectionFile={cancelCelectionFile}/>
+
       {/* <S.AllContent> */}
       <S.Title>All files</S.Title>
       {isLoading ? (

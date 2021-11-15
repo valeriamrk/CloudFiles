@@ -50,3 +50,16 @@ margin: 36px 36px 16px 48px;
 /* margin-bottom: 8px; */
 
 `
+
+export const CommandMenu = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: flex-start;
+height: 44px;
+/* padding: 8px; */
+/* background-color: #fffffb; */
+background-color: #DEF2F1;
+/* background-color: lightgray; */
+border-bottom: 1px solid #2B7A78;
+
+`
