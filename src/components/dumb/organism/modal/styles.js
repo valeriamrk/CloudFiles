@@ -11,14 +11,16 @@ display: flex;
 align-items: center;
 justify-content: center;
 /* transform: scale(1); */
-transform: ${props => props.modalActive ? "scale(1)" : "scale(0)"};
+opacity: ${props => props.modalActive ? "1" : "0"};
+transition: 0.3s;
+pointer-events: ${props => props.modalActive ? "all" : "none"};
 `
 
 export const ModalContent = styled.div`
 padding: 20px;
 border-radius: 12px;
 background-color: white;
-width: 400px;
-height: 200px;
+width: 50%;
+/* height: 200px; */
 
 `

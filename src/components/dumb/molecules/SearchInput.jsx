@@ -15,7 +15,7 @@ const SearchInput = (props) => {
           placeholder="search all you need"
           type="text"
         />
-        <MyButton><BsSearch/></MyButton>
+        <MyButton justIcon={"justIcon"} headerStyle={"headerStyle"}><BsSearch/></MyButton>
       </S.InputItem>
   );
 };

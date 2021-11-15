@@ -31,7 +31,7 @@ function App() {
             <Route path="/sharedfiles" render={SharedFiles} />
             <Route path="/recyclebin" render={RecycleBin} />
           </div>
-          <MyModal modalActive={modalActive} handleClose={handleClose} />
+          <MyModal modalActive={modalActive} handleClose={handleClose}><p>lorem</p></MyModal>
         </div>
       ) : (
         <div className="loginPage">

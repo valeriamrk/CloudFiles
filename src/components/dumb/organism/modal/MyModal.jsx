@@ -1,17 +1,16 @@
 
 import React, { useState } from 'react'
 import * as S from "./styles"
-import "./MyModal.module.css"
 
 const MyModal = (props) => {
 
-  const {modalActive, handleClose } = props
+  const {modalActive, handleClose, children } = props
 
 
   return (
     <S.MyModal modalActive={modalActive} onClick={() => handleClose()}>
       <S.ModalContent onClick={e => e.stopPropagation()}>
-        content
+        {children}
       </S.ModalContent>
     </S.MyModal>
   )

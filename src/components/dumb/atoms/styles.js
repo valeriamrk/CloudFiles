@@ -3,23 +3,9 @@ import styled from "styled-components/macro";
 // 1. Button
 
 export const MyButton = styled.button`
-  /* background: none;
-  color: black;
-  border: none;
-  margin-left: 4px;
-  padding: 8px;
-  padding: 16px 8px 16px 8px;
-  font-size: 14px;
-  &:hover {
-    background-color: #2B7A78;
-    color: #EDEAE5
-  };
-  cursor: pointer; */
-
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* background-color: #FEFFFF; */
   background: none;
   color: black;
   height: 100%;
@@ -31,9 +17,10 @@ export const MyButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    background-color: #d1e8e2;
+    background-color: ${props => props.headerStyle ? "#45A29E" : "#d1e8e2"};
   }
 `;
+
 
 // 2. Dropdown button
 
@@ -112,9 +99,10 @@ export const Icons = styled.div`
 // 3. Input field
 export const InputField = styled.input`
   width: 235px;
+  height: 24px;
   outline: none;
   font-size: 13px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: 6px;
+  padding-bottom: 6px;
   padding-left: 10px;
 `;
