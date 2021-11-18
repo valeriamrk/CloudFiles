@@ -27,3 +27,7 @@ align-items: center;
     };
   };
 `
+
+export const Table = styled.table`
+margin-left: 40px;
+`

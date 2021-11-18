@@ -14,7 +14,7 @@ const MainContent = (props) => {
 
   const [folders, setFolders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [gridView, setGridView] = useState(true);
+  const [gridView, setGridView] = useState(false);
   const [viewButtonsData, setViewButtonsData] = useState([
     { id: uuidv4(), value: "List", checked: false },
     { id: uuidv4(), value: "Tiles", checked: true },
@@ -55,6 +55,19 @@ const MainContent = (props) => {
         { id: uuidv4(), value: "Folder" },
       ],
     });
+
+  const fakeListViewArray = [
+    {userId: 1, id: 1, title: 'quidem molestiae enim', modified: "18/11/2021", size: "200Mb"},
+    {userId: 1, id: 2, title: 'sunt qui excepturi placeat culpa', modified: "19/11/2021", size: "220Mb"},
+    {userId: 1, id: 3, title: 'omnis laborum odio', modified: "17/11/2021", size: "250Mb"},
+    {userId: 1, id: 4, title: 'non esse culpa molestiae omnis sed optio', modified: "16/11/2021", size: "100Mb"},
+    {userId: 1, id: 5, title: 'eaque aut omnis a', modified: "14/11/2021", size: "500Mb"},
+    {userId: 1, id: 6, title: 'natus impedit quibusdam illo est', modified: "15/11/2021", size: "270Mb"},
+    {userId: 1, id: 7, title: 'quibusdam autem aliquid et et quia', modified: "20/11/2021", size: "600Mb"},
+    {userId: 1, id: 8, title: 'qui fuga est a eum', modified: "21/11/2021", size: "800Mb"},
+    {userId: 1, id: 9, title: 'saepe unde necessitatibus rem', modified: "23/11/2021", size: "20Mb"},
+    {userId: 1, id: 10, title: 'distinctio laborum qui', modified: "22/11/2021", size: "300Mb"},
+  ]
 
   const sendGetRequest = async () => {
     try {
@@ -140,7 +153,7 @@ const MainContent = (props) => {
       {isLoading ? (
         <Loader />
       ) : (
-        <UploadedFolders data={folders} gridView={gridView} />
+        <UploadedFolders data={folders} gridView={gridView} fakeListViewArray={fakeListViewArray}/>
       )}
       {/* </S.AllContent> */}
     </S.MainContent>

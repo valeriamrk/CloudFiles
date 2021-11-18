@@ -5,11 +5,10 @@ export const MainContent = styled.div`
 grid-area: c;
 display: flex;
 flex-direction: column;
-position: relative;
+/* position: relative; */
 width: 100%;
-/* height: 600px; */
-/* border: 1px solid black; */
-/* background-color: #fffffb; */
+/* height: 100%; */
+/* height: 660px; */
 background-color: #FEFFFF;
 
 `
@@ -36,6 +35,7 @@ display: flex;
 flex-direction: row;
 justify-content: space-between;
 height: 44px;
+/* position: relative; */
 /* padding: 8px; */
 /* background-color: #fffffb; */
 background-color: #DEF2F1;

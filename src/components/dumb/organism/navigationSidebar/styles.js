@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 export const Sidebar = styled.div`
   grid-area: n;
@@ -7,15 +7,14 @@ export const Sidebar = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border-right: 1px solid #2b7a78;
-  height: 100%;
+  height: 100vh;
   background-color: #def2f1;
 `;
 
 export const LinksContainer = styled.div`
   display: flex;
   flex-direction: column;
-
-`
+`;
 
 export const UserName = styled.div`
   margin: 16px 0px 24px 24px;
@@ -51,8 +50,26 @@ export const LinksWrapper = styled.div`
     }
   }
   cursor: pointer;
+  background-color: ${(props) => (props.selected ? "#d1e8e2" : "")};
 `;
 
 export const BottomContent = styled.div`
-  margin: 16px 0px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 16px 24px 24px 24px;
+`;
+
+export const ProgressBarContainer = styled.div`
+display: flex;
+  flex-direction: column;
+`
+export const PremiumContainer = styled.div`
+display: flex;
+justify-content: center;
+margin-bottom: 24px;
+`
+export const TextContainer = styled.div`
+margin-top: 8px;
+font-size: 12px;
 `

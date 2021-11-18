@@ -1,52 +1,46 @@
 import React from "react";
 import * as S from "./styles";
-import { NavLink } from "react-router-dom";
-import { BsFolder, BsImage, BsPersonPlus, BsBucket } from "react-icons/bs";
+import MyButton from "../../atoms/MyButton";
+import { IoDiamondOutline } from "react-icons/io5";
+import { BsGift } from "react-icons/bs";
+import ProgressBar from "../../atoms/ProgressBar";
 
 const NavigationSidebar = (props) => {
-  const { arrayOfLinks } = props;
+  const { sidebarRoutes } = props;
+
+  const [selectedIndex, setSelectedIndex] = React.useState();
+
+  const handleListItemClick = (event, index) => {
+    setSelectedIndex(index);
+    console.log("click");
+  };
 
   return (
     <S.Sidebar>
       <S.LinksContainer>
-      <S.UserName>User Name</S.UserName>
-      <S.LinksWrapper>
-        <S.Icons>
-          <BsFolder />
-        </S.Icons>
-        <S.Links to="/allfiles">All files</S.Links>
-      </S.LinksWrapper>
-      <S.LinksWrapper>
-        <S.Icons>
-          <BsImage />
-        </S.Icons>
-        <S.Links to="/photos">Photos</S.Links>
-      </S.LinksWrapper>
-      <S.LinksWrapper>
-        <S.Icons>
-          <BsPersonPlus />
-        </S.Icons>
-        <S.Links to="/sharedfiles">Shared files</S.Links>
-      </S.LinksWrapper>
-      <S.LinksWrapper>
-        <S.Icons>
-          <BsBucket />
-        </S.Icons>
-        <S.Links to="/recyclebin">Recycle bin</S.Links>
-      </S.LinksWrapper>
+        <S.UserName>User Name</S.UserName>
+        {sidebarRoutes.map((element, index) => (
+          <S.LinksWrapper
+            onClick={(event) => handleListItemClick(event, index)}
+            selected={selectedIndex === index}
+          >
+            <S.Icons>{element.icon}</S.Icons>
+            <S.Links to={element.path}> {element.label}</S.Links>
+          </S.LinksWrapper>
+        ))}
       </S.LinksContainer>
 
-      {/* Для универсальности, сделать потом 
-      {arrayOfLinks.map(() => {
-        <S.LinksWrapper>
-          <S.Links to="/"></S.Links>
-        </S.LinksWrapper>
-      })} */}
       <S.BottomContent>
-<div>button premium</div>
-<div>text</div> 
-<div>some link</div>
-</S.BottomContent>
+        <S.PremiumContainer>
+          <MyButton startIcon={<IoDiamondOutline />} premium={"premium"}>
+            Buy premium Cloud
+          </MyButton>
+        </S.PremiumContainer>
+        <S.ProgressBarContainer>
+          <ProgressBar />
+          <S.TextContainer>200Gb used from 1Tb</S.TextContainer>
+        </S.ProgressBarContainer>
+      </S.BottomContent>
     </S.Sidebar>
   );
 };

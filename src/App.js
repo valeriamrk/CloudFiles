@@ -9,6 +9,8 @@ import SharedFiles from "./components/pages/SharedFiles";
 import LoginPage from "./components/pages/LoginPage";
 import MyModal from "./components/dumb/organism/modal/MyModal";
 import { useState } from "react";
+import { BsFolder, BsImage, BsPersonPlus, BsBucket } from "react-icons/bs";
+
 
 function App() {
   const isAuth = true;
@@ -19,12 +21,19 @@ function App() {
   };
   const handleClose = () => setModalActive(false);
 
+  const sidebarRoutes = [
+    { path: "/allfiles", label: "All files", icon: <BsFolder /> },
+    { path: "/photos", label: "Photos", icon: <BsImage /> },
+    { path: "/sharedfiles", label: "Shared files", icon: <BsPersonPlus /> },
+    { path: "/recyclebin", label: "Recycle bin", icon: <BsBucket /> },
+  ];
+
   return (
     <>
       {isAuth ? (
         <div className="App">
           <MyHeader handleOpen={handleOpen} />
-          <NavigationSidebar />
+          <NavigationSidebar sidebarRoutes={sidebarRoutes}/>
           <div className="main-wrapper">
             <Route path="/allfiles" render={() => <MainContent />} />
             <Route path="/photos" render={Photos} />
