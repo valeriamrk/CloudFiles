@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import styled from "styled-components/macro";
 
 export const Sidebar = styled.div`
@@ -27,7 +26,7 @@ export const Icons = styled.div`
   align-items: center;
 `;
 
-export const Links = styled(NavLink)`
+export const NavMenuItemLabel = styled.span`
   text-decoration: none;
   color: black;
 `;
@@ -41,16 +40,10 @@ export const LinksWrapper = styled.div`
   text-decoration: none;
   color: black;
   &:hover {
-    background-color: #3aafa9;
-    ${Links} {
-      color: #feffff;
-    }
-    ${Icons} {
-      color: #feffff;
-    }
-  }
+    background-color: #d1e8e2;
+  };
   cursor: pointer;
-  background-color: ${(props) => (props.selected ? "#d1e8e2" : "")};
+  background-color: ${(props) => (props.selected ? "#3aafa9" : "")};
 `;
 
 export const BottomContent = styled.div`
@@ -61,15 +54,15 @@ export const BottomContent = styled.div`
 `;
 
 export const ProgressBarContainer = styled.div`
-display: flex;
+  display: flex;
   flex-direction: column;
-`
+`;
 export const PremiumContainer = styled.div`
-display: flex;
-justify-content: center;
-margin-bottom: 24px;
-`
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+`;
 export const TextContainer = styled.div`
-margin-top: 8px;
-font-size: 12px;
-`
+  margin-top: 8px;
+  font-size: 12px;
+`;

@@ -36,38 +36,106 @@ const MainContent = (props) => {
   ]);
 
   const [dropdownButtonsData, setDropdownButtonsData] = useState({
-      viewButtonsData: [
-        { id: uuidv4(), value: "List", checked: false },
-        { id: uuidv4(), value: "Tiles", checked: true },
-      ],
-      sortButtonsData: [
-        { id: uuidv4(), value: "A - Z", checked: true },
-        { id: uuidv4(), value: "Z - A", checked: false },
-      ],
-      newFileButtonsData: [
-        { id: uuidv4(), value: "Folder" },
-        { id: uuidv4(), value: "TXT file" },
-        { id: uuidv4(), value: "Word document" },
-        { id: uuidv4(), value: "Excel workbook" },
-      ],
-      uploadFileButtonsData: [
-        { id: uuidv4(), value: "File" },
-        { id: uuidv4(), value: "Folder" },
-      ],
-    });
+    viewButtonsData: [
+      { id: uuidv4(), value: "List", checked: false },
+      { id: uuidv4(), value: "Tiles", checked: true },
+    ],
+    sortButtonsData: [
+      { id: uuidv4(), value: "A - Z", checked: true },
+      { id: uuidv4(), value: "Z - A", checked: false },
+    ],
+    newFileButtonsData: [
+      { id: uuidv4(), value: "Folder" },
+      { id: uuidv4(), value: "TXT file" },
+      { id: uuidv4(), value: "Word document" },
+      { id: uuidv4(), value: "Excel workbook" },
+    ],
+    uploadFileButtonsData: [
+      { id: uuidv4(), value: "File" },
+      { id: uuidv4(), value: "Folder" },
+    ],
+    modifiedButtonsData: [
+      { id: uuidv4(), value: "Older to newer" },
+      { id: uuidv4(), value: "Newer to older" },
+    ],
+    sizeButtonsData: [
+      { id: uuidv4(), value: "Smaller to larger" },
+      { id: uuidv4(), value: "Larger to smaller" },
+    ],
+  });
 
   const fakeListViewArray = [
-    {userId: 1, id: 1, title: 'quidem molestiae enim', modified: "18/11/2021", size: "200Mb"},
-    {userId: 1, id: 2, title: 'sunt qui excepturi placeat culpa', modified: "19/11/2021", size: "220Mb"},
-    {userId: 1, id: 3, title: 'omnis laborum odio', modified: "17/11/2021", size: "250Mb"},
-    {userId: 1, id: 4, title: 'non esse culpa molestiae omnis sed optio', modified: "16/11/2021", size: "100Mb"},
-    {userId: 1, id: 5, title: 'eaque aut omnis a', modified: "14/11/2021", size: "500Mb"},
-    {userId: 1, id: 6, title: 'natus impedit quibusdam illo est', modified: "15/11/2021", size: "270Mb"},
-    {userId: 1, id: 7, title: 'quibusdam autem aliquid et et quia', modified: "20/11/2021", size: "600Mb"},
-    {userId: 1, id: 8, title: 'qui fuga est a eum', modified: "21/11/2021", size: "800Mb"},
-    {userId: 1, id: 9, title: 'saepe unde necessitatibus rem', modified: "23/11/2021", size: "20Mb"},
-    {userId: 1, id: 10, title: 'distinctio laborum qui', modified: "22/11/2021", size: "300Mb"},
-  ]
+    {
+      userId: 1,
+      id: 1,
+      title: "quidem molestiae enim",
+      modified: "18/11/2021",
+      size: "200Mb",
+    },
+    {
+      userId: 1,
+      id: 2,
+      title: "sunt qui excepturi placeat culpa",
+      modified: "19/11/2021",
+      size: "220Mb",
+    },
+    {
+      userId: 1,
+      id: 3,
+      title: "omnis laborum odio",
+      modified: "17/11/2021",
+      size: "250Mb",
+    },
+    {
+      userId: 1,
+      id: 4,
+      title: "non esse culpa molestiae omnis sed optio",
+      modified: "16/11/2021",
+      size: "100Mb",
+    },
+    {
+      userId: 1,
+      id: 5,
+      title: "eaque aut omnis a",
+      modified: "14/11/2021",
+      size: "500Mb",
+    },
+    {
+      userId: 1,
+      id: 6,
+      title: "natus impedit quibusdam illo est",
+      modified: "15/11/2021",
+      size: "270Mb",
+    },
+    {
+      userId: 1,
+      id: 7,
+      title: "quibusdam autem aliquid et et quia",
+      modified: "20/11/2021",
+      size: "600Mb",
+    },
+    {
+      userId: 1,
+      id: 8,
+      title: "qui fuga est a eum",
+      modified: "21/11/2021",
+      size: "800Mb",
+    },
+    {
+      userId: 1,
+      id: 9,
+      title: "saepe unde necessitatibus rem",
+      modified: "23/11/2021",
+      size: "20Mb",
+    },
+    {
+      userId: 1,
+      id: 10,
+      title: "distinctio laborum qui",
+      modified: "22/11/2021",
+      size: "300Mb",
+    },
+  ];
 
   const sendGetRequest = async () => {
     try {
@@ -85,14 +153,16 @@ const MainContent = (props) => {
   };
 
   const changeView = (id, value) => {
-    const changedViewButtonsData = dropdownButtonsData.viewButtonsData.map((element) => {
-      if (element.id === id) {
-        element.checked = true;
-      } else {
-        element.checked = false;
+    const changedViewButtonsData = dropdownButtonsData.viewButtonsData.map(
+      (element) => {
+        if (element.id === id) {
+          element.checked = true;
+        } else {
+          element.checked = false;
+        }
+        return element;
       }
-      return element;
-    });
+    );
     setViewButtonsData(changedViewButtonsData);
 
     if (value === "Tiles") {
@@ -146,14 +216,28 @@ const MainContent = (props) => {
         uploadFileButtonsData={uploadFileButtonsData}
         uploadFile={uploadFile}
       />
-      <CommandMenu shareFile={shareFile} deleteFile={deleteFile}  moveFile={moveFile} copyFile={copyFile} renameFile={renameFile} cancelCelectionFile={cancelCelectionFile}/>
+      <CommandMenu
+        shareFile={shareFile}
+        deleteFile={deleteFile}
+        moveFile={moveFile}
+        copyFile={copyFile}
+        renameFile={renameFile}
+        cancelCelectionFile={cancelCelectionFile}
+      />
 
       {/* <S.AllContent> */}
       <S.Title>All files</S.Title>
       {isLoading ? (
         <Loader />
       ) : (
-        <UploadedFolders data={folders} gridView={gridView} fakeListViewArray={fakeListViewArray}/>
+        <UploadedFolders
+        dropdownButtonsData={dropdownButtonsData}
+          data={folders}
+          gridView={gridView}
+          fakeListViewArray={fakeListViewArray}
+          sortFilter={sortFilter}
+
+        />
       )}
       {/* </S.AllContent> */}
     </S.MainContent>

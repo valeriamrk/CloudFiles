@@ -4,15 +4,19 @@ import MyButton from "../../atoms/MyButton";
 import { IoDiamondOutline } from "react-icons/io5";
 import { BsGift } from "react-icons/bs";
 import ProgressBar from "../../atoms/ProgressBar";
+import { useHistory } from "react-router-dom";
 
 const NavigationSidebar = (props) => {
   const { sidebarRoutes } = props;
 
+  const history = useHistory();
+
   const [selectedIndex, setSelectedIndex] = React.useState();
 
-  const handleListItemClick = (event, index) => {
-    setSelectedIndex(index);
+  const handleListItemClick = (event, index, path) => {
     console.log("click");
+    setSelectedIndex(index);
+    history.push(path);
   };
 
   return (
@@ -21,11 +25,12 @@ const NavigationSidebar = (props) => {
         <S.UserName>User Name</S.UserName>
         {sidebarRoutes.map((element, index) => (
           <S.LinksWrapper
-            onClick={(event) => handleListItemClick(event, index)}
+            onClick={(event) => handleListItemClick(event, index, element.path)}
             selected={selectedIndex === index}
           >
             <S.Icons>{element.icon}</S.Icons>
-            <S.Links to={element.path}> {element.label}</S.Links>
+            <S.NavMenuItemLabel>{element.label}</S.NavMenuItemLabel>
+            {/* <S.Links to={element.path}> {element.label}</S.Links> */}
           </S.LinksWrapper>
         ))}
       </S.LinksContainer>
@@ -33,7 +38,7 @@ const NavigationSidebar = (props) => {
       <S.BottomContent>
         <S.PremiumContainer>
           <MyButton startIcon={<IoDiamondOutline />} premium={"premium"}>
-            Buy premium Cloud
+            Buy Premium Cloud
           </MyButton>
         </S.PremiumContainer>
         <S.ProgressBarContainer>

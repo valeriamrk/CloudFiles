@@ -2,7 +2,7 @@ import { Formik } from "formik";
 import React from "react";
 import InputField from "../../atoms/InputField";
 import MyButton from "../../atoms/MyButton";
-import * as S from './styles'
+import * as S from "./styles";
 
 const LoginForm = () => {
   return (
@@ -40,31 +40,32 @@ const LoginForm = () => {
         }) => (
           <S.FormStyle onSubmit={handleSubmit}>
             <S.InputContainer>
-            <InputField
-              type="email"
-              name="email"
-              placeholder="e-mail"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
-            />
+              <InputField
+                type="email"
+                name="email"
+                placeholder="e-mail"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.email}
+              />
+              <div>{errors.email && touched.email && errors.email}</div>
             </S.InputContainer>
-            {errors.email && touched.email && errors.email}
+            
             <S.InputContainer>
-            <InputField
-              type="password"
-              name="password"
-              placeholder="password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
-            />
+              <InputField
+                type="password"
+                name="password"
+                placeholder="password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
+              />
             </S.InputContainer>
             {errors.password && touched.password && errors.password}
             <S.BtnContainer>
-            <MyButton type="submit" disabled={isSubmitting}>
-              Submit
-            </MyButton>
+              <MyButton type="submit" disabled={isSubmitting}>
+                Submit
+              </MyButton>
             </S.BtnContainer>
           </S.FormStyle>
         )}
