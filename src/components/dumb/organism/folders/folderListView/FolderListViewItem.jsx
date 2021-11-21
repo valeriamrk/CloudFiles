@@ -1,7 +1,11 @@
 import React from "react";
+import Checkbox from "../../../atoms/Checkbox";
 import * as S from "./styles";
 
 const FolderListViewItem = (props) => {
+
+const {checkFile} = props
+
   const checkboxActive = () => {
     console.log("checkboxActive");
   };
@@ -9,7 +13,9 @@ const FolderListViewItem = (props) => {
     <S.ListStyle onClick={() => checkboxActive()}>
       <S.Container>
         <S.LeftContainer>
-          <S.Checkbox type="checkbox"></S.Checkbox>
+          <S.CheckboxContainer type="checkbox">
+          <Checkbox checkFile={checkFile}/>
+          </S.CheckboxContainer>
           <S.FolderImg
             onDoubleClick={() => console.log("openfile")}
             src="https://s3.amazonaws.com/media-p.slid.es/uploads/644286/images/3450303/folder.png"

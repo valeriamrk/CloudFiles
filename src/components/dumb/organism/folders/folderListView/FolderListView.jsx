@@ -3,15 +3,26 @@ import FolderListViewItem from "./FolderListViewItem";
 import * as S from "./styles";
 import MyButton from "../../../atoms/MyButton";
 import MyDropdown from "../../../atoms/dropdown/MyDropdown";
+import Checkbox from "../../../atoms/Checkbox";
+import {
+  BsChevronCompactDown,
+  BsChevronDown,
+  BsPlusSquare,
+  BsUpload,
+  BsGrid,
+  BsSortDown,
+} from "react-icons/bs";
 
 const FolderListView = (props) => {
-  const { data, dropdownButtonsData, sortFilter } = props;
+  const { data, dropdownButtonsData, sortFilter, checkFile } = props;
 
   return (
     <S.ListView>
       <S.HeaderStyle>
         <S.HeaderLeftContainer>
-          <S.Checkbox type="checkbox"></S.Checkbox>
+          <S.CheckboxContainer>
+            <Checkbox/>
+          </S.CheckboxContainer>
           <S.HeaderFolderImg
             src="https://s3.amazonaws.com/media-p.slid.es/uploads/644286/images/3450303/folder.png"
             alt="folder icon"
@@ -20,7 +31,7 @@ const FolderListView = (props) => {
             buttonClick={sortFilter}
             dropdownButtonsData={dropdownButtonsData.sortButtonsData}
           >
-            <S.HeaderTitle>Name</S.HeaderTitle>
+            <S.HeaderTitle><div>Name</div> <BsChevronDown/> </S.HeaderTitle>
           </MyDropdown>
         </S.HeaderLeftContainer>
         <MyDropdown
@@ -28,7 +39,7 @@ const FolderListView = (props) => {
           dropdownButtonsData={dropdownButtonsData.modifiedButtonsData}
         >
           <S.ModContainer>
-          <S.HeaderModified>Modified</S.HeaderModified>
+          <S.HeaderModified><div>Modified</div> <BsChevronDown/></S.HeaderModified>
           </S.ModContainer>
         </MyDropdown>
         <MyDropdown
@@ -36,7 +47,7 @@ const FolderListView = (props) => {
           dropdownButtonsData={dropdownButtonsData.sizeButtonsData}
         >
           <S.SizeContainer>
-          <S.HeaderSize>Size</S.HeaderSize>
+          <S.HeaderSize><div>Size</div> <BsChevronDown/></S.HeaderSize>
           </S.SizeContainer>
         </MyDropdown>
       </S.HeaderStyle>
@@ -46,6 +57,7 @@ const FolderListView = (props) => {
           title={element.title}
           modified={element.modified}
           size={element.size}
+          checkFile={checkFile}
         />
       ))}
     </S.ListView>

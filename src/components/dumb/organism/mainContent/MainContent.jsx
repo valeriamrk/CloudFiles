@@ -64,13 +64,14 @@ const MainContent = (props) => {
     ],
   });
 
-  const fakeListViewArray = [
+  const [fakeListViewArray, setFakeListViewArray] = useState([
     {
       userId: 1,
       id: 1,
       title: "quidem molestiae enim",
       modified: "18/11/2021",
       size: "200Mb",
+      checked: "false",
     },
     {
       userId: 1,
@@ -78,6 +79,7 @@ const MainContent = (props) => {
       title: "sunt qui excepturi placeat culpa",
       modified: "19/11/2021",
       size: "220Mb",
+      checked: "false",
     },
     {
       userId: 1,
@@ -85,6 +87,7 @@ const MainContent = (props) => {
       title: "omnis laborum odio",
       modified: "17/11/2021",
       size: "250Mb",
+      checked: "false",
     },
     {
       userId: 1,
@@ -92,6 +95,7 @@ const MainContent = (props) => {
       title: "non esse culpa molestiae omnis sed optio",
       modified: "16/11/2021",
       size: "100Mb",
+      checked: "false",
     },
     {
       userId: 1,
@@ -99,6 +103,7 @@ const MainContent = (props) => {
       title: "eaque aut omnis a",
       modified: "14/11/2021",
       size: "500Mb",
+      checked: "false",
     },
     {
       userId: 1,
@@ -106,6 +111,7 @@ const MainContent = (props) => {
       title: "natus impedit quibusdam illo est",
       modified: "15/11/2021",
       size: "270Mb",
+      checked: "false",
     },
     {
       userId: 1,
@@ -113,6 +119,7 @@ const MainContent = (props) => {
       title: "quibusdam autem aliquid et et quia",
       modified: "20/11/2021",
       size: "600Mb",
+      checked: "false",
     },
     {
       userId: 1,
@@ -120,6 +127,7 @@ const MainContent = (props) => {
       title: "qui fuga est a eum",
       modified: "21/11/2021",
       size: "800Mb",
+      checked: "false",
     },
     {
       userId: 1,
@@ -127,6 +135,7 @@ const MainContent = (props) => {
       title: "saepe unde necessitatibus rem",
       modified: "23/11/2021",
       size: "20Mb",
+      checked: "false",
     },
     {
       userId: 1,
@@ -134,8 +143,9 @@ const MainContent = (props) => {
       title: "distinctio laborum qui",
       modified: "22/11/2021",
       size: "300Mb",
+      checked: "false",
     },
-  ];
+  ]);
 
   const sendGetRequest = async () => {
     try {
@@ -172,6 +182,17 @@ const MainContent = (props) => {
     }
   };
 
+  const checkFile = (id, checked) => {
+    const checkedFile= fakeListViewArray.map((element) => {
+      if (element.id === id) {
+        element.checked = !checked;
+      }
+      return element;
+    });
+    setFakeListViewArray(checkedFile);
+    console.log("checked")
+  };
+
   const sortFilter = () => {
     console.log("sort");
   };
@@ -202,6 +223,8 @@ const MainContent = (props) => {
   const cancelCelectionFile = () => {
     console.log("cancelCelectionfile");
   };
+
+  
 
   return (
     <S.MainContent>
@@ -236,7 +259,7 @@ const MainContent = (props) => {
           gridView={gridView}
           fakeListViewArray={fakeListViewArray}
           sortFilter={sortFilter}
-
+          checkFile={checkFile}
         />
       )}
       {/* </S.AllContent> */}

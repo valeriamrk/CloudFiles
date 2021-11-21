@@ -17,7 +17,7 @@ export const HeaderStyle = styled.div`
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgb(237, 235, 233);
-  padding: 0 64px 0 24px;
+  padding: 0 64px 0 0;
 `;
 
 export const HeaderLeftContainer = styled.div`
@@ -66,6 +66,7 @@ export const ModContainer = styled.div`
 export const HeaderModified = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   font-weight: bold;
   margin-left: 16px;
   padding: 8px 0 8px 0;
@@ -93,9 +94,11 @@ export const HeaderSize = styled.div`
 
 // 2. FolderListViewItem
 
-export const Checkbox = styled.input`
+export const CheckboxContainer = styled.div`
   display: block;
   visibility: hidden;
+  /* visibility: ${(props) => (props.checked ? "visible" : "hidden")}; */
+
 `;
 export const FolderImg = styled.img`
   width: 40px;
@@ -111,7 +114,7 @@ export const ListStyle = styled.div`
   &:hover {
     background-color: #def2f1;
     cursor: pointer;
-    ${Checkbox} {
+    ${CheckboxContainer} {
       visibility: visible;
     }
   }
