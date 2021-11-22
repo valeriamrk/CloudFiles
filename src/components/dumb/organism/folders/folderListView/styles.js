@@ -30,7 +30,6 @@ export const HeaderLeftContainer = styled.div`
   /* height: 100%;
   width: 100%; */
   padding: 8px 64px 8px 24px;
-  
 
   &:hover {
     background-color: #def2f1;
@@ -46,10 +45,8 @@ export const HeaderTitle = styled.div`
   font-weight: bold;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   padding: 8px 0 8px 0;
-
 `;
 
 export const ModContainer = styled.div`
@@ -60,17 +57,16 @@ export const ModContainer = styled.div`
 
   &:hover {
     background-color: #def2f1;
-    cursor: pointer;}
+    cursor: pointer;
+  }
 `;
 
 export const HeaderModified = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
   font-weight: bold;
   margin-left: 16px;
   padding: 8px 0 8px 0;
-
 `;
 
 export const SizeContainer = styled.div`
@@ -81,7 +77,8 @@ export const SizeContainer = styled.div`
 
   &:hover {
     background-color: #def2f1;
-    cursor: pointer;}
+    cursor: pointer;
+  }
 `;
 export const HeaderSize = styled.div`
   display: flex;
@@ -89,6 +86,15 @@ export const HeaderSize = styled.div`
   font-weight: bold;
   margin-left: 16px;
   padding: 8px 0 8px 0;
+  
+`;
+
+export const HeaderIcon = styled.div`
+  margin-left: 4px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-top: 2px;
 
 `;
 
@@ -98,7 +104,6 @@ export const CheckboxContainer = styled.div`
   display: block;
   visibility: hidden;
   /* visibility: ${(props) => (props.checked ? "visible" : "hidden")}; */
-
 `;
 export const FolderImg = styled.img`
   width: 40px;

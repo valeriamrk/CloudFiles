@@ -14,6 +14,7 @@ const MainContent = (props) => {
 
   const [folders, setFolders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isChecked, setIsChecked] = useState(false)
   const [gridView, setGridView] = useState(false);
   const [viewButtonsData, setViewButtonsData] = useState([
     { id: uuidv4(), value: "List", checked: false },
@@ -183,14 +184,15 @@ const MainContent = (props) => {
   };
 
   const checkFile = (id, checked) => {
-    const checkedFile= fakeListViewArray.map((element) => {
+    const checkedFile = fakeListViewArray.map((element) => {
       if (element.id === id) {
         element.checked = !checked;
       }
       return element;
     });
     setFakeListViewArray(checkedFile);
-    console.log("checked")
+    setIsChecked(!isChecked)
+    console.log("checked");
   };
 
   const sortFilter = () => {
@@ -224,11 +226,9 @@ const MainContent = (props) => {
     console.log("cancelCelectionfile");
   };
 
-  
-
   return (
     <S.MainContent>
-      <CommandBar
+      {/* <CommandBar
         dropdownButtonsData={dropdownButtonsData}
         changeView={changeView}
         viewButtonsData={viewButtonsData}
@@ -238,15 +238,25 @@ const MainContent = (props) => {
         newFileButtonsData={newFileButtonsData}
         uploadFileButtonsData={uploadFileButtonsData}
         uploadFile={uploadFile}
-      />
-      <CommandMenu
+      /> */}
+      {isChecked ? <CommandMenu
         shareFile={shareFile}
         deleteFile={deleteFile}
         moveFile={moveFile}
         copyFile={copyFile}
         renameFile={renameFile}
         cancelCelectionFile={cancelCelectionFile}
-      />
+      /> :       <CommandBar
+      dropdownButtonsData={dropdownButtonsData}
+      changeView={changeView}
+      viewButtonsData={viewButtonsData}
+      sortButtonsData={sortButtonsData}
+      sortFilter={sortFilter}
+      addNewFile={addNewFile}
+      newFileButtonsData={newFileButtonsData}
+      uploadFileButtonsData={uploadFileButtonsData}
+      uploadFile={uploadFile}
+    />}
 
       {/* <S.AllContent> */}
       <S.Title>All files</S.Title>
@@ -254,7 +264,7 @@ const MainContent = (props) => {
         <Loader />
       ) : (
         <UploadedFolders
-        dropdownButtonsData={dropdownButtonsData}
+          dropdownButtonsData={dropdownButtonsData}
           data={folders}
           gridView={gridView}
           fakeListViewArray={fakeListViewArray}

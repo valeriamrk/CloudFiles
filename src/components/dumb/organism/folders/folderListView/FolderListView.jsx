@@ -21,7 +21,7 @@ const FolderListView = (props) => {
       <S.HeaderStyle>
         <S.HeaderLeftContainer>
           <S.CheckboxContainer>
-            <Checkbox/>
+            <Checkbox />
           </S.CheckboxContainer>
           <S.HeaderFolderImg
             src="https://s3.amazonaws.com/media-p.slid.es/uploads/644286/images/3450303/folder.png"
@@ -31,7 +31,12 @@ const FolderListView = (props) => {
             buttonClick={sortFilter}
             dropdownButtonsData={dropdownButtonsData.sortButtonsData}
           >
-            <S.HeaderTitle><div>Name</div> <BsChevronDown/> </S.HeaderTitle>
+            <S.HeaderTitle>
+              <div>Name</div>
+              <S.HeaderIcon>
+                <BsChevronDown />
+              </S.HeaderIcon>
+            </S.HeaderTitle>
           </MyDropdown>
         </S.HeaderLeftContainer>
         <MyDropdown
@@ -39,7 +44,12 @@ const FolderListView = (props) => {
           dropdownButtonsData={dropdownButtonsData.modifiedButtonsData}
         >
           <S.ModContainer>
-          <S.HeaderModified><div>Modified</div> <BsChevronDown/></S.HeaderModified>
+            <S.HeaderModified>
+              <div>Modified</div>
+              <S.HeaderIcon>
+                <BsChevronDown />
+              </S.HeaderIcon>
+            </S.HeaderModified>
           </S.ModContainer>
         </MyDropdown>
         <MyDropdown
@@ -47,7 +57,12 @@ const FolderListView = (props) => {
           dropdownButtonsData={dropdownButtonsData.sizeButtonsData}
         >
           <S.SizeContainer>
-          <S.HeaderSize><div>Size</div> <BsChevronDown/></S.HeaderSize>
+            <S.HeaderSize>
+              <div>Size</div>
+              <S.HeaderIcon>
+                <BsChevronDown />
+              </S.HeaderIcon>
+            </S.HeaderSize>
           </S.SizeContainer>
         </MyDropdown>
       </S.HeaderStyle>

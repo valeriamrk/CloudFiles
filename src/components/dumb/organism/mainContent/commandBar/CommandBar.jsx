@@ -27,7 +27,7 @@ const CommandBar = (props) => {
           buttonClick={addNewFile}
           dropdownButtonsData={dropdownButtonsData.newFileButtonsData}
         >
-          <MyButton startIcon={<BsPlusSquare />} endIcon={<BsChevronDown />}>
+          <MyButton startIcon={<BsPlusSquare />} endIcon={<BsChevronDown />} >
             New file
           </MyButton>
         </MyDropdown>

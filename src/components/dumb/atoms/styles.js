@@ -36,13 +36,14 @@ export const DropdownBtn = styled.button`
 `;
 
 export const DropdownContent = styled.div`
-  display: none;
   position: absolute;
   width: 200px;
   background-color: #feffff;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   cursor: pointer;
+  display: ${(props) => (props.openDropdown ? "block" : "none")};
+
 `;
 
 export const DropdownListItem = styled.div`
@@ -63,9 +64,6 @@ export const Dropdown = styled.div`
   height: 100%;
 
   &:hover {
-    ${DropdownContent} {
-      display: block;
-    }
     ${DropdownBtn} {
       /* background-color: #2B7A78; */
       background-color: #d1e8e2;

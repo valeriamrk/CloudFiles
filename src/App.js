@@ -17,7 +17,6 @@ function App() {
   const [modalActive, setModalActive] = useState(false);
   const handleOpen = () => {
     setModalActive(true);
-    console.log("gregg");
   };
   const handleClose = () => setModalActive(false);
 
