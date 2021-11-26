@@ -5,13 +5,22 @@ import FolderListView from "../../../folders/folderListView/FolderListView";
 import * as S from "./styles";
 
 const UploadedFolders = (props) => {
-  const { gridView, data, fakeListViewArray, dropdownButtonsData, sortFilter, checkFile } =
-    props;
+  const {
+    gridView,
+    fakeListViewArray,
+    dropdownButtonsData,
+    sortFilter,
+    checkFile,
+  } = props;
 
   return (
     <S.UploadedContent>
       {gridView ? (
-        <FolderGridView data={data} />
+        <FolderGridView
+          data={fakeListViewArray}
+          sortFilter={sortFilter}
+          checkFile={checkFile}
+        />
       ) : (
         <FolderListView
           dropdownButtonsData={dropdownButtonsData}

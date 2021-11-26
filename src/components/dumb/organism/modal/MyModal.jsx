@@ -1,10 +1,11 @@
 
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import * as S from "./styles"
 
 const MyModal = (props) => {
-
+  
   const {modalActive, handleClose, children } = props
+
 
 
   return (

@@ -73,6 +73,7 @@ const FolderListView = (props) => {
           modified={element.modified}
           size={element.size}
           checkFile={checkFile}
+          checked={element.checked}
         />
       ))}
     </S.ListView>

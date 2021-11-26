@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 export const LoginForm = styled.div`
   display: flex;
@@ -27,4 +27,10 @@ export const LoginText = styled.div`
   color: #feffff;
   font-weight: 630;
   font-size: 30px;
+`;
+
+export const ErrorContainer = styled.div`
+  display: block;
+  visibility: visible;
+  height: 16px;
 `;

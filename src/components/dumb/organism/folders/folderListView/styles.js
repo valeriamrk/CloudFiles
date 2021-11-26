@@ -102,9 +102,10 @@ export const HeaderIcon = styled.div`
 
 export const CheckboxContainer = styled.div`
   display: block;
-  visibility: hidden;
-  /* visibility: ${(props) => (props.checked ? "visible" : "hidden")}; */
+  /* visibility: hidden; */
+  visibility: ${(props) => (props.checked ? "visible" : "hidden")};
 `;
+
 export const FolderImg = styled.img`
   width: 40px;
 `;
@@ -124,6 +125,8 @@ export const ListStyle = styled.div`
     }
   }
   border-bottom: 1px solid rgb(237, 235, 233);
+  background-color: ${(props) => (props.checked ? "#def2f1" : "")};
+
 `;
 export const Container = styled.div`
   display: flex;

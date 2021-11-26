@@ -4,13 +4,16 @@ export const FolderImg = styled.img`
   width: 120px;
 `;
 
-export const Checkbox = styled.input`
-display: block;
-/* visibility: visible; */
-visibility: hidden;
-align-self: flex-end;
+
+export const CheckboxContainer = styled.div`
+  display: block;
+  align-self: flex-end;
 margin-right: 8px;
-`
+
+  /* visibility: hidden; */
+  visibility: ${(props) => (props.checked ? "visible" : "hidden")};
+`;
+
 
 export const GridView = styled.div`
   display: grid;
@@ -33,10 +36,12 @@ margin: 15px; */
   &:hover {
     background-color: #def2f1;
     cursor: pointer;
-    ${Checkbox} {
+    ${CheckboxContainer} {
       visibility: visible
     };
   }
+  background-color: ${(props) => (props.checked ? "#def2f1" : "")};
+
 `;
 
 export const FolderName = styled.div`

@@ -4,17 +4,18 @@ import * as S from "./styles";
 
 const FolderListViewItem = (props) => {
 
-const {checkFile} = props
-
-  const checkboxActive = () => {
+const {checkFile, checked, id} = props
+console.log(checked)
+  const checkboxActive = (id, checked) => {
+    checkFile(id, checked)
     console.log("checkboxActive");
   };
   return (
-    <S.ListStyle onClick={() => checkboxActive()}>
+    <S.ListStyle onClick={() => checkboxActive(id, checked)} checked={checked}>
       <S.Container>
         <S.LeftContainer>
-          <S.CheckboxContainer type="checkbox">
-          <Checkbox checkFile={checkFile}/>
+          <S.CheckboxContainer checked={checked}>
+          <Checkbox checked={checked} checkFile={checkFile} id={id}/>
           </S.CheckboxContainer>
           <S.FolderImg
             onDoubleClick={() => console.log("openfile")}

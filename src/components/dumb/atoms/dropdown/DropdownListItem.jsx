@@ -17,7 +17,7 @@ const {element} = props
   return (
     <S.DropdownListItem onClick={() => handleButtonClick(element.id, element.value)}
     href="#">
-      <S.Checked>{element.checked && <BsCheck2 />}</S.Checked>
+      <S.Checked checked="checked">{element.checked && <BsCheck2 />}</S.Checked>
       <div>{element.value}</div>
     </S.DropdownListItem>
   );

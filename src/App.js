@@ -19,6 +19,7 @@ function App() {
     setModalActive(true);
   };
   const handleClose = () => setModalActive(false);
+  
 
   const sidebarRoutes = [
     { path: "/allfiles", label: "All files", icon: <BsFolder /> },

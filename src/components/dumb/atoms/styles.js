@@ -15,7 +15,6 @@ export const MyButton = styled.button`
   border: ${(props) => (props.premium ? "0.5px solid black" : "none")};
   font-size: 14px;
   cursor: pointer;
-
   &:hover {
     background-color: ${(props) => (props.headerStyle ? "#45A29E" : "#d1e8e2")};
   }
@@ -43,7 +42,6 @@ export const DropdownContent = styled.div`
   z-index: 1;
   cursor: pointer;
   display: ${(props) => (props.openDropdown ? "block" : "none")};
-
 `;
 
 export const DropdownListItem = styled.div`
@@ -78,8 +76,11 @@ export const Dropdown = styled.div`
 `;
 
 export const Checked = styled.div`
-  /* visibility: hidden; */
-  visibility: ${(element) => (element.checked ? "visible" : "")};
+  display: flex;
+  align-items: flex-start;
+  visibility: ${(element) => (element.checked ? "visible" : "hidden")};
+  width: 16px;
+  margin-right: 4px;
 `;
 export const Value = styled.div`
   padding: 4px;
@@ -112,5 +113,5 @@ export const ProgressBar = styled.div`
 export const Bar = styled.div`
   width: 20%;
   height: 4px;
-  background-color: #3AAFA9;
+  background-color: #3aafa9;
 `;

@@ -48,9 +48,11 @@ const LoginForm = () => {
                 onBlur={handleBlur}
                 value={values.email}
               />
-              <div>{errors.email && touched.email && errors.email}</div>
+              <S.ErrorContainer>
+                {errors.email && touched.email && errors.email}
+              </S.ErrorContainer>
             </S.InputContainer>
-            
+
             <S.InputContainer>
               <InputField
                 type="password"
@@ -61,9 +63,11 @@ const LoginForm = () => {
                 value={values.password}
               />
             </S.InputContainer>
-            {errors.password && touched.password && errors.password}
+            <S.ErrorContainer>
+              {errors.password && touched.password && errors.password}{" "}
+            </S.ErrorContainer>
             <S.BtnContainer>
-              <MyButton type="submit" disabled={isSubmitting}>
+              <MyButton type="submit" disabled={isSubmitting} premium={"premium"}>
                 Submit
               </MyButton>
             </S.BtnContainer>
