@@ -3,7 +3,6 @@ import React from 'react'
 const Checkbox = (props) => {
 
   const { checkFile, checked, id } = props
-  console.log(checked)
 
   const changeCheckbox = (id, checked) => {
     checkFile(id, checked)

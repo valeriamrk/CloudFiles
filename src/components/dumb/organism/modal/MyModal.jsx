@@ -4,7 +4,14 @@ import * as S from "./styles"
 
 const MyModal = (props) => {
   
+  // const {children } = props
   const {modalActive, handleClose, children } = props
+
+  // const [modalActive, setModalActive] = useState(false);
+  // const handleOpen = () => {
+  //   setModalActive(true);
+  // };
+  // const handleClose = () => setModalActive(false);
 
 
 

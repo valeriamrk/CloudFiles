@@ -193,18 +193,40 @@ const MainContent = (props) => {
       }
       return element;
     });
-    setFakeListViewArray(checkedFile);
-    setShowCommandMenu(!showCommandMenu);
 
     //считаем кол-во чекнутых элементов
-    const tempCheckedElementsArray = [...checkedElementsArray]
-    const filteredCheckedElementArray = tempCheckedElementsArray.filter(item => item !== id)
-    filteredCheckedElementArray.push(id)
-    setCheckedElementsArray(filteredCheckedElementArray)
-    setSelectedElementsNumber(filteredCheckedElementArray.length)
+
+    let transformedArray = [];
+    if (!checkedElementsArray.includes(id)) {
+      transformedArray = [...checkedElementsArray, id];
+    } else {
+      transformedArray = checkedElementsArray.filter(
+        (element) => element !== id
+      );
+    }
+
+    // показывать комманд меню или нет
+    if (transformedArray.length > 0 ) {
+      setShowCommandMenu(true);
+    } else {
+      setShowCommandMenu(false)
+    }
+
+    setFakeListViewArray(checkedFile);
+    setCheckedElementsArray([...transformedArray]);
+    setSelectedElementsNumber(transformedArray.length)
   };
 
-
+  const cancelSelectionFile = () => {
+    const uncheckedFile = fakeListViewArray.map((element) => {
+        element.checked = false;
+        return element
+      } 
+    );
+    setFakeListViewArray(uncheckedFile);
+    setCheckedElementsArray([])
+    setShowCommandMenu(false)
+  };
 
   const sortFilter = () => {
     console.log("sort");
@@ -233,9 +255,7 @@ const MainContent = (props) => {
   const renameFile = () => {
     console.log("renamefile");
   };
-  const cancelSelectionFile = () => {
-    console.log("cancelSelectionfile");
-  };
+
 
   return (
     <S.MainContent>

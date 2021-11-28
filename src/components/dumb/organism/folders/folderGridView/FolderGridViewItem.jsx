@@ -5,10 +5,8 @@ import * as S from "./styles";
 const FolderGridViewItem = (props) => {
 
   const { checkFile, checked, id } = props;
-  console.log(checked);
   const checkboxActive = (id, checked) => {
     checkFile(id, checked);
-    console.log("checkboxActive");
   };
 
   return (
