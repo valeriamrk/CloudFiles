@@ -6,8 +6,19 @@ import UploadedFolders from "./commandBar/UploadedContent/UploadedFolders";
 import * as S from "./styles";
 import { v4 as uuidv4 } from "uuid";
 import CommandMenu from "./commandBar/CommandMenu";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  checkOneFile,
+  uncheckAllFiles,
+} from "../../../../Redux/foldersDataSlice";
 
 const MainContent = (props) => {
+  const fakeListViewArray = useSelector(
+    (state) => state.foldersData.allFolders
+  );
+  console.log("fakeListViewArray", fakeListViewArray);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     sendGetRequest();
   }, []);
@@ -65,89 +76,6 @@ const MainContent = (props) => {
     ],
   });
 
-  const [fakeListViewArray, setFakeListViewArray] = useState([
-    {
-      userId: 1,
-      id: 1,
-      title: "quidem molestiae enim",
-      modified: "18/11/2021",
-      size: "200Mb",
-      checked: false,
-    },
-    {
-      userId: 1,
-      id: 2,
-      title: "sunt qui excepturi placeat culpa",
-      modified: "19/11/2021",
-      size: "220Mb",
-      checked: false,
-    },
-    {
-      userId: 1,
-      id: 3,
-      title: "omnis laborum odio",
-      modified: "17/11/2021",
-      size: "250Mb",
-      checked: false,
-    },
-    {
-      userId: 1,
-      id: 4,
-      title: "non esse culpa molestiae omnis sed optio",
-      modified: "16/11/2021",
-      size: "100Mb",
-      checked: false,
-    },
-    {
-      userId: 1,
-      id: 5,
-      title: "eaque aut omnis a",
-      modified: "14/11/2021",
-      size: "500Mb",
-      checked: false,
-    },
-    {
-      userId: 1,
-      id: 6,
-      title: "natus impedit quibusdam illo est",
-      modified: "15/11/2021",
-      size: "270Mb",
-      checked: false,
-    },
-    {
-      userId: 1,
-      id: 7,
-      title: "quibusdam autem aliquid et et quia",
-      modified: "20/11/2021",
-      size: "600Mb",
-      checked: false,
-    },
-    {
-      userId: 1,
-      id: 8,
-      title: "qui fuga est a eum",
-      modified: "21/11/2021",
-      size: "800Mb",
-      checked: false,
-    },
-    {
-      userId: 1,
-      id: 9,
-      title: "saepe unde necessitatibus rem",
-      modified: "23/11/2021",
-      size: "20Mb",
-      checked: false,
-    },
-    {
-      userId: 1,
-      id: 10,
-      title: "distinctio laborum qui",
-      modified: "22/11/2021",
-      size: "300Mb",
-      checked: false,
-    },
-  ]);
-
   const [checkedElementsArray, setCheckedElementsArray] = useState([]);
   const [selectedElementsNumber, setSelectedElementsNumber] = useState("");
 
@@ -187,12 +115,7 @@ const MainContent = (props) => {
   };
 
   const checkFile = (id, checked) => {
-    const checkedFile = fakeListViewArray.map((element) => {
-      if (element.id === id) {
-        element.checked = !checked;
-      }
-      return element;
-    });
+    dispatch(checkOneFile({id, checked}));
 
     //считаем кол-во чекнутых элементов
 
@@ -206,26 +129,20 @@ const MainContent = (props) => {
     }
 
     // показывать комманд меню или нет
-    if (transformedArray.length > 0 ) {
+    if (transformedArray.length > 0) {
       setShowCommandMenu(true);
     } else {
-      setShowCommandMenu(false)
+      setShowCommandMenu(false);
     }
 
-    setFakeListViewArray(checkedFile);
     setCheckedElementsArray([...transformedArray]);
-    setSelectedElementsNumber(transformedArray.length)
+    setSelectedElementsNumber(transformedArray.length);
   };
 
   const cancelSelectionFile = () => {
-    const uncheckedFile = fakeListViewArray.map((element) => {
-        element.checked = false;
-        return element
-      } 
-    );
-    setFakeListViewArray(uncheckedFile);
-    setCheckedElementsArray([])
-    setShowCommandMenu(false)
+    dispatch(uncheckAllFiles());
+    setCheckedElementsArray([]);
+    setShowCommandMenu(false);
   };
 
   const sortFilter = () => {
@@ -255,7 +172,6 @@ const MainContent = (props) => {
   const renameFile = () => {
     console.log("renamefile");
   };
-
 
   return (
     <S.MainContent>
