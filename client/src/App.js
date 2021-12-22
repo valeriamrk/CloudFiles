@@ -10,16 +10,20 @@ import LoginPage from "./components/pages/LoginPage";
 import MyModal from "./components/dumb/organism/modal/MyModal";
 import { useState } from "react";
 import { BsFolder, BsImage, BsPersonPlus, BsBucket } from "react-icons/bs";
-
+import UserCard from "./components/pages/UserCard";
 
 function App() {
-  const isAuth = true;
+  const isAuth = false;
   const [modalActive, setModalActive] = useState(false);
+  const [popupOpen, setPopupOpen] = useState(false);
   const handleOpen = () => {
     setModalActive(true);
   };
   const handleClose = () => setModalActive(false);
-  
+
+  const handlePopupOpen = () => {
+    setPopupOpen(!popupOpen);
+  };
 
   const sidebarRoutes = [
     { path: "/allfiles", label: "All files", icon: <BsFolder /> },
@@ -32,15 +36,18 @@ function App() {
     <>
       {isAuth ? (
         <div className="App">
-          <MyHeader handleOpen={handleOpen} />
-          <NavigationSidebar sidebarRoutes={sidebarRoutes}/>
+          <MyHeader handleOpen={handleOpen} handlePopupOpen={handlePopupOpen} />
+          <NavigationSidebar sidebarRoutes={sidebarRoutes} />
           <div className="main-wrapper">
             <Route path="/allfiles" render={() => <MainContent />} />
             <Route path="/photos" render={Photos} />
             <Route path="/sharedfiles" render={SharedFiles} />
             <Route path="/recyclebin" render={RecycleBin} />
           </div>
-          <MyModal modalActive={modalActive} handleClose={handleClose}><p>lorem</p></MyModal>
+          <MyModal modalActive={modalActive} handleClose={handleClose}>
+            <p>lorem</p>
+          </MyModal>
+          <UserCard popupOpen={popupOpen} setPopupOpen={setPopupOpen} />
         </div>
       ) : (
         <div className="loginPage">

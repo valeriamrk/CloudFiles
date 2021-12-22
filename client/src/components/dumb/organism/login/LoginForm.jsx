@@ -4,7 +4,18 @@ import InputField from "../../atoms/InputField";
 import MyButton from "../../atoms/MyButton";
 import * as S from "./styles";
 
-const LoginForm = () => {
+
+const LoginForm = (props) => {
+
+  const {sendLoginRequest} = props
+  
+  const login = (values) => {
+    console.log(values)
+    sendLoginRequest(values)
+  }
+  const register = () => {
+
+  }
   return (
     <S.LoginForm>
       <S.LoginText>Login</S.LoginText>
@@ -26,6 +37,7 @@ const LoginForm = () => {
             alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
           }, 400);
+          login(values)
         }}
       >
         {({
@@ -67,8 +79,14 @@ const LoginForm = () => {
               {errors.password && touched.password && errors.password}{" "}
             </S.ErrorContainer>
             <S.BtnContainer>
+              {/* <MyButton type="submit" disabled={isSubmitting} premium={"premium"} >
+                Login
+              </MyButton> */}
+              <MyButton onClick={() => login()} premium={"premium"} >
+                Login
+              </MyButton>
               <MyButton type="submit" disabled={isSubmitting} premium={"premium"}>
-                Submit
+                Registration
               </MyButton>
             </S.BtnContainer>
           </S.FormStyle>

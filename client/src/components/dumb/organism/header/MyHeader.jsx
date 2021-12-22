@@ -7,7 +7,12 @@ import { BsGear, BsQuestionCircle, BsPerson } from "react-icons/bs";
 import MyModal from "../modal/MyModal";
 
 const MyHeader = (props) => {
-  const { handleOpen } = props;
+  const { handleOpen, handlePopupOpen } = props;
+
+  const handlePopupFunc = (event) => {
+    event.stopPropagation();
+    handlePopupOpen();
+  };
 
   return (
     <S.Header>
@@ -35,7 +40,11 @@ const MyHeader = (props) => {
         >
           <BsQuestionCircle />
         </MyButton>
-        <MyButton justIcon={"justIcon"} headerStyle={"headerStyle"}>
+        <MyButton
+          clickButton={(event) => handlePopupFunc(event)}
+          justIcon={"justIcon"}
+          headerStyle={"headerStyle"}
+        >
           <BsPerson />
         </MyButton>
       </S.RightContainer>

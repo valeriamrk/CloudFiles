@@ -8,7 +8,7 @@ import { BsSearch } from "react-icons/bs";
 const SearchInput = (props) => {
 
   const [valueInput, setValueInput] = useState("");
-  console.log({valueInput})
+  // console.log({valueInput})
 
   return (
       <S.InputItem>

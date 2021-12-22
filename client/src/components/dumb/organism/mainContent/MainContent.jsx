@@ -16,12 +16,15 @@ const MainContent = (props) => {
   const fakeListViewArray = useSelector(
     (state) => state.foldersData.allFolders
   );
-  console.log("fakeListViewArray", fakeListViewArray);
+  // console.log("fakeListViewArray", fakeListViewArray);
   const dispatch = useDispatch();
 
   useEffect(() => {
     sendGetRequest();
   }, []);
+
+// тестовый стейт для получения постов
+  const [testState, setTestState] = useState("")
 
   const [folders, setFolders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -31,22 +34,6 @@ const MainContent = (props) => {
     { id: uuidv4(), value: "List", checked: false },
     { id: uuidv4(), value: "Tiles", checked: true },
   ]);
-  const [sortButtonsData, setSortButtonsData] = useState([
-    { id: uuidv4(), value: "A - Z", checked: true },
-    { id: uuidv4(), value: "Z - A", checked: false },
-  ]);
-  const [newFileButtonsData, setNewFileButtonsData] = useState([
-    { id: uuidv4(), value: "Folder" },
-    { id: uuidv4(), value: "TXT file" },
-    { id: uuidv4(), value: "Word document" },
-    { id: uuidv4(), value: "Excel workbook" },
-  ]);
-
-  const [uploadFileButtonsData, setUploadFileButtonsData] = useState([
-    { id: uuidv4(), value: "File" },
-    { id: uuidv4(), value: "Folder" },
-  ]);
-
   const [dropdownButtonsData, setDropdownButtonsData] = useState({
     viewButtonsData: [
       { id: uuidv4(), value: "List", checked: false },
@@ -85,6 +72,8 @@ const MainContent = (props) => {
       const response = await axios.get(
         "https://jsonplaceholder.typicode.com/albums"
       );
+      const testResponse = await axios.get("http://127.0.0.1:5000/auth/posts");
+      setTestState(testResponse.data.post)
       setFolders(response.data);
     } catch (err) {
       // Handle Error Here
@@ -93,6 +82,16 @@ const MainContent = (props) => {
       setIsLoading(false);
     }
   };
+
+  // const getTestPosts = async () => {
+  //   try {
+  //     const response = await axios.get("http://localhost:5000/auth/posts");
+  //     setTestState(response.data)
+  //   } catch (err) {
+  //     // Handle Error Here
+  //     console.error(err);
+  //   }
+  // };
 
   const changeView = (id, value) => {
     const changedViewButtonsData = dropdownButtonsData.viewButtonsData.map(
@@ -115,7 +114,7 @@ const MainContent = (props) => {
   };
 
   const checkFile = (id, checked) => {
-    dispatch(checkOneFile({id, checked}));
+    dispatch(checkOneFile({ id, checked }));
 
     //считаем кол-во чекнутых элементов
 
@@ -175,17 +174,6 @@ const MainContent = (props) => {
 
   return (
     <S.MainContent>
-      {/* <CommandBar
-        dropdownButtonsData={dropdownButtonsData}
-        changeView={changeView}
-        viewButtonsData={viewButtonsData}
-        sortButtonsData={sortButtonsData}
-        sortFilter={sortFilter}
-        addNewFile={addNewFile}
-        newFileButtonsData={newFileButtonsData}
-        uploadFileButtonsData={uploadFileButtonsData}
-        uploadFile={uploadFile}
-      /> */}
       {showCommandMenu ? (
         <CommandMenu
           shareFile={shareFile}
@@ -200,18 +188,14 @@ const MainContent = (props) => {
         <CommandBar
           dropdownButtonsData={dropdownButtonsData}
           changeView={changeView}
-          viewButtonsData={viewButtonsData}
-          sortButtonsData={sortButtonsData}
           sortFilter={sortFilter}
           addNewFile={addNewFile}
-          newFileButtonsData={newFileButtonsData}
-          uploadFileButtonsData={uploadFileButtonsData}
           uploadFile={uploadFile}
         />
       )}
 
       {/* <S.AllContent> */}
-      <S.Title>All files</S.Title>
+      <S.Title>All files {testState}</S.Title>
       {isLoading ? (
         <Loader />
       ) : (
