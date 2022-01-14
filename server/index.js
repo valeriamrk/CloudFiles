@@ -1,45 +1,74 @@
-import express from "express";
+import express, { json, urlencoded } from "express";
 import mongoose from "mongoose";
-import authRouter from "./authRouter.js";
+import authRouter from "./routes/authRouter.js";
 import cors from "cors";
-// import "./setupEnv.js";
+import helmet from "helmet";
+// import { dirname } from "path";
+// import { fileURLToPath } from "url";
+import config from "config";
 
-// dotenv.config();
+// настройки, конфигурации (добавить конфиг)
+const dbURL = config.get("dbConfig.url");
+const srvPort = config.get("srvConfig.port");
 
-const PORT = 5000;
-// const PORT2 = process.env.PORT;
-// const DB_URL = process.env.DB_URL;
-const DB_URL =
-  "mongodb+srv://clouduser:db%215835File@cluster0.ampiz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+//  путь к текущей директории
+// const directoryName = dirname(fileURLToPath(import.meta.url));
 
-const app = express();
+// определяем режим работы, (добавить конфиг env)
+// const isProduction = false;
 
-//сервер парсит json, который прилетает в запрос
-app.use(express.json());
-app.use(cors());
-
-//для прослушивания роутера
-app.use("/auth", authRouter);
-app.use(express.static("static"));
-
-// const start = async () => {
-//   try {
-//     await mongoose.connect('mongodb+srv://clouduser:db%215835File@cluster0.ampiz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
-//     app.listen(PORT, () => console.log("server started on port 5000"))
-//   } catch (e) {
-//     console.log(e)
-//   }
+// выбираем настройки, конфигурацию
+// let config;
+// if (isProduction) {
+//   config = productionConfig;
+// } else {
+//   config = developmentConfig;
 // }
 
-// start()
+// создаем экземпляр приложения
+const app = express();
 
+// предоставление статических файлов
+app.use(express.static("static"));
+
+// устанавливаем заголовки, связанные с безопасностью
+app.use(helmet());
+
+// устанавливаем заголовки, связанные с CORS
+app.use(
+  cors({
+    // сервер будет обрабатывать запросы только из разрешенного источника
+    origin: config.allowedOrigin,
+  })
+);
+
+// преобразование тела запроса из JSON в обычный объект
+app.use(json());
+
+// разбор параметров строки запроса
+app.use(urlencoded({ extended: true }));
+
+// маршруты, routes
+app.use("/auth", authRouter);
+
+// маршрут, route not found
+app.use("*", (req, res) => {
+  res.status(404).json({ message: "Endpoint not found" });
+});
+
+// обработчик ошибок (доработать)
+
+// запуск сервера
 async function startApp() {
   try {
-    await mongoose.connect(DB_URL, {
+    // подключение к MongoDB
+    await mongoose.connect(dbURL, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
     });
-    app.listen(PORT, () => console.log("SERVER STARTED ON PORT " + PORT));
+    app.listen(srvPort, () =>
+      console.log(`SERVER STARTED ON PORT: ${srvPort}`)
+    );
   } catch (e) {
     console.log(e);
   }

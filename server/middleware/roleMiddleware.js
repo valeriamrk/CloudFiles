@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { secret } from "../config.js";
+import { secret } from "../config/config.js";
 
 const roleMiddleware = (roles) => {
   return function (req, res, next) {

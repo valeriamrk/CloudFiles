@@ -1,19 +1,19 @@
-import MyHeader from "./components/dumb/organism/header/MyHeader";
-import MainContent from "./components/dumb/organism/mainContent/MainContent";
-import NavigationSidebar from "./components/dumb/organism/navigationSidebar/NavigationSidebar";
+import { MyHeader } from "./components/presentational";
+import {MainContent} from "./pages";
+import { NavigationSidebar } from "./components/presentational";
 import "./App.css";
 import { Route } from "react-router";
-import Photos from "./components/pages/Photos";
-import RecycleBin from "./components/pages/RecycleBin";
-import SharedFiles from "./components/pages/SharedFiles";
-import LoginPage from "./components/pages/LoginPage";
-import MyModal from "./components/dumb/organism/modal/MyModal";
+import {Photos} from "./pages";
+import {RecycleBin} from "./pages";
+import {SharedFiles} from "./pages";
+import {LoginPage} from "./pages";
+import { MyModal } from "./components/presentational";
 import { useState } from "react";
 import { BsFolder, BsImage, BsPersonPlus, BsBucket } from "react-icons/bs";
-import UserCard from "./components/pages/UserCard";
+import {UserCard} from "./components/presentational";
 
 function App() {
-  const isAuth = false;
+  const isAuth = true;
   const [modalActive, setModalActive] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
   const handleOpen = () => {
