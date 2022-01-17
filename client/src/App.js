@@ -1,4 +1,4 @@
-import { MyHeader } from "./components/presentational";
+import { FilesDownloader, MyHeader } from "./components/presentational";
 import { MainContent } from "./pages";
 import { NavigationSidebar } from "./components/presentational";
 import "./App.css";
@@ -42,7 +42,7 @@ function App() {
           {/* <MainPage /> */}
           {/* <div className="main-wrapper"> */}
           <Routes>
-            <Route path="/" element={<MainPage />}>
+            <Route path="/" element={<MainPage handleOpen={handleOpen} handlePopupOpen={handlePopupOpen} />}>
               <Route path="/allfiles" element={<MainContent />} />
               <Route path="/photos" element={<Photos />} />
               <Route path="/sharedfiles" element={<SharedFiles />} />
@@ -52,6 +52,7 @@ function App() {
           {/* </div> */}
           <MyModal modalActive={modalActive} handleClose={handleClose}>
             <p>lorem</p>
+            <FilesDownloader/>
           </MyModal>
           <UserCard popupOpen={popupOpen} setPopupOpen={setPopupOpen} />
         </div>
