@@ -10,6 +10,7 @@ import {
 } from "../../components/presentational";
 import { BsGear, BsQuestionCircle, BsPerson } from "react-icons/bs";
 import { useSelector } from "react-redux";
+import { Outlet } from "react-router-dom";
 
 const MainPage = (props) => {
   const { handleOpen, handlePopupOpen } = props;
@@ -59,7 +60,9 @@ const MainPage = (props) => {
       <PageBasicLayout.PageSidebar>
         <NavigationSidebar sidebarLinks={sidebarLinks}/>
       </PageBasicLayout.PageSidebar>
-      <PageBasicLayout.PageContent></PageBasicLayout.PageContent>
+      <PageBasicLayout.PageContent>
+      <Outlet />
+      </PageBasicLayout.PageContent>
     </PageBasicLayout>
   );
 };

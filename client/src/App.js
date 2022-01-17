@@ -1,16 +1,17 @@
 import { MyHeader } from "./components/presentational";
-import {MainContent} from "./pages";
+import { MainContent } from "./pages";
 import { NavigationSidebar } from "./components/presentational";
 import "./App.css";
-import { Route } from "react-router";
-import {Photos} from "./pages";
-import {RecycleBin} from "./pages";
-import {SharedFiles} from "./pages";
-import {LoginPage} from "./pages";
+import { Routes, Route } from "react-router-dom";
+import { Photos } from "./pages";
+import { RecycleBin } from "./pages";
+import { SharedFiles } from "./pages";
+import { LoginPage } from "./pages";
 import { MyModal } from "./components/presentational";
 import { useState } from "react";
 import { BsFolder, BsImage, BsPersonPlus, BsBucket } from "react-icons/bs";
-import {UserCard} from "./components/presentational";
+import { UserCard } from "./components/presentational";
+import { MainPage } from "./pages";
 
 function App() {
   const isAuth = true;
@@ -36,14 +37,19 @@ function App() {
     <>
       {isAuth ? (
         <div className="App">
-          <MyHeader handleOpen={handleOpen} handlePopupOpen={handlePopupOpen} />
-          <NavigationSidebar sidebarRoutes={sidebarRoutes} />
-          <div className="main-wrapper">
-            <Route path="/allfiles" render={() => <MainContent />} />
-            <Route path="/photos" render={Photos} />
-            <Route path="/sharedfiles" render={SharedFiles} />
-            <Route path="/recyclebin" render={RecycleBin} />
-          </div>
+          {/* <MyHeader handleOpen={handleOpen} handlePopupOpen={handlePopupOpen} />
+          <NavigationSidebar sidebarRoutes={sidebarRoutes} /> */}
+          {/* <MainPage /> */}
+          {/* <div className="main-wrapper"> */}
+          <Routes>
+            <Route path="/" element={<MainPage />}>
+              <Route path="/allfiles" element={<MainContent />} />
+              <Route path="/photos" element={<Photos />} />
+              <Route path="/sharedfiles" element={<SharedFiles />} />
+              <Route path="/recyclebin" element={<RecycleBin />} />
+            </Route>
+          </Routes>
+          {/* </div> */}
           <MyModal modalActive={modalActive} handleClose={handleClose}>
             <p>lorem</p>
           </MyModal>

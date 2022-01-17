@@ -153,18 +153,11 @@ const MainContent = (props) => {
     console.log("uploadfile");
   };
 
-  const shareFile = () => {
-    console.log("sharefile");
-  };
   const deleteFile = () => {
     console.log("deletefile");
   };
-  const moveFile = () => {
-    console.log("movefile");
-  };
-  const copyFile = () => {
-    console.log("copyfile");
-  };
+
+
   const renameFile = () => {
     console.log("renamefile");
   };
@@ -173,10 +166,7 @@ const MainContent = (props) => {
     <S.MainContent>
       {showCommandMenu ? (
         <CommandMenu
-          shareFile={shareFile}
           deleteFile={deleteFile}
-          moveFile={moveFile}
-          copyFile={copyFile}
           renameFile={renameFile}
           cancelSelectionFile={cancelSelectionFile}
           selectedElementsNumber={selectedElementsNumber}

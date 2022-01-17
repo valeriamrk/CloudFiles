@@ -3,19 +3,21 @@ import * as S from "./styles";
 import { MyButton } from "../../../presentational";
 import { IoDiamondOutline } from "react-icons/io5";
 import { ProgressBar } from "../../../presentational";
-import { useHistory } from "react-router-dom";
+import { useHistory, useNavigate } from "react-router-dom";
 
 const NavigationSidebar = (props) => {
   const { sidebarLinks } = props;
 
-  const history = useHistory();
+  // const history = useHistory();
+  const navigate = useNavigate();
 
   const [selectedIndex, setSelectedIndex] = React.useState();
 
   const handleListItemClick = (event, index, path) => {
     console.log("click");
     setSelectedIndex(index);
-    history.push(path);
+    // history.push(path);
+    navigate(path);
   };
 
   return (
