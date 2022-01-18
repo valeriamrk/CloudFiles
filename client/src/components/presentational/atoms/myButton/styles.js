@@ -1,6 +1,7 @@
 import styled from "styled-components/macro";
 
 export const MyButton = styled.button`
+  font-family: 'Montserrat', sans-serif;
   display: flex;
   flex-direction: row;
   align-items: center;

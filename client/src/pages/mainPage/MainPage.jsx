@@ -13,7 +13,7 @@ import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 
 const MainPage = (props) => {
-  const { handleOpen, handlePopupOpen } = props;
+  const { handleOpen, handlePopupOpen, handleModalState } = props;
 
   const sidebarLinks = useSelector(
     (state) => state.sidebarLinks.sidebarLinks
@@ -33,14 +33,14 @@ const MainPage = (props) => {
 
             <Flex alignItems="center">
               <MyButton
-                clickButton={handleOpen}
+                clickButton={() => handleModalState({id: 1})}
                 justIcon={"justIcon"}
                 headerStyle={"headerStyle"}
               >
                 <BsGear />
               </MyButton>
               <MyButton
-                clickButton={handleOpen}
+                clickButton={() => handleModalState({id: 2})}
                 justIcon={"justIcon"}
                 headerStyle={"headerStyle"}
               >
@@ -58,7 +58,7 @@ const MainPage = (props) => {
         </Box>
       </PageBasicLayout.PageHeader>
       <PageBasicLayout.PageSidebar>
-        <NavigationSidebar sidebarLinks={sidebarLinks}/>
+        <NavigationSidebar sidebarLinks={sidebarLinks} handleModalState={handleModalState}/>
       </PageBasicLayout.PageSidebar>
       <PageBasicLayout.PageContent>
       <Outlet />

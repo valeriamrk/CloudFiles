@@ -5,14 +5,12 @@ import { BsCheck2, BsGrid, BsChevronDown } from "react-icons/bs";
 
 const DropdownListItem = (props) => {
 
-  const { buttonClick } = props;
+  const { element } = props;
 
 
   const handleButtonClick = (id, value) => {
-    buttonClick(id, value);
+    element.clickHandler(id, value);
   };
-
-const {element} = props
 
   return (
     <S.DropdownListItem onClick={() => handleButtonClick(element.id, element.value)}

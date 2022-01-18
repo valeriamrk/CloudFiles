@@ -1,5 +1,5 @@
 import React from "react";
-import { InputField, MyButton } from "../..";
+import { MyButton } from "../..";
 import * as S from "./styles";
 import { Box, Flex } from "../..";
 

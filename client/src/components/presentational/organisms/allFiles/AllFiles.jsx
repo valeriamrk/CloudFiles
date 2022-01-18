@@ -4,7 +4,7 @@ import { FolderGridView } from "../..";
 import { FolderListView } from "../..";
 import * as S from "./styles";
 
-const UploadedFolders = (props) => {
+const AllFiles = (props) => {
   const {
     gridView,
     fakeListViewArray,
@@ -33,4 +33,4 @@ const UploadedFolders = (props) => {
   );
 };
 
-export { UploadedFolders };
+export { AllFiles };

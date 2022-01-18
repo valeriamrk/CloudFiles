@@ -5,7 +5,6 @@ const Photos = () => {
   return (
     <div>
       <h3>photos</h3>
-      <DragAndDrop />
     </div>
   );
 };

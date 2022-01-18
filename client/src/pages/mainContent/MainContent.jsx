@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Loader } from "../../components/presentational";
 import { CommandBar } from "../../components/presentational";
-import { UploadedFolders } from "../../components/presentational";
+import { AllFiles } from "../../components/presentational";
 import * as S from "../../components/presentational/organisms/commandBar/styles";
 import { v4 as uuidv4 } from "uuid";
 import { CommandMenu } from "../../components/presentational";
@@ -19,6 +19,13 @@ const MainContent = (props) => {
   useEffect(() => {
     sendGetRequest();
   }, []);
+
+  const fileClickHandler = (id, value) => {
+    console.log("fileClickHandler", id, value);
+  };
+  const folderClickHandler = (id, value) => {
+    console.log("folderClickHandler", id, value);
+  };
 
   // тестовый стейт для получения постов
   const [testState, setTestState] = useState("");
@@ -43,12 +50,10 @@ const MainContent = (props) => {
     newFileButtonsData: [
       { id: uuidv4(), value: "Folder" },
       { id: uuidv4(), value: "TXT file" },
-      { id: uuidv4(), value: "Word document" },
-      { id: uuidv4(), value: "Excel workbook" },
     ],
     uploadFileButtonsData: [
-      { id: uuidv4(), value: "File" },
-      { id: uuidv4(), value: "Folder" },
+      { id: uuidv4(), value: "File", clickHandler: fileClickHandler },
+      { id: uuidv4(), value: "Folder", clickHandler: folderClickHandler },
     ],
     modifiedButtonsData: [
       { id: uuidv4(), value: "Older to newer" },
@@ -157,7 +162,6 @@ const MainContent = (props) => {
     console.log("deletefile");
   };
 
-
   const renameFile = () => {
     console.log("renamefile");
   };
@@ -186,7 +190,7 @@ const MainContent = (props) => {
       {isLoading ? (
         <Loader />
       ) : (
-        <UploadedFolders
+        <AllFiles
           dropdownButtonsData={dropdownButtonsData}
           data={folders}
           gridView={gridView}

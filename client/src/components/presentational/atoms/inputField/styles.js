@@ -7,4 +7,6 @@ export const InputField = styled.input`
   outline: none;
   font-size: 13px;
   padding-left: 10px;
+  font-family: 'Montserrat', sans-serif;
+
 `;

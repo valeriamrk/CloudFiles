@@ -1,12 +1,12 @@
 import React from "react";
 import * as S from "./styles";
-import { MyButton } from "../../../presentational";
+import { MyButton} from "../../../presentational";
 import { IoDiamondOutline } from "react-icons/io5";
 import { ProgressBar } from "../../../presentational";
-import { useHistory, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const NavigationSidebar = (props) => {
-  const { sidebarLinks } = props;
+  const { sidebarLinks, handleModalState } = props;
 
   // const history = useHistory();
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const NavigationSidebar = (props) => {
 
       <S.BottomContent>
         <S.PremiumContainer>
-          <MyButton startIcon={<IoDiamondOutline />} premium={"premium"}>
+          <MyButton startIcon={<IoDiamondOutline />} premium={"premium"} clickButton={() => handleModalState({id: 3})}>
             Buy Premium Cloud
           </MyButton>
         </S.PremiumContainer>

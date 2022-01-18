@@ -1,6 +1,7 @@
-import { FilesDownloader, MyHeader } from "./components/presentational";
+import {
+  UnderConstruction,
+} from "./components/presentational";
 import { MainContent } from "./pages";
-import { NavigationSidebar } from "./components/presentational";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { Photos } from "./pages";
@@ -12,37 +13,44 @@ import { useState } from "react";
 import { BsFolder, BsImage, BsPersonPlus, BsBucket } from "react-icons/bs";
 import { UserCard } from "./components/presentational";
 import { MainPage } from "./pages";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  changeModalState,
+  changeModalStateClose,
+} from "./store/modalsDataSlice";
 
 function App() {
   const isAuth = true;
-  const [modalActive, setModalActive] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
-  const handleOpen = () => {
-    setModalActive(true);
-  };
-  const handleClose = () => setModalActive(false);
-
   const handlePopupOpen = () => {
     setPopupOpen(!popupOpen);
   };
 
-  const sidebarRoutes = [
-    { path: "/allfiles", label: "All files", icon: <BsFolder /> },
-    { path: "/photos", label: "Photos", icon: <BsImage /> },
-    { path: "/sharedfiles", label: "Shared files", icon: <BsPersonPlus /> },
-    { path: "/recyclebin", label: "Recycle bin", icon: <BsBucket /> },
-  ];
+  const dispatch = useDispatch();
+
+  const modalsData = useSelector((state) => state.modalsData.allModals);
+
+  const handleModalState = (id) => {
+    dispatch(changeModalState(id));
+  };
+  const handleModalStateClose = () => {
+    dispatch(changeModalStateClose());
+  };
 
   return (
     <>
       {isAuth ? (
         <div className="App">
-          {/* <MyHeader handleOpen={handleOpen} handlePopupOpen={handlePopupOpen} />
-          <NavigationSidebar sidebarRoutes={sidebarRoutes} /> */}
-          {/* <MainPage /> */}
-          {/* <div className="main-wrapper"> */}
           <Routes>
-            <Route path="/" element={<MainPage handleOpen={handleOpen} handlePopupOpen={handlePopupOpen} />}>
+            <Route
+              path="/"
+              element={
+                <MainPage
+                  handlePopupOpen={handlePopupOpen}
+                  handleModalState={handleModalState}
+                />
+              }
+            >
               <Route path="/allfiles" element={<MainContent />} />
               <Route path="/photos" element={<Photos />} />
               <Route path="/sharedfiles" element={<SharedFiles />} />
@@ -50,9 +58,31 @@ function App() {
             </Route>
           </Routes>
           {/* </div> */}
-          <MyModal modalActive={modalActive} handleClose={handleClose}>
-            <p>lorem</p>
-            <FilesDownloader/>
+          <MyModal
+            modalActive={modalsData[0].opened}
+            handleClose={handleModalStateClose}
+            modalsData={modalsData}
+          >
+            <div>Settings</div>
+            <UnderConstruction />
+          </MyModal>
+
+          <MyModal
+            modalActive={modalsData[1].opened}
+            handleClose={handleModalStateClose}
+            modalsData={modalsData}
+          >
+            <div>Questions</div>
+            <UnderConstruction />
+          </MyModal>
+
+          <MyModal
+            modalActive={modalsData[2].opened}
+            handleClose={handleModalStateClose}
+            modalsData={modalsData}
+          >
+            <div>Buy Premium Cloud</div>
+            <UnderConstruction />
           </MyModal>
           <UserCard popupOpen={popupOpen} setPopupOpen={setPopupOpen} />
         </div>
@@ -61,8 +91,6 @@ function App() {
           <LoginPage />
         </div>
       )}
-
-      {/* <Footer/> */}
     </>
   );
 }

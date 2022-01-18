@@ -5,7 +5,6 @@ const SharedFiles = () => {
   return (
     <div>
       <h3>Shared files</h3>
-      <CreateNewFolder />
     </div>
   );
 };

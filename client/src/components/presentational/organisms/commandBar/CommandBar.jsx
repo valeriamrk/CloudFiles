@@ -32,7 +32,7 @@ const CommandBar = (props) => {
           </MyButton>
         </MyDropdown>
         <MyDropdown
-          buttonClick={uploadFile}
+          // buttonClick={uploadFile}
           dropdownButtonsData={dropdownButtonsData.uploadFileButtonsData}
         >
           <MyButton startIcon={<BsUpload />} endIcon={<BsChevronDown />}>
