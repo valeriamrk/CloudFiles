@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { secret } from "../config/config.js";
+import config from 'config'
 
 const authMiddleware = (req, res, next) => {
   if (req.method === "OPTIONS") {
@@ -11,7 +11,7 @@ const authMiddleware = (req, res, next) => {
     if (!token) {
       return res.status(403).json({ message: "User is not authorized" });
     }
-    const decodedData = jwt.verify(token, secret);
+    const decodedData = jwt.verify(token, config.secretKey);
     req.user = decodedData;
     next();
   } catch (e) {

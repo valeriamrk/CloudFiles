@@ -1,6 +1,7 @@
 import express, { json, urlencoded } from "express";
 import mongoose from "mongoose";
 import authRouter from "./routes/authRouter.js";
+import fileRouter from "./routes/fileRouter.js";
 import cors from "cors";
 import helmet from "helmet";
 // import { dirname } from "path";
@@ -50,6 +51,7 @@ app.use(urlencoded({ extended: true }));
 
 // маршруты, routes
 app.use("/auth", authRouter);
+app.use("/files", fileRouter)
 
 // маршрут, route not found
 app.use("*", (req, res) => {

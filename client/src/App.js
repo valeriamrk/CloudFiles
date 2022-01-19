@@ -10,7 +10,6 @@ import { SharedFiles } from "./pages";
 import { LoginPage } from "./pages";
 import { MyModal } from "./components/presentational";
 import { useState } from "react";
-import { BsFolder, BsImage, BsPersonPlus, BsBucket } from "react-icons/bs";
 import { UserCard } from "./components/presentational";
 import { MainPage } from "./pages";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,6 +17,7 @@ import {
   changeModalState,
   changeModalStateClose,
 } from "./store/modalsDataSlice";
+import { setCurrentDir, setFolders } from "./store/folderCreateSlice";
 
 function App() {
   const isAuth = true;
@@ -36,6 +36,11 @@ function App() {
   const handleModalStateClose = () => {
     dispatch(changeModalStateClose());
   };
+
+  const testonclick = () => {
+    dispatch(setFolders("test"))
+    dispatch(setCurrentDir("test1"))
+  }
 
   return (
     <>
@@ -85,6 +90,7 @@ function App() {
             <UnderConstruction />
           </MyModal>
           <UserCard popupOpen={popupOpen} setPopupOpen={setPopupOpen} />
+          <button onClick={() => testonclick()}>button</button>
         </div>
       ) : (
         <div className="loginPage">

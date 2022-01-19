@@ -4,5 +4,7 @@
   },
   "srvConfig": {
     "port": 5000
-  }
+  },
+  "secretKey": "SECRET_KEY_RANDOM",
+  "filePath": "C:\\Users\\valeria\\Documents\\react-learning\\cloud-files\\server\\data"
 }

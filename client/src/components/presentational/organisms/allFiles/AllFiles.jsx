@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { FolderGridView } from "../..";
 import { FolderListView } from "../..";
 import * as S from "./styles";
