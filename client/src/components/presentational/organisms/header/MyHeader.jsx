@@ -30,8 +30,9 @@ const MyHeader = (props) => {
       <S.RightContainer>
         <MyButton
           clickButton={handleOpen}
-          justIcon={"justIcon"}
+          // justIcon={"justIcon"}
           headerStyle={"headerStyle"}
+          padding="8px"
         >
           <BsGear />
         </MyButton>

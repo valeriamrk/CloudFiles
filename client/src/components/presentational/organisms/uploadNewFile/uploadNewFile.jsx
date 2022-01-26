@@ -1,5 +1,5 @@
 import React from "react";
-import { DragAndDrop, Flex, MyButton } from "../..";
+import { DragAndDrop, FileInput, Flex, MyButton } from "../..";
 import * as S from "./styles";
 
 const UploadNewFile = (props) => {
@@ -8,7 +8,7 @@ const UploadNewFile = (props) => {
       <div>Upload your file</div>
       <Flex flexDirection={"column"} alignItems={"flex-start"}>
         <S.Field><DragAndDrop /></S.Field>
-        <MyButton premium="premium">Browse files</MyButton>
+        <FileInput/>
       </Flex>
     </S.UploadNewFileBody>
   );

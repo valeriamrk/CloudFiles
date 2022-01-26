@@ -1,4 +1,6 @@
 import React from "react";
+import * as S from "./styles"
+
 
 const Checkbox = (props) => {
   const { checkFile, checked, id } = props;
@@ -10,10 +12,12 @@ const Checkbox = (props) => {
   return (
     <div>
       <input
+        id="checkbox"
         type="checkbox"
         checked={checked}
         onChange={() => changeCheckbox(id, checked)}
-      ></input>
+      />
+      <label for="checkbox"></label>
     </div>
   );
 };

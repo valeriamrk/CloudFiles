@@ -4,6 +4,7 @@ export * from "./atoms/loader/Loader"
 export * from "./atoms/myButton/MyButton"
 export * from "./atoms/progressBar/ProgressBar"
 export * from "./atoms/logo/Logo"
+export * from "./atoms/fileInput/FileInput"
 
 export * from "./molecules/dropdown/DropdownListItem"
 export * from "./molecules/dropdown/MyDropdown"

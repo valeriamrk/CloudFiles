@@ -9,6 +9,7 @@ export const MyButton = styled.button`
   color: black;
   height: 100%;
   padding: ${(props) => (props.justIcon ? "8px" : "4")};
+  /* padding: ${props => props.padding || "4px"} */
   margin: 0;
   /* padding: 16px 8px 16px 8px; */
   border: ${(props) => (props.premium ? "0.5px solid black" : "none")};

@@ -15,9 +15,10 @@ const MyButton = (props) => {
   return (
     <S.MyButton
       onClick={clickButton && ((event) => clickButton(event))}
-      justIcon={justIcon}
+      // justIcon={justIcon}
       headerStyle={headerStyle}
       premium={premium}
+      {...props}
     >
       {startIcon && <S.Icons>{startIcon}</S.Icons>}
       <S.Value>{children}</S.Value>
