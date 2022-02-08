@@ -10,7 +10,6 @@ export const CheckboxContainer = styled.div`
   align-self: flex-end;
 margin-right: 8px;
 
-  /* visibility: hidden; */
   visibility: ${(props) => (props.checked ? "visible" : "hidden")};
 `;
 

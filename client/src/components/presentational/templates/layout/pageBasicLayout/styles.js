@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 export const Layout = styled.div`
   display: grid;
@@ -11,12 +11,12 @@ export const Layout = styled.div`
 
 export const Header = styled.div`
   grid-area: h;
-  line-height: 44px;
-  /* display: flex; */
-  /* flex-direction: row;
-  justify-content: space-between; */
-  /* align-items: center; */
+  /* line-height: 44px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #3aafa9;
+  width: 100%;
 `;
 
 export const Sidebar = styled.div`
@@ -25,8 +25,9 @@ export const Sidebar = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border-right: 1px solid #2b7a78;
-  height: 100vh;
+  height: 100%;
   background-color: #def2f1;
+  width: 100%;
 `;
 
 export const Content = styled.div`

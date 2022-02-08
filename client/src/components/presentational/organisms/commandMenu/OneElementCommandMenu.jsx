@@ -1,5 +1,5 @@
 import React from "react";
-import { MyButton } from "../../../presentational";
+import { MyButton } from "../..";
 import * as S from "./styles";
 import {
   BsShare,
@@ -10,7 +10,7 @@ import {
   BsXLg,
 } from "react-icons/bs";
 
-const CommandMenu = (props) => {
+const OneElementCommandMenu = (props) => {
   const {
     deleteFile,
     renameFile,
@@ -32,9 +32,6 @@ const CommandMenu = (props) => {
         {/* <MyButton clickButton={copyFile} startIcon={<BsFiles />}>
           Copy
         </MyButton> */}
-        <MyButton clickButton={renameFile} startIcon={<BsPencilSquare />}>
-          Rename
-        </MyButton>
       </S.RightButtons>
       <S.LeftButtons>
         <MyButton clickButton={cancelSelectionFile} endIcon={<BsXLg />}>
@@ -45,4 +42,4 @@ const CommandMenu = (props) => {
   );
 };
 
-export { CommandMenu };
+export { OneElementCommandMenu };

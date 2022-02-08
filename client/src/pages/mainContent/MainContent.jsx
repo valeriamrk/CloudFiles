@@ -1,6 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Loader } from "../../components/presentational";
+import {
+  Flex,
+  Loader,
+  MyButton,
+  OneElementCommandMenu,
+} from "../../components/presentational";
 import { CommandBar } from "../../components/presentational";
 import { AllFiles } from "../../components/presentational";
 import * as S from "../../components/presentational/organisms/commandBar/styles";
@@ -8,6 +13,13 @@ import { v4 as uuidv4 } from "uuid";
 import { CommandMenu } from "../../components/presentational";
 import { useSelector, useDispatch } from "react-redux";
 import { checkOneFile, uncheckAllFiles } from "../../store/foldersDataSlice";
+import { filesAPI } from "../../services/api/api";
+// import { fetchFolders } from "../../store/folderCreateSlice";
+import {
+  fetchFolders,
+  deleteFolder,
+  renameFolder,
+} from "../../store/folderSlice";
 
 const MainContent = (props) => {
   const fakeListViewArray = useSelector(
@@ -19,6 +31,10 @@ const MainContent = (props) => {
   useEffect(() => {
     sendGetRequest();
   }, []);
+
+  // useEffect(() => {
+  //   dispatch(fetchFolders(), [dispatch])
+  // })
 
   const fileClickHandler = (id, value) => {
     console.log("fileClickHandler", id, value);
@@ -33,6 +49,8 @@ const MainContent = (props) => {
   const [folders, setFolders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showCommandMenu, setShowCommandMenu] = useState(false);
+  const [showOneElementCommandMenu, setshowOneElementCommandMenu] =
+    useState(false);
   const [gridView, setGridView] = useState(true);
   const [viewButtonsData, setViewButtonsData] = useState([
     { id: uuidv4(), value: "List", checked: false },
@@ -74,8 +92,8 @@ const MainContent = (props) => {
       const response = await axios.get(
         "https://jsonplaceholder.typicode.com/albums"
       );
-      const testResponse = await axios.get("http://127.0.0.1:5000/auth/posts");
-      setTestState(testResponse.data.post);
+      // const testResponse = await axios.get("http://127.0.0.1:5000/auth/posts");
+      // setTestState(testResponse.data.post);
       setFolders(response.data);
     } catch (err) {
       // Handle Error Here
@@ -130,8 +148,13 @@ const MainContent = (props) => {
     }
 
     // показывать комманд меню или нет
+
+    // if (transformedArray.length > 0) {
+    //   setshowOneElementCommandMenu(true);
     if (transformedArray.length > 0) {
       setShowCommandMenu(true);
+      // } else if (transformedArray.length > 1) {
+      //   setShowCommandMenu(true);
     } else {
       setShowCommandMenu(false);
     }
@@ -166,6 +189,15 @@ const MainContent = (props) => {
     console.log("renamefile");
   };
 
+  const getFiles = async (name, type, parent) => {
+    try {
+      const response = await filesAPI.createDir(name, type, parent);
+      console.log("getFiles", response);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <S.MainContent>
       {showCommandMenu ? (
@@ -176,6 +208,12 @@ const MainContent = (props) => {
           selectedElementsNumber={selectedElementsNumber}
         />
       ) : (
+        // ) : showCommandMenu ? (
+        //   <OneElementCommandMenu
+        //     deleteFile={deleteFile}
+        //     cancelSelectionFile={cancelSelectionFile}
+        //     selectedElementsNumber={selectedElementsNumber}
+        //   />)
         <CommandBar
           dropdownButtonsData={dropdownButtonsData}
           changeView={changeView}
@@ -187,8 +225,22 @@ const MainContent = (props) => {
 
       {/* <S.AllContent> */}
       <S.Title>All files {testState}</S.Title>
+      {/* <MyButton onClick={() => getFiles("test", "folder")}>Button</MyButton> */}
+      <MyButton
+        onClick={() =>
+          dispatch(fetchFolders({ name: "some_folder2", type: "folder" }))
+        }
+      >
+        Button
+      </MyButton>
+      <MyButton onClick={() => dispatch(deleteFolder())}>Delete</MyButton>
+
+      <MyButton onClick={() => dispatch(renameFolder())}>Rename</MyButton>
+
       {isLoading ? (
-        <Loader />
+        <Flex justifyContent="center">
+          <Loader />
+        </Flex>
       ) : (
         <AllFiles
           dropdownButtonsData={dropdownButtonsData}

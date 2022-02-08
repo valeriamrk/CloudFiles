@@ -10,7 +10,7 @@ export const DropdownListItem = styled.div`
   justify-content: flex-start;
   align-items: center;
   &:hover {
-    background-color: #def2f1;
+    background-color: #d1e8e2;
   }
 `;
 

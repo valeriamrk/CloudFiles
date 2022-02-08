@@ -1,6 +1,6 @@
 import React from "react";
 import * as S from "./styles";
-import { MyButton} from "../../../presentational";
+import { Box, Flex, MyButton} from "../../../presentational";
 import { IoDiamondOutline } from "react-icons/io5";
 import { ProgressBar } from "../../../presentational";
 import { useNavigate } from "react-router-dom";
@@ -28,10 +28,13 @@ const NavigationSidebar = (props) => {
           <S.LinksWrapper
             onClick={(event) => handleListItemClick(event, index, element.path)}
             selected={selectedIndex === index}
-          >
+          ><Box ml={24}>
+            <Flex>
             <S.Icons>{element.icon}</S.Icons>
             <S.NavMenuItemLabel>{element.label}</S.NavMenuItemLabel>
             {/* <S.Links to={element.path}> {element.label}</S.Links> */}
+            </Flex>
+            </Box>
           </S.LinksWrapper>
         ))}
       </S.LinksContainer>

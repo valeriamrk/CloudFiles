@@ -85,6 +85,10 @@ const initialState = {
   ],
 };
 
+// const initialState = {
+  
+// }
+
 export const foldersDataSlice = createSlice({
   name: "foldersData",
   initialState,

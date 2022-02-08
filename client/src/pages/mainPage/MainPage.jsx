@@ -26,7 +26,7 @@ const MainPage = (props) => {
   return (
     <PageBasicLayout>
       <PageBasicLayout.PageHeader>
-        <Box ml={16}>
+        <Box ml={16} width={1}>
           <Flex justifyContent="space-between" alignItems="center">
             <Logo />
             <SearchInput />

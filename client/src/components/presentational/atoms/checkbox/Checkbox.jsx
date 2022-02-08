@@ -11,13 +11,13 @@ const Checkbox = (props) => {
 
   return (
     <div>
-      <input
+      <S.Checkbox
         id="checkbox"
         type="checkbox"
         checked={checked}
         onChange={() => changeCheckbox(id, checked)}
       />
-      <label for="checkbox"></label>
+      <S.StyledCheckbox for="checkbox"></S.StyledCheckbox>
     </div>
   );
 };

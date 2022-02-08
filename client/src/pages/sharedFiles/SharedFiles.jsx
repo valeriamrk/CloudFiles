@@ -1,11 +1,14 @@
 import React from "react";
 import {CreateNewFolder} from "../../components/presentational"
+import * as S from './styles'
+
 
 const SharedFiles = () => {
   return (
-    <div>
-      <h3>Shared files</h3>
-    </div>
+    <S.Body>
+      <S.Title>Shared files</S.Title>
+      <div>This page is under construction</div>
+    </S.Body>
   );
 };
 

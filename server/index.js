@@ -35,13 +35,15 @@ app.use(express.static("static"));
 // устанавливаем заголовки, связанные с безопасностью
 app.use(helmet());
 
+app.use(cors());
+
 // устанавливаем заголовки, связанные с CORS
-app.use(
-  cors({
-    // сервер будет обрабатывать запросы только из разрешенного источника
-    origin: config.allowedOrigin,
-  })
-);
+// app.use(
+//   cors({
+//     // сервер будет обрабатывать запросы только из разрешенного источника
+//     origin: config.allowedOrigin,
+//   })
+// );
 
 // преобразование тела запроса из JSON в обычный объект
 app.use(json());
@@ -51,7 +53,7 @@ app.use(urlencoded({ extended: true }));
 
 // маршруты, routes
 app.use("/auth", authRouter);
-app.use("/files", fileRouter)
+app.use("/files", fileRouter);
 
 // маршрут, route not found
 app.use("*", (req, res) => {

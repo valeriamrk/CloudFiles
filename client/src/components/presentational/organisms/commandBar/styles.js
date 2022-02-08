@@ -35,7 +35,9 @@ height: 44px;
 /* position: relative; */
 /* padding: 8px; */
 /* background-color: #fffffb; */
-background-color: #DEF2F1;
+/* background-color: #DEF2F1; */
+background-color: #feffff;
+
 /* background-color: lightgray; */
 border-bottom: 1px solid #2B7A78;
 `

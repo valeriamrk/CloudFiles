@@ -1,18 +1,20 @@
 import styled from "styled-components/macro";
 
 export const Sidebar = styled.div`
-  grid-area: n;
+  /* grid-area: n; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* border-right: 1px solid #2b7a78; */
   height: 100vh;
-  background-color: #def2f1;
+  width: 100%;
+  /* background-color: #def2f1; */
 `;
 
 export const LinksContainer = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+
 `;
 
 export const UserName = styled.div`
@@ -35,8 +37,9 @@ export const LinksWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-left: 24px;
+  /* padding-left: 24px; */
   height: 40px;
+  width: 100%;
   text-decoration: none;
   color: black;
   &:hover {
