@@ -7,6 +7,7 @@ import helmet from "helmet";
 // import { dirname } from "path";
 // import { fileURLToPath } from "url";
 import config from "config";
+import fileUpload from "express-fileupload"
 
 // настройки, конфигурации (добавить конфиг)
 const dbURL = config.get("dbConfig.url");
@@ -31,6 +32,9 @@ const app = express();
 
 // предоставление статических файлов
 app.use(express.static("static"));
+
+// загрузка файлов
+app.use(fileUpload({}))
 
 // устанавливаем заголовки, связанные с безопасностью
 app.use(helmet());

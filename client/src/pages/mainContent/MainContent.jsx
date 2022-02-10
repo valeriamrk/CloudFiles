@@ -226,7 +226,7 @@ const MainContent = (props) => {
       {/* <S.AllContent> */}
       <S.Title>All files {testState}</S.Title>
       {/* <MyButton onClick={() => getFiles("test", "folder")}>Button</MyButton> */}
-      <MyButton
+      {/* <MyButton
         onClick={() =>
           dispatch(fetchFolders({ name: "some_folder2", type: "folder" }))
         }
@@ -235,7 +235,7 @@ const MainContent = (props) => {
       </MyButton>
       <MyButton onClick={() => dispatch(deleteFolder())}>Delete</MyButton>
 
-      <MyButton onClick={() => dispatch(renameFolder())}>Rename</MyButton>
+      <MyButton onClick={() => dispatch(renameFolder())}>Rename</MyButton> */}
 
       {isLoading ? (
         <Flex justifyContent="center">

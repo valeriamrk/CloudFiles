@@ -25,7 +25,7 @@ export const filesAPI = {
     return instance.post(`files/getFiles`, {  });
   },
   deleteFolder() {
-    return instance.get(`files/deleteFolder`);
+    return instance.delete(`files/deleteFolder`);
   },
   renameFolder() {
     return instance.get(`files/renameFolder`);
