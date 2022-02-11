@@ -21,8 +21,9 @@ export const filesAPI = {
   createDir(name, type, parent) {
     return instance.post(`files/createdir`, { name, type, parent });
   },
-  fetchAllFoldersFromBackend() {
-    return instance.post(`files/getFiles`, {  });
+  getAllFolders(id) {
+    return instance.get(`files/getFiles`, { id });
+    // id пока не будет прикручена аутентификация, потом убрать
   },
   deleteFolder() {
     return instance.delete(`files/deleteFolder`);
@@ -31,3 +32,9 @@ export const filesAPI = {
     return instance.get(`files/renameFolder`);
   },
 };
+
+export const usersAPI = {
+  registration(email, password) {
+    return instance.post(`auth/registration`, {email, password})
+  }
+}

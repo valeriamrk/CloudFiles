@@ -6,6 +6,7 @@ import sidebarLinksSlice from "./sidebarLinksSlice";
 
 // test slice
 import testReducer from "./folderSlice";
+import  registrationReducer from "./registrationSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     modalsData: modalsDataSlice,
     foldersCreate: foldersCreateSlice,
     testReducerName: testReducer,
+    registrationReducer: registrationReducer,
   },
 });
 

@@ -1,7 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { filesAPI } from "../services/api/api";
+import { transformDataGetFiles } from "./helpers/transformData";
 
-export const fetchFolders = createAsyncThunk(
+
+export const createDir = createAsyncThunk(
   "files/createdir",
   async (params) => {
     try {
@@ -17,12 +19,13 @@ export const fetchFolders = createAsyncThunk(
   }
 );
 
-export const fetchAllFoldersFromBackend = createAsyncThunk(
-  "files/fetchAllFoldersFromBackend",
+export const getAllFolders = createAsyncThunk(
+  "files/getAllFolders",
   async (params) => {
     try {
-      const response = await filesAPI.fetchAllFoldersFromBackend(); // параметры
-      return response.data;
+      const response = await filesAPI.getAllFolders("61aca9176a109bf46b5c5116"); // параметры
+      const transformedData = transformDataGetFiles(response.data)
+      return transformedData;
     } catch (error) {
       return error;
     }
@@ -68,7 +71,7 @@ export const testReducer = createSlice({
   name: "testReducerName",
   initialState,
   reducers: {
-    setFolders: (state, action) => {
+    createDir: (state, action) => {
       state.folders.push(action.payload);
     },
     setCurrentDir: (state, action) => {
@@ -90,10 +93,15 @@ export const testReducer = createSlice({
     },
   },
   extraReducers: {
-    [fetchFolders.fulfilled]: (state, action) => {
+    [createDir.fulfilled]: (state, action) => {
       state.folders = action.payload;
     },
-    [fetchFolders.rejected]: setError,
+    [createDir.rejected]: setError,
+
+    [getAllFolders.fulfilled]: (state, action) => {
+      state.folders = action.payload;
+    },
+    [getAllFolders.rejected]: setError,
 
     [deleteFolder.fulfilled]: (state, action) => {
       state.folders = action.payload;

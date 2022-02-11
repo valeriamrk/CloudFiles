@@ -14,11 +14,11 @@ import { CommandMenu } from "../../components/presentational";
 import { useSelector, useDispatch } from "react-redux";
 import { checkOneFile, uncheckAllFiles } from "../../store/foldersDataSlice";
 import { filesAPI } from "../../services/api/api";
-// import { fetchFolders } from "../../store/folderCreateSlice";
 import {
-  fetchFolders,
+  createDir,
   deleteFolder,
   renameFolder,
+  getAllFolders
 } from "../../store/folderSlice";
 
 const MainContent = (props) => {
@@ -33,7 +33,7 @@ const MainContent = (props) => {
   }, []);
 
   // useEffect(() => {
-  //   dispatch(fetchFolders(), [dispatch])
+  //   dispatch(createDir(), [dispatch])
   // })
 
   const fileClickHandler = (id, value) => {
@@ -226,16 +226,17 @@ const MainContent = (props) => {
       {/* <S.AllContent> */}
       <S.Title>All files {testState}</S.Title>
       {/* <MyButton onClick={() => getFiles("test", "folder")}>Button</MyButton> */}
-      {/* <MyButton
+      <MyButton
         onClick={() =>
-          dispatch(fetchFolders({ name: "some_folder2", type: "folder" }))
+          dispatch(createDir({ name: "some_folder2", type: "folder" }))
         }
       >
         Button
       </MyButton>
       <MyButton onClick={() => dispatch(deleteFolder())}>Delete</MyButton>
 
-      <MyButton onClick={() => dispatch(renameFolder())}>Rename</MyButton> */}
+      <MyButton onClick={() => dispatch(renameFolder())}>Rename</MyButton>
+      <MyButton onClick={() => dispatch(getAllFolders())}>Rename</MyButton>
 
       {isLoading ? (
         <Flex justifyContent="center">

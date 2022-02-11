@@ -1,7 +1,7 @@
 import {
   UnderConstruction,
 } from "./components/presentational";
-import { MainContent } from "./pages";
+import { MainContent, RegistrationPage } from "./pages";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { Photos } from "./pages";
@@ -20,7 +20,7 @@ import {
 import { setCurrentDir, setFolders } from "./store/folderCreateSlice";
 
 function App() {
-  const isAuth = true;
+  const isAuth = false;
   const [popupOpen, setPopupOpen] = useState(false);
   const handlePopupOpen = () => {
     setPopupOpen(!popupOpen);
@@ -94,7 +94,8 @@ function App() {
         </div>
       ) : (
         <div className="loginPage">
-          <LoginPage />
+          {/* <LoginPage /> */}
+          <RegistrationPage/>
         </div>
       )}
     </>

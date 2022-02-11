@@ -1,8 +1,8 @@
 import fileService from "../services/fileService.js";
 import File from "../models/File.js";
 import User from "../models/User.js";
-import config from "config"
-import fs from "fs"
+import config from "config";
+import fs from "fs";
 
 class FileController {
   async createDir(req, res) {
@@ -28,11 +28,19 @@ class FileController {
   }
 
   async getFiles(req, res) {
+    const { id } = req.body;
+    // убрать когда будет прикурчена аутентификация
     try {
+      // const files = await File.find({
+      //   user: req.user.id,
+      //   parent: req.query.parent,
+      // });
+
       const files = await File.find({
-        user: req.user.id,
+        user: id,
         parent: req.query.parent,
       });
+
       return res.json({ files });
     } catch (e) {
       console.log(e);
@@ -42,52 +50,56 @@ class FileController {
 
   async uploadFile(req, res) {
     try {
-        const file = req.files.file
-        const parent = await File.findOne({user: req.user.id, _id: req.body.parent})
-        const user = await User.findOne({_id: req.user.id})
+      const file = req.files.file;
+      const parent = await File.findOne({
+        user: req.user.id,
+        _id: req.body.parent,
+      });
+      const user = await User.findOne({ _id: req.user.id });
 
+      if (user.usedSpace + file.size > user.diskSpace) {
+        return res.status(400).json({ message: "There no space on the disk" });
+      }
 
-        if (user.usedSpace + file.size > user.diskSpace) {
-            return res.status(400).json({message: 'There no space on the disk'})
-        }
+      user.usedSpace = user.usedSpace + file.size;
 
-        user.usedSpace = user.usedSpace + file.size
+      let path;
+      if (parent) {
+        path = `${config.get("filePath")}\\${user._id}\\${parent.path}\\${
+          file.name
+        }`;
+      } else {
+        path = `${config.get("filePath")}\\${user._id}\\${file.name}`;
+      }
 
-        let path;
-        if (parent) {
-            path = `${config.get('filePath')}\\${user._id}\\${parent.path}\\${file.name}`
-        } else {
-            path = `${config.get('filePath')}\\${user._id}\\${file.name}`
-        }
+      if (fs.existsSync(path)) {
+        return res.status(400).json({ message: "File already exist" });
+      }
+      file.mv(path);
 
-        if (fs.existsSync(path)) {
-            return res.status(400).json({message: 'File already exist'})
-        }
-        file.mv(path)
+      const type = file.name.split(".").pop();
+      let filePath = file.name;
+      if (parent) {
+        filePath = parent.path + "\\" + file.name;
+      }
+      const dbFile = new File({
+        name: file.name,
+        type,
+        size: file.size,
+        path: filePath,
+        parent: parent?._id,
+        user: user._id,
+      });
 
-        const type = file.name.split('.').pop()
-        let filePath = file.name
-        if (parent) {
-            filePath = parent.path + "\\" + file.name
-        }
-        const dbFile = new File({
-            name: file.name,
-            type,
-            size: file.size,
-            path: filePath,
-            parent: parent?._id,
-            user: user._id
-        });
+      await dbFile.save();
+      await user.save();
 
-        await dbFile.save()
-        await user.save()
-
-        res.json(dbFile)
+      res.json(dbFile);
     } catch (e) {
-        console.log(e)
-        return res.status(500).json({message: "Upload error"})
+      console.log(e);
+      return res.status(500).json({ message: "Upload error" });
     }
-}
+  }
 
   async deleteFolder(req, res) {
     try {
