@@ -3,39 +3,30 @@ import Role from "../models/Role.js";
 import bcrypt from "bcryptjs";
 import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
-import { secret } from "../config/config.js";
-
-const generateAccessToken = (id, roles) => {
-  const payload = {
-    id,
-    roles,
-  };
-  return jwt.sign(payload, secret, { expiresIn: "24h" });
-};
+// import { secret } from "../config/config.js";
+import config from "config";
 
 class authController {
   async registration(req, res) {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
+        return res.status(400).json({ message: "Uncorrect request", errors });
+      }
+
+      const { email, password } = req.body;
+
+      const candidate = await User.findOne({ email });
+      if (candidate) {
         return res
           .status(400)
-          .json({ message: "Something is going wrong", errors });
+          .json({ message: `User with email ${email} already exist` });
       }
-      const { username, password } = req.body;
-      const candidate = await User.findOne({ username });
-      if (candidate) {
-        return res.status(400).json({ message: "User already exists" });
-      }
-      const hashPassword = bcrypt.hashSync(password, 7);
-      const userRole = await Role.findOne({ value: "USER" });
-      const user = new User({
-        username,
-        password: hashPassword,
-        roles: [userRole.value],
-      });
+
+      const hashPassword = await bcrypt.hash(password, 15);
+      const user = new User({ email, password: hashPassword });
       await user.save();
-      return res.json({ message: "User registered successfully" });
+      return res.json({ message: "User was created" });
     } catch (e) {
       console.log(e);
       res.status(400).json({ message: "Registration error" });
@@ -44,35 +35,53 @@ class authController {
 
   async login(req, res) {
     try {
-      const { username, password } = req.body;
-      const user = await User.findOne({ username });
+      const { email, password } = req.body;
+      const user = await User.findOne({ email });
       if (!user) {
-        return res.status(400).json({ message: "User ${username} not found" });
+        return res.status(400).json({ message: `User ${email} not found` });
       }
       const validPassword = bcrypt.compareSync(password, user.password);
       if (!validPassword) {
         return res.status(400).json({ message: "Incorrect password" });
       }
-      const token = generateAccessToken(user._id, user.roles);
-      return res.json({ token });
+      const token = jwt.sign({ id: user.id }, config.get("secretKey"), {
+        expiresIn: "24h",
+      });
+      return res.json({
+        token,
+        user: {
+          id: user.id,
+          email: user.email,
+          diskSpace: user.diskSpace,
+          usedSpace: user.usedSpace,
+          avatar: user.avatar,
+        },
+      });
     } catch (e) {
       console.log(e);
       res.status(400).json({ message: "Login error" });
     }
   }
 
-  async getUsers(req, res) {
+  async auth(req, res) {
     try {
-      // удаляем этот код, потому что они сохранились автоматом в коллекциях mongo
-      // const userRole = new Role()
-      // const adminRole = new Role({value: "ADMIN"})
-      // await userRole.save()
-      // await adminRole.save()
-
-      const users = await User.find();
-      res.json(users);
+      const user = await User.findOne({_id: req.user.id})
+      const token = jwt.sign({ id: user.id }, config.get("secretKey"), {
+        expiresIn: "24h",
+      });
+      return res.json({
+        token,
+        user: {
+          id: user.id,
+          email: user.email,
+          diskSpace: user.diskSpace,
+          usedSpace: user.usedSpace,
+          avatar: user.avatar,
+        },
+      });
     } catch (e) {
       console.log(e);
+      res.status(400).json({ message: "Server error" });
     }
   }
 }

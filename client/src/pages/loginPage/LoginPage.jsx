@@ -5,37 +5,34 @@ import axios from "axios";
 import { SearchInput } from "../../components/presentational";
 import { InputField } from "../../components/presentational";
 import { MyButton } from "../../components/presentational";
+import { useDispatch } from "react-redux";
+import { loginAsync } from "../../store/authSlice";
 
 const LoginPage = () => {
-  const sendLoginRequest = async (values) => {
-    try {
-      const response = await axios.post("http://localhost:5000/auth/login", {
-        username: values.email,
-        password: values.password,
-      });
-      console.log(response);
-      // const testResponse = await axios.get("http://127.0.0.1:5000/auth/posts");
-    } catch (err) {
-      // Handle Error Here
-      console.error(err);
-    }
-  };
+
+  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch()
 
   return (
     <S.LoginPage>
       <InputField
-        placeholder="email"
+        placeholder="Enter your email"
         type="text"
-        onChange={(e) => setEmail(e.target.value)}
+        value={email}
+        setValue={setEmail}
       />
       <InputField
-        placeholder="password"
+        placeholder="Enter your password"
         type="text"
-        onChange={(e) => setPassword(e.target.value)}
+        value={password}
+        setValue={setPassword}
       />
-      <MyButton>Login</MyButton>
+      <MyButton
+      clickButton={() => dispatch(loginAsync({ email, password }))}>Login</MyButton>
       {/* <LoginForm  sendLoginRequest={sendLoginRequest} /> */}
     </S.LoginPage>
   );

@@ -71,7 +71,7 @@ export const testReducer = createSlice({
   name: "testReducerName",
   initialState,
   reducers: {
-    createDir: (state, action) => {
+    setFolders: (state, action) => {
       state.folders.push(action.payload);
     },
     setCurrentDir: (state, action) => {

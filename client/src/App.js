@@ -1,6 +1,4 @@
-import {
-  UnderConstruction,
-} from "./components/presentational";
+import { Loader, UnderConstruction } from "./components/presentational";
 import { MainContent, RegistrationPage } from "./pages";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
@@ -9,7 +7,7 @@ import { RecycleBin } from "./pages";
 import { SharedFiles } from "./pages";
 import { LoginPage } from "./pages";
 import { MyModal } from "./components/presentational";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UserCard } from "./components/presentational";
 import { MainPage } from "./pages";
 import { useSelector, useDispatch } from "react-redux";
@@ -18,15 +16,24 @@ import {
   changeModalStateClose,
 } from "./store/modalsDataSlice";
 import { setCurrentDir, setFolders } from "./store/folderCreateSlice";
+import { authAsync } from "./store/authSlice";
+import MyRoutes from "./routes/MyRoutes";
 
 function App() {
-  const isAuth = false;
+  // const isAuth = false;
+
+  const isAuth = useSelector((state) => state.authReducerName.isAuth);
+  const isLoading = useSelector((state) => state.authReducerName.loader);
+
   const [popupOpen, setPopupOpen] = useState(false);
   const handlePopupOpen = () => {
     setPopupOpen(!popupOpen);
   };
 
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(authAsync());
+  }, []);
 
   const modalsData = useSelector((state) => state.modalsData.allModals);
 
@@ -38,64 +45,65 @@ function App() {
   };
 
   const testonclick = () => {
-    dispatch(setFolders("test"))
-    dispatch(setCurrentDir("test1"))
-  }
+    dispatch(setFolders("test"));
+    dispatch(setCurrentDir("test1"));
+  };
+
+
+  const showContent = (isLoading) => {
+    if (!isLoading) {
+      return (
+        <div className="App">
+            <MyRoutes
+              handlePopupOpen={handlePopupOpen}
+              handleModalState={handleModalState}
+            />
+            {/* </div> */}
+            <MyModal
+              modalActive={modalsData[0].opened}
+              handleClose={handleModalStateClose}
+              modalsData={modalsData}
+            >
+              <div>Settings</div>
+              <UnderConstruction />
+            </MyModal>
+  
+            <MyModal
+              modalActive={modalsData[1].opened}
+              handleClose={handleModalStateClose}
+              modalsData={modalsData}
+            >
+              <div>Questions</div>
+              <UnderConstruction />
+            </MyModal>
+  
+            <MyModal
+              modalActive={modalsData[2].opened}
+              handleClose={handleModalStateClose}
+              modalsData={modalsData}
+            >
+              <div>Buy Premium Cloud</div>
+              <UnderConstruction />
+            </MyModal>
+            <UserCard popupOpen={popupOpen} setPopupOpen={setPopupOpen} />
+          </div>
+      )
+    } else {
+      return (
+        <Loader/>
+      )
+    }
+  } 
+
 
   return (
     <>
       {isAuth ? (
-        <div className="App">
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <MainPage
-                  handlePopupOpen={handlePopupOpen}
-                  handleModalState={handleModalState}
-                />
-              }
-            >
-              <Route path="/allfiles" element={<MainContent />} />
-              <Route path="/photos" element={<Photos />} />
-              <Route path="/sharedfiles" element={<SharedFiles />} />
-              <Route path="/recyclebin" element={<RecycleBin />} />
-            </Route>
-          </Routes>
-          {/* </div> */}
-          <MyModal
-            modalActive={modalsData[0].opened}
-            handleClose={handleModalStateClose}
-            modalsData={modalsData}
-          >
-            <div>Settings</div>
-            <UnderConstruction />
-          </MyModal>
-
-          <MyModal
-            modalActive={modalsData[1].opened}
-            handleClose={handleModalStateClose}
-            modalsData={modalsData}
-          >
-            <div>Questions</div>
-            <UnderConstruction />
-          </MyModal>
-
-          <MyModal
-            modalActive={modalsData[2].opened}
-            handleClose={handleModalStateClose}
-            modalsData={modalsData}
-          >
-            <div>Buy Premium Cloud</div>
-            <UnderConstruction />
-          </MyModal>
-          <UserCard popupOpen={popupOpen} setPopupOpen={setPopupOpen} />
-          <button onClick={() => testonclick()}>button</button>
-        </div>
+        showContent(isLoading)
       ) : (
         <div className="loginPage">
-          {/* <LoginPage /> */}
-          <RegistrationPage/>
+          <LoginPage />
+          {/* <RegistrationPage/> */}
         </div>
       )}
     </>

@@ -1,19 +1,12 @@
 import * as axios from "axios";
+import { loginAsync } from "../../store/authSlice";
 
-// const instance = axios.create({
-//   baseURL: "http://localhost:5000/",
-//   headers: {
-//     Authorization:
-//       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYWNhOTE3NmExMDliZjQ2YjVjNTExNiIsImlhdCI6MTY0NDI0NTg5OCwiZXhwIjoxNjQ0MjQ5NDk4fQ.sFxPmY-ax_7yPlmTvH1iSdqrMRkRkvCGeLaFp3QTyTM",
-//   },
-// });
 
 const instance = axios.create({
   baseURL: "http://localhost:5000/",
-  // headers: {
-  //   Authorization:
-  //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYWNhOTE3NmExMDliZjQ2YjVjNTExNiIsImlhdCI6MTY0NDI0NTg5OCwiZXhwIjoxNjQ0MjQ5NDk4fQ.sFxPmY-ax_7yPlmTvH1iSdqrMRkRkvCGeLaFp3QTyTM",
-  // },
+  headers: {
+    Authorization: `Bearer ${localStorage.getItem('token')}`
+  },
 });
 
 
@@ -36,5 +29,11 @@ export const filesAPI = {
 export const usersAPI = {
   registration(email, password) {
     return instance.post(`auth/registration`, {email, password})
-  }
+  },
+  login(email, password) {
+    return instance.post('auth/login', {email, password})
+  },
+  auth() {
+    return instance.get('auth/auth', {})
+  },
 }
