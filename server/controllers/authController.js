@@ -5,6 +5,8 @@ import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 // import { secret } from "../config/config.js";
 import config from "config";
+import fileService from "../services/fileService.js";
+import File from "../models/File.js";
 
 class authController {
   async registration(req, res) {
@@ -26,6 +28,7 @@ class authController {
       const hashPassword = await bcrypt.hash(password, 15);
       const user = new User({ email, password: hashPassword });
       await user.save();
+      await fileService.createDir(new File({user:user.id, name: ''}))
       return res.json({ message: "User was created" });
     } catch (e) {
       console.log(e);
@@ -81,7 +84,8 @@ class authController {
       });
     } catch (e) {
       console.log(e);
-      res.status(400).json({ message: "Server error" });
+      // res.status(400).json({ message: "Server error" });
+      res.send({ message: "Server error" });
     }
   }
 }

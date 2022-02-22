@@ -15,98 +15,136 @@ import {
   changeModalState,
   changeModalStateClose,
 } from "./store/modalsDataSlice";
-import { setCurrentDir, setFolders } from "./store/folderCreateSlice";
 import { authAsync } from "./store/authSlice";
-import MyRoutes from "./routes/MyRoutes";
 
 function App() {
-  // const isAuth = false;
+  // const isAuth = true;
+  // const isLoading = useSelector((state) => state.authReducer.loader);
 
-  const isAuth = useSelector((state) => state.authReducerName.isAuth);
-  const isLoading = useSelector((state) => state.authReducerName.loader);
-
-  const [popupOpen, setPopupOpen] = useState(false);
-  const handlePopupOpen = () => {
-    setPopupOpen(!popupOpen);
-  };
-
+  const isAuth = useSelector((state) => state.authReducer.isAuth);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(authAsync());
   }, []);
 
-  const modalsData = useSelector((state) => state.modalsData.allModals);
+  // const showContent = (isLoading) => {
+  //   if (!isLoading) {
+  //     return (
+  //       <div className="App">
+  //           <MyRoutes
+  //             handlePopupOpen={handlePopupOpen}
+  //             handleModalState={handleModalState}
+  //           />
+  //           {/* </div> */}
+  //           <MyModal
+  //             modalActive={modalsData[0].opened}
+  //             handleClose={handleModalStateClose}
+  //             modalsData={modalsData}
+  //           >
+  //             <div>Settings</div>
+  //             <UnderConstruction />
+  //           </MyModal>
 
-  const handleModalState = (id) => {
-    dispatch(changeModalState(id));
-  };
-  const handleModalStateClose = () => {
-    dispatch(changeModalStateClose());
-  };
+  //           <MyModal
+  //             modalActive={modalsData[1].opened}
+  //             handleClose={handleModalStateClose}
+  //             modalsData={modalsData}
+  //           >
+  //             <div>Questions</div>
+  //             <UnderConstruction />
+  //           </MyModal>
 
-  const testonclick = () => {
-    dispatch(setFolders("test"));
-    dispatch(setCurrentDir("test1"));
-  };
-
-
-  const showContent = (isLoading) => {
-    if (!isLoading) {
-      return (
-        <div className="App">
-            <MyRoutes
-              handlePopupOpen={handlePopupOpen}
-              handleModalState={handleModalState}
-            />
-            {/* </div> */}
-            <MyModal
-              modalActive={modalsData[0].opened}
-              handleClose={handleModalStateClose}
-              modalsData={modalsData}
-            >
-              <div>Settings</div>
-              <UnderConstruction />
-            </MyModal>
-  
-            <MyModal
-              modalActive={modalsData[1].opened}
-              handleClose={handleModalStateClose}
-              modalsData={modalsData}
-            >
-              <div>Questions</div>
-              <UnderConstruction />
-            </MyModal>
-  
-            <MyModal
-              modalActive={modalsData[2].opened}
-              handleClose={handleModalStateClose}
-              modalsData={modalsData}
-            >
-              <div>Buy Premium Cloud</div>
-              <UnderConstruction />
-            </MyModal>
-            <UserCard popupOpen={popupOpen} setPopupOpen={setPopupOpen} />
-          </div>
-      )
-    } else {
-      return (
-        <Loader/>
-      )
-    }
-  } 
-
+  //           <MyModal
+  //             modalActive={modalsData[2].opened}
+  //             handleClose={handleModalStateClose}
+  //             modalsData={modalsData}
+  //           >
+  //             <div>Buy Premium Cloud</div>
+  //             <UnderConstruction />
+  //           </MyModal>
+  //           <UserCard popupOpen={popupOpen} setPopupOpen={setPopupOpen} />
+  //         </div>
+  //     )
+  //   } else {
+  //     return (
+  //       <Loader/>
+  //     )
+  //   }
+  // }
 
   return (
-    <>
+    <Routes>
       {isAuth ? (
-        showContent(isLoading)
+        <Route path="/" element={<MainPage />}>
+          <Route index element={<MainContent />} />
+          <Route path="/allfiles" element={<MainContent />} />
+          <Route path="/photos" element={<Photos />} />
+          <Route path="/sharedfiles" element={<SharedFiles />} />
+          <Route path="/recyclebin" element={<RecycleBin />} />
+          {/* <Route path="*" element={<NotFound />} /> */}
+        </Route>
       ) : (
-        <div className="loginPage">
-          <LoginPage />
-          {/* <RegistrationPage/> */}
-        </div>
+        <Route index element={<LoginPage />} />
+        // <Route path="/" element={<LoginPage />} />
+        // <Route path="*" element={<NotFound />} />
       )}
-    </>
+    </Routes>
+    // <>
+    //   {isAuth ? (
+    //     <div className="App">
+    //       <Routes>
+    //         <Route
+    //           path="/"
+    //           element={
+    //             <MainPage
+    //               handlePopupOpen={handlePopupOpen}
+    //               handleModalState={handleModalState}
+    //             />
+    //           }
+    //         >
+    //           <Route path="/allfiles" element={<MainContent />} />
+    //           <Route path="/photos" element={<Photos />} />
+    //           <Route path="/sharedfiles" element={<SharedFiles />} />
+    //           <Route path="/recyclebin" element={<RecycleBin />} />
+    //         </Route>
+    //       </Routes>
+    //       {/* </div> */}
+    //       <MyModal
+    //         modalActive={modalsData[0].opened}
+    //         handleClose={handleModalStateClose}
+    //         modalsData={modalsData}
+    //       >
+    //         <div>Settings</div>
+    //         <UnderConstruction />
+    //       </MyModal>
+
+    //       <MyModal
+    //         modalActive={modalsData[1].opened}
+    //         handleClose={handleModalStateClose}
+    //         modalsData={modalsData}
+    //       >
+    //         <div>Questions</div>
+    //         <UnderConstruction />
+    //       </MyModal>
+
+    //       <MyModal
+    //         modalActive={modalsData[2].opened}
+    //         handleClose={handleModalStateClose}
+    //         modalsData={modalsData}
+    //       >
+    //         <div>Buy Premium Cloud</div>
+    //         <UnderConstruction />
+    //       </MyModal>
+    //       <UserCard popupOpen={popupOpen} setPopupOpen={setPopupOpen} />
+    //     </div>
+    //   ) : (
+    //     <div className="loginPage">
+    //       <LoginPage />
+    //       {/* <RegistrationPage/> */}
+    //     </div>
+    //   )}
+    // </>
   );
 }
 

@@ -1,57 +1,53 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { filesAPI } from "../services/api/api";
-import { transformDataGetFiles } from "./helpers/transformData";
+import { transformDataGetAllFiles } from "./helpers/transformData";
 
-
-export const createDir = createAsyncThunk(
-  "files/createdir",
-  async (params) => {
-    try {
-      const response = await filesAPI.createDir(
-        params.name,
-        params.type,
-        params.parent
-      );
-      return response.data;
-    } catch (error) {
-      return error;
-    }
+export const createDir = createAsyncThunk("files/createdir", async (params, {rejectWithValue}) => {
+  try {
+    const response = await filesAPI.createDir(
+      params.name,
+      params.type,
+      params.parent
+    );
+    return response.data;
+  } catch (error) {
+    return rejectWithValue(error.response.data)
   }
-);
+});
 
-export const getAllFolders = createAsyncThunk(
-  "files/getAllFolders",
-  async (params) => {
+export const getAllFiles = createAsyncThunk(
+  "files/getAllFiles",
+  async (params, {rejectWithValue}) => {
     try {
-      const response = await filesAPI.getAllFolders("61aca9176a109bf46b5c5116"); // параметры
-      const transformedData = transformDataGetFiles(response.data)
+      const response = await filesAPI.getAllFiles();
+      const transformedData = transformDataGetAllFiles(response.data);
       return transformedData;
     } catch (error) {
-      return error;
+      return rejectWithValue(error.response.data)
     }
   }
 );
 
 export const deleteFolder = createAsyncThunk(
   "files/deleteFolder",
-  async (params) => {
+  async (params, {rejectWithValue}) => {
     try {
       const response = await filesAPI.deleteFolder(); // параметры
       return response.data;
     } catch (error) {
-      return error;
+      return rejectWithValue(error.response.data)
     }
   }
 );
 
 export const renameFolder = createAsyncThunk(
   "files/renameFolder",
-  async (params) => {
+  async (params, {rejectWithValue}) => {
     try {
       const response = await filesAPI.renameFolder(); // параметры
       return response.data;
     } catch (error) {
-      return error;
+      return rejectWithValue(error.response.data)
     }
   }
 );
@@ -62,23 +58,25 @@ const setError = (state, action) => {
 };
 
 const initialState = {
-  folders: [],
-  testData: null,
+  files: [],
   currentDir: null,
 };
 
-export const testReducer = createSlice({
-  name: "testReducerName",
+export const filesReducerSlice = createSlice({
+  name: "filesReducer",
   initialState,
   reducers: {
-    setFolders: (state, action) => {
-      state.folders.push(action.payload);
+    // setFiles: (state, action) => {
+    //   state.files.push(action.payload);
+    // },
+    setFiles: (state, action) => {
+      state.files = action.payload;
     },
     setCurrentDir: (state, action) => {
       state.currentDir = action.payload;
     },
     checkOneFile: (state, action) => {
-      state.allFolders.map((element) => {
+      state.files.map((element) => {
         if (element.id === action.payload.id) {
           element.checked = !action.payload.checked;
         }
@@ -86,7 +84,7 @@ export const testReducer = createSlice({
       });
     },
     uncheckAllFiles: (state) => {
-      state.allFolders.map((element) => {
+      state.files.map((element) => {
         element.checked = false;
         return element;
       });
@@ -94,30 +92,29 @@ export const testReducer = createSlice({
   },
   extraReducers: {
     [createDir.fulfilled]: (state, action) => {
-      state.folders = action.payload;
+      state.files = action.payload;
     },
     [createDir.rejected]: setError,
 
-    [getAllFolders.fulfilled]: (state, action) => {
-      state.folders = action.payload;
+    [getAllFiles.fulfilled]: (state, action) => {
+      state.files = action.payload;
     },
-    [getAllFolders.rejected]: setError,
+    [getAllFiles.rejected]: setError,
 
     [deleteFolder.fulfilled]: (state, action) => {
-      state.folders = action.payload;
+      state.files = action.payload;
     },
     [deleteFolder.rejected]: setError,
 
     [renameFolder.fulfilled]: (state, action) => {
-      state.folders = action.payload;
+      state.files = action.payload;
     },
     [renameFolder.rejected]: setError,
-
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setFolders, setCurrentDir, checkOneFile, uncheckAllFiles } =
-testReducer.actions;
+export const { setFiles, setCurrentDir, checkOneFile, uncheckAllFiles } =
+filesReducerSlice.actions;
 
-export default testReducer.reducer;
+export default filesReducerSlice.reducer;

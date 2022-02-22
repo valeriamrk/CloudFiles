@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { MyButton } from "../..";
 import { logout } from "../../../../store/authSlice";
 import { useOnClickOutside } from "../../../../utils/hooks/useOnClickOutside";
@@ -11,6 +12,7 @@ const UserCard = (props) => {
   useOnClickOutside(ref, () => setPopupOpen(false));
 
   const dispatch = useDispatch()
+  let navigate = useNavigate();
 
   return (
     <S.UserCardBody
@@ -24,7 +26,7 @@ const UserCard = (props) => {
       />
       <div>
         <S.Username>User Name</S.Username>
-        <MyButton premium="premium" clickButton={() => dispatch(logout())}>Logout</MyButton>
+        <MyButton premium="premium" clickButton={() => {dispatch(logout()); navigate("/")}}>Logout</MyButton>
       </div>
     </S.UserCardBody>
   );

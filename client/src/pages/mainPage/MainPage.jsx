@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Flex,
@@ -7,17 +7,37 @@ import {
   SearchInput,
   Logo,
   NavigationSidebar,
+  MyModal,
+  UnderConstruction,
+  UserCard,
 } from "../../components/presentational";
 import { BsGear, BsQuestionCircle, BsPerson } from "react-icons/bs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
+import { changeModalState, changeModalStateClose } from "../../store/modalsDataSlice";
 
 const MainPage = (props) => {
-  const { handleOpen, handlePopupOpen, handleModalState } = props;
+  const {} = props;
+  const dispatch = useDispatch();
+
+  const modalsData = useSelector((state) => state.modalsData.allModals);
 
   const sidebarLinks = useSelector(
     (state) => state.sidebarLinks.sidebarLinks
   );
+
+  const handleModalState = (id) => {
+    dispatch(changeModalState(id));
+  };
+  const handleModalStateClose = () => {
+    dispatch(changeModalStateClose());
+  };
+
+  const [popupOpen, setPopupOpen] = useState(false);
+  const handlePopupOpen = () => {
+    setPopupOpen(!popupOpen);
+  };
+
 
   const handlePopupFunc = (event) => {
     event.stopPropagation();
@@ -63,6 +83,35 @@ const MainPage = (props) => {
       <PageBasicLayout.PageContent>
       <Outlet />
       </PageBasicLayout.PageContent>
+    
+          <MyModal
+            modalActive={modalsData[0].opened}
+            handleClose={handleModalStateClose}
+            modalsData={modalsData}
+          >
+            <div>Settings</div>
+            <UnderConstruction />
+          </MyModal>
+
+          <MyModal
+            modalActive={modalsData[1].opened}
+            handleClose={handleModalStateClose}
+            modalsData={modalsData}
+          >
+            <div>Questions</div>
+            <UnderConstruction />
+          </MyModal>
+
+          <MyModal
+            modalActive={modalsData[2].opened}
+            handleClose={handleModalStateClose}
+            modalsData={modalsData}
+          >
+            <div>Buy Premium Cloud</div>
+            <UnderConstruction />
+          </MyModal>
+          <UserCard popupOpen={popupOpen} setPopupOpen={setPopupOpen} />
+
     </PageBasicLayout>
   );
 };

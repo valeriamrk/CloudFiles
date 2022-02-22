@@ -10,8 +10,6 @@ import { loginAsync } from "../../store/authSlice";
 
 const LoginPage = () => {
 
-  
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -27,7 +25,7 @@ const LoginPage = () => {
       />
       <InputField
         placeholder="Enter your password"
-        type="text"
+        type="password"
         value={password}
         setValue={setPassword}
       />

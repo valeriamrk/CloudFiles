@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { InputField, MyButton } from "../../components/presentational";
 import { registrationAsync } from "../../store/authSlice";
-// import { createDir } from "../../store/folderSlice";
+// import { createDir } from "../../store/filesSlice";
 import * as S from "./styles";
 
 const RegistrationPage = () => {

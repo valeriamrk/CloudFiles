@@ -7,13 +7,11 @@ class FileService {
 
   createDir(file) {
     const filePath = `${config.get("filePath")}\\${file.user}\\${file.path}`;
-    console.log(filePath);
 
     return new Promise((resolve, reject) => {
       try {
         if (!fs.existsSync(filePath)) {
-          //   fs.mkdirSync(filePath);
-          fs.mkdirSync(filePath, { recursive: true });
+            fs.mkdirSync(filePath);
           return resolve({ message: "File was created" });
         } else {
           return reject({ message: "File already exists" });
@@ -24,6 +22,12 @@ class FileService {
     });
   }
 
+  
+  getPath(file) {
+    return config.get("filePath") + "\\" + file.user + "\\" + file.path;
+  }
+
+  
   deleteFile(file) {
     const path = this.getPath(file);
     if (file.type === "dir") {
@@ -31,10 +35,6 @@ class FileService {
     } else {
       fs.unlinkSync(path);
     }
-  }
-  
-  getPath(file) {
-    return config.get("filePath") + "\\" + file.user + "\\" + file.path;
   }
 }
 

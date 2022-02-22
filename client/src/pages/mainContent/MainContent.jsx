@@ -14,27 +14,22 @@ import { CommandMenu } from "../../components/presentational";
 import { useSelector, useDispatch } from "react-redux";
 import { checkOneFile, uncheckAllFiles } from "../../store/foldersDataSlice";
 import { filesAPI } from "../../services/api/api";
-import {
-  createDir,
-  deleteFolder,
-  renameFolder,
-  getAllFolders
-} from "../../store/folderSlice";
+import { getAllFiles } from "../../store/filesSlice";
 
 const MainContent = (props) => {
-  const fakeListViewArray = useSelector(
-    (state) => state.foldersData.allFolders
-  );
-  // console.log("fakeListViewArray", fakeListViewArray);
+
+  const currentDir = useSelector((state) => state.filesReducer.currentDir);
+  const files = useSelector((state) => state.filesReducer.files);
+
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    sendGetRequest();
-  }, []);
-
   // useEffect(() => {
-  //   dispatch(createDir(), [dispatch])
-  // })
+  //   sendGetRequest();
+  // }, []);
+
+  useEffect((currentDir) => {
+    dispatch(getAllFiles(currentDir), [currentDir]);
+  });
 
   const fileClickHandler = (id, value) => {
     console.log("fileClickHandler", id, value);
@@ -44,9 +39,7 @@ const MainContent = (props) => {
   };
 
   // тестовый стейт для получения постов
-  const [testState, setTestState] = useState("");
 
-  const [folders, setFolders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [showCommandMenu, setShowCommandMenu] = useState(false);
   const [showOneElementCommandMenu, setshowOneElementCommandMenu] =
@@ -85,33 +78,6 @@ const MainContent = (props) => {
 
   const [checkedElementsArray, setCheckedElementsArray] = useState([]);
   const [selectedElementsNumber, setSelectedElementsNumber] = useState("");
-
-  const sendGetRequest = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/albums"
-      );
-      // const testResponse = await axios.get("http://127.0.0.1:5000/auth/posts");
-      // setTestState(testResponse.data.post);
-      setFolders(response.data);
-    } catch (err) {
-      // Handle Error Here
-      console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  // const getTestPosts = async () => {
-  //   try {
-  //     const response = await axios.get("http://localhost:5000/auth/posts");
-  //     setTestState(response.data)
-  //   } catch (err) {
-  //     // Handle Error Here
-  //     console.error(err);
-  //   }
-  // };
 
   const changeView = (id, value) => {
     const changedViewButtonsData = dropdownButtonsData.viewButtonsData.map(
@@ -189,15 +155,6 @@ const MainContent = (props) => {
     console.log("renamefile");
   };
 
-  const getFiles = async (name, type, parent) => {
-    try {
-      const response = await filesAPI.createDir(name, type, parent);
-      console.log("getFiles", response);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   return (
     <S.MainContent>
       {showCommandMenu ? (
@@ -224,19 +181,7 @@ const MainContent = (props) => {
       )}
 
       {/* <S.AllContent> */}
-      <S.Title>All files {testState}</S.Title>
-      {/* <MyButton onClick={() => getFiles("test", "folder")}>Button</MyButton> */}
-      <MyButton
-        onClick={() =>
-          dispatch(createDir({ name: "some_folder2", type: "folder" }))
-        }
-      >
-        Button
-      </MyButton>
-      <MyButton onClick={() => dispatch(deleteFolder())}>Delete</MyButton>
-
-      <MyButton onClick={() => dispatch(renameFolder())}>Rename</MyButton>
-      <MyButton onClick={() => dispatch(getAllFolders())}>Rename</MyButton>
+      <S.Title>All files</S.Title>
 
       {isLoading ? (
         <Flex justifyContent="center">
@@ -245,9 +190,8 @@ const MainContent = (props) => {
       ) : (
         <AllFiles
           dropdownButtonsData={dropdownButtonsData}
-          data={folders}
+          data={files}
           gridView={gridView}
-          fakeListViewArray={fakeListViewArray}
           sortFilter={sortFilter}
           checkFile={checkFile}
         />

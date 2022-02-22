@@ -1,21 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
-import foldersCreateSlice from "./folderCreateSlice";
 import foldersDataSlice from "./foldersDataSlice";
 import modalsDataSlice from "./modalsDataSlice";
 import sidebarLinksSlice from "./sidebarLinksSlice";
 
 // test slice
-import testReducer from "./folderSlice";
-import authReducer from "./authSlice";
+import filesReducerSlice from "./filesSlice";
+import authReducerSlice from "./authSlice";
 
 const store = configureStore({
   reducer: {
     foldersData: foldersDataSlice,
     sidebarLinks: sidebarLinksSlice,
     modalsData: modalsDataSlice,
-    foldersCreate: foldersCreateSlice,
-    testReducerName: testReducer,
-    authReducerName: authReducer,
+    filesReducer: filesReducerSlice,
+    authReducer: authReducerSlice,
   },
 });
 

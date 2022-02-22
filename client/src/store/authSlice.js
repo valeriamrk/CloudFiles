@@ -3,7 +3,7 @@ import { usersAPI } from "../services/api/api";
 
 export const registrationAsync = createAsyncThunk(
   "auth/registration",
-  async (params) => {
+  async (params, {rejectWithValue}) => {
     try {
       const response = await usersAPI.registration(
         params.email,
@@ -11,27 +11,28 @@ export const registrationAsync = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      return error;
+      return rejectWithValue(error.response.data)
     }
   }
 );
 
-export const loginAsync = createAsyncThunk("auth/login", async (params) => {
+export const loginAsync = createAsyncThunk("auth/login", async (params, {rejectWithValue}) => {
   try {
     const response = await usersAPI.login(params.email, params.password);
     localStorage.setItem("token", response.data.token);
     return response.data.user;
   } catch (error) {
-    return error;
+    return rejectWithValue(error.response.data)
   }
 });
-export const authAsync = createAsyncThunk("auth/auth", async () => {
+export const authAsync = createAsyncThunk("auth/auth", async ({ rejectWithValue }) => {
   try {
     const response = await usersAPI.auth();
-    localStorage.removeItem("token");
+    localStorage.setItem("token");
     return response.data.user;
   } catch (error) {
-    return error;
+    localStorage.removeItem('token');
+    return rejectWithValue(error.response.data)
   }
 });
 
@@ -46,8 +47,8 @@ const initialState = {
   loader: false
 };
 
-export const authReducer = createSlice({
-  name: "authReducerName",
+export const authReducerSlice = createSlice({
+  name: "authReducer",
   initialState,
   reducers: {
     logout: (state, action) => {
@@ -69,7 +70,6 @@ export const authReducer = createSlice({
     [loginAsync.rejected]: setError,
 
     [authAsync.pending]: (state, action) => {
-      state.currentUser = action.payload;
       state.loader = true;
     },
     [authAsync.fulfilled]: (state, action) => {
@@ -77,10 +77,15 @@ export const authReducer = createSlice({
       state.isAuth = true;
       state.loader = false;
     },
-    [authAsync.rejected]: setError,
+    [authAsync.rejected] : (state, action) => {
+      state.isAuth = false;
+      state.loader = false;
+      state.status = "rejected";
+      state.error = action.payload;
+    }
   },
 });
 
-export const { logout } = authReducer.actions;
+export const { logout } = authReducerSlice.actions;
 
-export default authReducer.reducer;
+export default authReducerSlice.reducer;

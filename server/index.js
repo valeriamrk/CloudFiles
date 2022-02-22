@@ -39,15 +39,18 @@ app.use(fileUpload({}))
 // устанавливаем заголовки, связанные с безопасностью
 app.use(helmet());
 
-app.use(cors());
+// app.use(cors());
 
 // устанавливаем заголовки, связанные с CORS
-// app.use(
-//   cors({
-//     // сервер будет обрабатывать запросы только из разрешенного источника
-//     origin: config.allowedOrigin,
-//   })
-// );
+app.use(
+  cors({
+    // сервер будет обрабатывать запросы только из разрешенного источника
+    // origin: config.allowedOrigin,
+    origin: ["http://localhost:3000"],
+    methods: ["GET, PUT, PATCH, POST, DELETE"],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  })
+);
 
 // преобразование тела запроса из JSON в обычный объект
 app.use(json());

@@ -1,5 +1,5 @@
-export const transformDataGetFiles = (data) => {
-  const transformedData = data.files.map((element) => {
+export const transformDataGetAllFiles = (data) => {
+  const transformedData = data.map((element) => {
     return {
       userId: element.user,
       id: element._id,

@@ -6,7 +6,7 @@ import * as S from "./styles";
 const AllFiles = (props) => {
   const {
     gridView,
-    fakeListViewArray,
+    data,
     dropdownButtonsData,
     sortFilter,
     checkFile,
@@ -16,14 +16,14 @@ const AllFiles = (props) => {
     <S.UploadedContent>
       {gridView ? (
         <FolderGridView
-          data={fakeListViewArray}
+          data={data}
           sortFilter={sortFilter}
           checkFile={checkFile}
         />
       ) : (
         <FolderListView
           dropdownButtonsData={dropdownButtonsData}
-          data={fakeListViewArray}
+          data={data}
           sortFilter={sortFilter}
           checkFile={checkFile}
         />
