@@ -10,35 +10,60 @@ import {
   BsSortDown,
 } from "react-icons/bs";
 import { MyDropdown } from "../../../presentational";
+import { MyModal } from "../modal/MyModal";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changeModalState,
+  changeModalStateClose,
+} from "../../../../store/modalsDataSlice";
+import { UploadNewFile } from "../uploadNewFile/UploadNewFile";
+import { CreateNewFolder } from "../createNewFolder/CreateNewFolder";
+
 
 const CommandBar = (props) => {
-  const {
-    changeView,
-    dropdownButtonsData,
-    sortFilter,
-    addNewFile,
-    uploadFile,
-  } = props;
+  const dispatch = useDispatch();
+
+  const { changeView, dropdownButtonsData, sortFilter, addNewFile  } = props;
+  const modalsData = useSelector((state) => state.modalsData.allModals);
+
+  const handleModalState = (id) => {
+    dispatch(changeModalState(id));
+  };
+  const handleModalStateClose = () => {
+    dispatch(changeModalStateClose());
+  };
+
 
   return (
     <S.CommandBar>
       <S.RightButtons>
-        <MyDropdown
+        {/* <MyDropdown
           buttonClick={addNewFile}
           dropdownButtonsData={dropdownButtonsData.newFileButtonsData}
         >
           <MyButton startIcon={<BsPlusSquare />} endIcon={<BsChevronDown />}>
             New file
           </MyButton>
-        </MyDropdown>
-        <MyDropdown
-          // buttonClick={uploadFile}
-          dropdownButtonsData={dropdownButtonsData.uploadFileButtonsData}
+        </MyDropdown> */}
+
+        <MyButton
+          startIcon={<BsUpload />}
+          clickButton={() => addNewFile("vbn", "dir")}
         >
-          <MyButton startIcon={<BsUpload />} endIcon={<BsChevronDown />}>
-            Upload
-          </MyButton>
-        </MyDropdown>
+          New file
+        </MyButton>
+        <MyButton
+          startIcon={<BsPlusSquare />}
+          clickButton={() => handleModalState({ id: 6 })}
+        >
+          New folder
+        </MyButton>
+        <MyButton
+          clickButton={() => handleModalState({ id: 5 })}
+          startIcon={<BsUpload />}
+        >
+          Upload
+        </MyButton>
       </S.RightButtons>
 
       <S.LeftButtons>
@@ -63,6 +88,20 @@ const CommandBar = (props) => {
           <BsInfoCircle />
         </MyButton>
       </S.LeftButtons>
+      <MyModal
+        modalActive={modalsData[4].opened}
+        handleClose={handleModalStateClose}
+        modalsData={modalsData}
+      >
+        <UploadNewFile />
+      </MyModal>
+      <MyModal
+        modalActive={modalsData[5].opened}
+        handleClose={handleModalStateClose}
+        modalsData={modalsData}
+      >
+        <CreateNewFolder />
+      </MyModal>
     </S.CommandBar>
   );
 };

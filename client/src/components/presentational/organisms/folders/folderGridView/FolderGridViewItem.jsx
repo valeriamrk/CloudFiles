@@ -1,13 +1,20 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentDir } from "../../../../../store/filesSlice";
 import { Checkbox } from "../../../../presentational";
 import * as S from "./styles";
 
 const FolderGridViewItem = (props) => {
+
   const { checkFile, checked, id } = props;
   const checkboxActive = (id, checked) => {
     checkFile(id, checked);
   };
+  const dispatch = useDispatch()
 
+  const openDirHandler = (id) => {
+    dispatch(setCurrentDir(id))
+  }
   return (
     <S.GridStyle onClick={() => checkboxActive(id, checked)} checked={checked}>
       {/* <S.Checkbox type="checkbox"></S.Checkbox> */}
@@ -17,7 +24,8 @@ const FolderGridViewItem = (props) => {
       <S.FolderImg
         src="https://s3.amazonaws.com/media-p.slid.es/uploads/644286/images/3450303/folder.png"
         alt="folder icon"
-        onDoubleClick={() => console.log("openfile")}
+        // onClick={() => console.log("opendir")}
+        onClick={() => openDirHandler(id)}
       />
       {/* <div>{props.id}.</div> */}
       <S.FolderName>

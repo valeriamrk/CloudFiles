@@ -2,52 +2,72 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { filesAPI } from "../services/api/api";
 import { transformDataGetAllFiles } from "./helpers/transformData";
 
-export const createDir = createAsyncThunk("files/createdir", async (params, {rejectWithValue}) => {
-  try {
-    const response = await filesAPI.createDir(
-      params.name,
-      params.type,
-      params.parent
-    );
-    return response.data;
-  } catch (error) {
-    return rejectWithValue(error.response.data)
-  }
-});
-
-export const getAllFiles = createAsyncThunk(
-  "files/getAllFiles",
-  async (params, {rejectWithValue}) => {
+export const createDir = createAsyncThunk(
+  "files/createdir",
+  async (params, { rejectWithValue }) => {
     try {
-      const response = await filesAPI.getAllFiles();
-      const transformedData = transformDataGetAllFiles(response.data);
-      return transformedData;
+      const response = await filesAPI.createDir(
+        params.name,
+        params.type,
+        params.parent,
+      );
+      return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data)
+      return rejectWithValue(error.response.data);
     }
   }
 );
 
+export const getAllFiles = createAsyncThunk(
+  "files/getAllFiles", 
+  async (params, { rejectWithValue }) => {
+    try {
+      const response = await filesAPI.getAllFiles(
+        params.currentDir,
+      );
+      const transformedData = transformDataGetAllFiles(response.data);
+      return transformedData;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+// export const uploadFile = createAsyncThunk(
+//   async (params, { rejectWithValue }) => {
+//     try {
+//       const response = await filesAPI.createDir(
+//         params.name,
+//         params.type,
+//         params.parent
+//       );
+//       return response.data;
+//     } catch (error) {
+//       return rejectWithValue(error.response.data);
+//     }
+//   }
+// );
+
 export const deleteFolder = createAsyncThunk(
   "files/deleteFolder",
-  async (params, {rejectWithValue}) => {
+  async (params, { rejectWithValue }) => {
     try {
       const response = await filesAPI.deleteFolder(); // параметры
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data)
+      return rejectWithValue(error.response.data);
     }
   }
 );
 
 export const renameFolder = createAsyncThunk(
   "files/renameFolder",
-  async (params, {rejectWithValue}) => {
+  async (params, { rejectWithValue }) => {
     try {
       const response = await filesAPI.renameFolder(); // параметры
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response.data)
+      return rejectWithValue(error.response.data);
     }
   }
 );
@@ -75,6 +95,9 @@ export const filesReducerSlice = createSlice({
     setCurrentDir: (state, action) => {
       state.currentDir = action.payload;
     },
+    addFile: (state, action) => {
+      state.files = action.payload;
+    },
     checkOneFile: (state, action) => {
       state.files.map((element) => {
         if (element.id === action.payload.id) {
@@ -92,7 +115,7 @@ export const filesReducerSlice = createSlice({
   },
   extraReducers: {
     [createDir.fulfilled]: (state, action) => {
-      state.files = action.payload;
+      state.files.push(action.payload)
     },
     [createDir.rejected]: setError,
 
@@ -114,7 +137,7 @@ export const filesReducerSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setFiles, setCurrentDir, checkOneFile, uncheckAllFiles } =
-filesReducerSlice.actions;
+export const { setFiles, setCurrentDir, addFile, checkOneFile, uncheckAllFiles } =
+  filesReducerSlice.actions;
 
 export default filesReducerSlice.reducer;

@@ -14,7 +14,7 @@ import { CommandMenu } from "../../components/presentational";
 import { useSelector, useDispatch } from "react-redux";
 import { checkOneFile, uncheckAllFiles } from "../../store/foldersDataSlice";
 import { filesAPI } from "../../services/api/api";
-import { getAllFiles } from "../../store/filesSlice";
+import { createDir, getAllFiles } from "../../store/filesSlice";
 
 const MainContent = (props) => {
 
@@ -23,11 +23,8 @@ const MainContent = (props) => {
 
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   sendGetRequest();
-  // }, []);
 
-  useEffect((currentDir) => {
+  useEffect(() => {
     dispatch(getAllFiles(currentDir), [currentDir]);
   });
 
@@ -37,6 +34,7 @@ const MainContent = (props) => {
   const folderClickHandler = (id, value) => {
     console.log("folderClickHandler", id, value);
   };
+
 
   // тестовый стейт для получения постов
 
@@ -139,8 +137,9 @@ const MainContent = (props) => {
     console.log("sort");
   };
 
-  const addNewFile = () => {
-    console.log("newfile");
+  const addNewFile = (name, type) => {
+    dispatch(createDir({name, type}))
+    console.log("newfile", name, type);
   };
 
   const uploadFile = () => {
