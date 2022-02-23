@@ -17,16 +17,15 @@ import { filesAPI } from "../../services/api/api";
 import { createDir, getAllFiles } from "../../store/filesSlice";
 
 const MainContent = (props) => {
-
   const currentDir = useSelector((state) => state.filesReducer.currentDir);
   const files = useSelector((state) => state.filesReducer.files);
 
   const dispatch = useDispatch();
 
-
   useEffect(() => {
-    dispatch(getAllFiles(currentDir), [currentDir]);
-  });
+    dispatch(getAllFiles({currentDir}));
+    console.log("RENDER COMPONENT");
+  }, [currentDir]);
 
   const fileClickHandler = (id, value) => {
     console.log("fileClickHandler", id, value);
@@ -34,7 +33,6 @@ const MainContent = (props) => {
   const folderClickHandler = (id, value) => {
     console.log("folderClickHandler", id, value);
   };
-
 
   // тестовый стейт для получения постов
 
@@ -138,7 +136,7 @@ const MainContent = (props) => {
   };
 
   const addNewFile = (name, type) => {
-    dispatch(createDir({name, type}))
+    dispatch(createDir({ name, type, currentDir }));
     console.log("newfile", name, type);
   };
 

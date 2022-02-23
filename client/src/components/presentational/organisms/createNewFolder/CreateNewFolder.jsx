@@ -6,11 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { createDir } from "../../../../store/filesSlice";
 import { changeModalStateClose } from "../../../../store/modalsDataSlice";
 
-const CreateNewFolder = () => {
+const CreateNewFolder = (props) => {
+  const {addNewFile} = props
   const [dirName, setDirName] = useState('')
   const dispatch = useDispatch();
-  const addNewFile = (name, type) => {
-    dispatch(createDir({name, type}))
+  const handleButtonClick = (name, type) => {
+    addNewFile(name, type)
     setDirName('')
     dispatch(changeModalStateClose())
   };
@@ -33,7 +34,7 @@ const CreateNewFolder = () => {
               />
             </S.Field>
             <MyButton
-          clickButton={() => addNewFile(dirName, "dir")}
+          clickButton={() => handleButtonClick(dirName, "dir")}
           premium="premium"
             >
               Create

@@ -12,6 +12,17 @@ export const transformDataGetAllFiles = (data) => {
   return transformedData
 }
 
+export const transformDataCreateDir = (data) => {
+    return {
+      userId: data.user,
+      id: data._id,
+      title: data.name,
+      modified: data.date.split("T", 1)[0],
+      size: data.size,
+      checked: false
+    }
+  }
+
 // my data
 // {
 //   userId: 1,

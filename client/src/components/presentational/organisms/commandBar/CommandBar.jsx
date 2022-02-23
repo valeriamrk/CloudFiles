@@ -37,14 +37,6 @@ const CommandBar = (props) => {
   return (
     <S.CommandBar>
       <S.RightButtons>
-        {/* <MyDropdown
-          buttonClick={addNewFile}
-          dropdownButtonsData={dropdownButtonsData.newFileButtonsData}
-        >
-          <MyButton startIcon={<BsPlusSquare />} endIcon={<BsChevronDown />}>
-            New file
-          </MyButton>
-        </MyDropdown> */}
 
         <MyButton
           startIcon={<BsUpload />}
@@ -100,7 +92,7 @@ const CommandBar = (props) => {
         handleClose={handleModalStateClose}
         modalsData={modalsData}
       >
-        <CreateNewFolder />
+        <CreateNewFolder addNewFile={addNewFile}/>
       </MyModal>
     </S.CommandBar>
   );

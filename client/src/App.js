@@ -26,6 +26,7 @@ function App() {
 
   useEffect(() => {
     dispatch(authAsync());
+    console.log("AUTH RENDER")
   }, []);
 
   // const showContent = (isLoading) => {

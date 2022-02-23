@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { filesAPI } from "../services/api/api";
-import { transformDataGetAllFiles } from "./helpers/transformData";
+import { transformDataGetAllFiles, transformDataCreateDir } from "./helpers/transformData";
 
 export const createDir = createAsyncThunk(
   "files/createdir",
@@ -9,9 +9,13 @@ export const createDir = createAsyncThunk(
       const response = await filesAPI.createDir(
         params.name,
         params.type,
-        params.parent,
+        // params.parent,
+        params.currentDir,
+
       );
-      return response.data;
+      const transformedData = transformDataCreateDir(response.data);
+      return transformedData;
+      // return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -23,7 +27,7 @@ export const getAllFiles = createAsyncThunk(
   async (params, { rejectWithValue }) => {
     try {
       const response = await filesAPI.getAllFiles(
-        params.currentDir,
+        params.currentDir
       );
       const transformedData = transformDataGetAllFiles(response.data);
       return transformedData;
@@ -86,12 +90,12 @@ export const filesReducerSlice = createSlice({
   name: "filesReducer",
   initialState,
   reducers: {
-    // setFiles: (state, action) => {
-    //   state.files.push(action.payload);
-    // },
     setFiles: (state, action) => {
-      state.files = action.payload;
+      state.files.push(action.payload);
     },
+    // setFiles: (state, action) => {
+    //   state.files = action.payload;
+    // },
     setCurrentDir: (state, action) => {
       state.currentDir = action.payload;
     },
@@ -115,7 +119,7 @@ export const filesReducerSlice = createSlice({
   },
   extraReducers: {
     [createDir.fulfilled]: (state, action) => {
-      state.files.push(action.payload)
+      state.files = [...state.files, action.payload]
     },
     [createDir.rejected]: setError,
 
