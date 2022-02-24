@@ -93,11 +93,11 @@ class FileController {
     }
   }
 
-  async deleteFolder(req, res) {
+  async deleteFile(req, res) {
     try {
       const file = await File.findOne({ _id: req.query.id, user: req.user.id });
       if (!file) {
-        return res.status(400).json({ message: "file not found" });
+        return res.status(400).json({ message: "File not found" });
       }
       fileService.deleteFile(file);
       await file.remove();

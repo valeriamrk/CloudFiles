@@ -12,7 +12,7 @@ import {
 
 const CommandMenu = (props) => {
   const {
-    deleteFile,
+    deleteFileHandler,
     renameFile,
     cancelSelectionFile,
     selectedElementsNumber,
@@ -23,7 +23,7 @@ const CommandMenu = (props) => {
         {/* <MyButton clickButton={shareFile} startIcon={<BsShare />}>
           Share
         </MyButton> */}
-        <MyButton clickButton={deleteFile} startIcon={<BsBucket />}>
+        <MyButton clickButton={deleteFileHandler} startIcon={<BsBucket />}>
           Delete
         </MyButton>
         {/* <MyButton clickButton={moveFile} startIcon={<BsFolderSymlink />}>

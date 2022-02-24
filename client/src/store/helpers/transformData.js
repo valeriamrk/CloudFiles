@@ -6,7 +6,7 @@ export const transformDataGetAllFiles = (data) => {
       title: element.name,
       modified: element.date.split("T", 1)[0],
       size: element.size,
-      checked: false
+      checked: false,
     }
   })
   return transformedData

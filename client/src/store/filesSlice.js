@@ -37,26 +37,26 @@ export const getAllFiles = createAsyncThunk(
   }
 );
 
-// export const uploadFile = createAsyncThunk(
-//   async (params, { rejectWithValue }) => {
-//     try {
-//       const response = await filesAPI.createDir(
-//         params.name,
-//         params.type,
-//         params.parent
-//       );
-//       return response.data;
-//     } catch (error) {
-//       return rejectWithValue(error.response.data);
-//     }
-//   }
-// );
-
-export const deleteFolder = createAsyncThunk(
-  "files/deleteFolder",
+export const uploadFile = createAsyncThunk(
   async (params, { rejectWithValue }) => {
     try {
-      const response = await filesAPI.deleteFolder(); // параметры
+      const response = await filesAPI.createDir(
+        params.name,
+        params.type,
+        params.parent
+      );
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const deleteFile = createAsyncThunk(
+  "files/deleteFile",
+  async (params, { rejectWithValue }) => {
+    try {
+      const response = await filesAPI.deleteFile(); // параметры
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -84,6 +84,8 @@ const setError = (state, action) => {
 const initialState = {
   files: [],
   currentDir: null,
+  dirStack: [],
+  checkedToDelete: null,
 };
 
 export const filesReducerSlice = createSlice({
@@ -93,14 +95,19 @@ export const filesReducerSlice = createSlice({
     setFiles: (state, action) => {
       state.files.push(action.payload);
     },
-    // setFiles: (state, action) => {
-    //   state.files = action.payload;
-    // },
     setCurrentDir: (state, action) => {
       state.currentDir = action.payload;
     },
     addFile: (state, action) => {
       state.files = action.payload;
+    },
+    pushToStack: (state, action) => {
+      // state.dirStack = [...state.dirStack, action.payload];
+      state.dirStack.push(action.payload);
+    },
+    popToStack: (state, action) => {
+      // state.dirStack = [...state.dirStack, action.payload];
+      state.dirStack.pop();
     },
     checkOneFile: (state, action) => {
       state.files.map((element) => {
@@ -109,6 +116,9 @@ export const filesReducerSlice = createSlice({
         }
         return element;
       });
+    },
+    checkToDeleteFile: (state, action) => {
+      state.checkedToDelete = action.payload.id 
     },
     uncheckAllFiles: (state) => {
       state.files.map((element) => {
@@ -128,10 +138,10 @@ export const filesReducerSlice = createSlice({
     },
     [getAllFiles.rejected]: setError,
 
-    [deleteFolder.fulfilled]: (state, action) => {
-      state.files = action.payload;
+    [deleteFile.fulfilled]: (state, action) => {
+      state.files = [...state.files.filter(file => file._id !== action.payload)]
     },
-    [deleteFolder.rejected]: setError,
+    [deleteFile.rejected]: setError,
 
     [renameFolder.fulfilled]: (state, action) => {
       state.files = action.payload;
@@ -141,7 +151,7 @@ export const filesReducerSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setFiles, setCurrentDir, addFile, checkOneFile, uncheckAllFiles } =
+export const { setFiles, setCurrentDir, pushToStack, popToStack, addFile, checkOneFile, checkToDeleteFile, uncheckAllFiles } =
   filesReducerSlice.actions;
 
 export default filesReducerSlice.reducer;

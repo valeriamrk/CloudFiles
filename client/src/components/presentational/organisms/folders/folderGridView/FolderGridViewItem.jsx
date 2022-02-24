@@ -1,10 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentDir } from "../../../../../store/filesSlice";
+import { pushToStack, setCurrentDir } from "../../../../../store/filesSlice";
 import { Checkbox } from "../../../../presentational";
 import * as S from "./styles";
 
 const FolderGridViewItem = (props) => {
+  const currentDir = useSelector((state) => state.filesReducer.currentDir);
+
 
   const { checkFile, checked, id } = props;
   const checkboxActive = (id, checked) => {
@@ -13,6 +15,7 @@ const FolderGridViewItem = (props) => {
   const dispatch = useDispatch()
 
   const openDirHandler = (id) => {
+    dispatch(pushToStack(id))
     dispatch(setCurrentDir(id))
   }
   return (
@@ -25,6 +28,7 @@ const FolderGridViewItem = (props) => {
         src="https://s3.amazonaws.com/media-p.slid.es/uploads/644286/images/3450303/folder.png"
         alt="folder icon"
         // onClick={() => console.log("opendir")}
+        // onClick={type === 'dir' ? () => openDirHandler(id) : ''}
         onClick={() => openDirHandler(id)}
       />
       {/* <div>{props.id}.</div> */}

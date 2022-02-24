@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
+  Box,
   Flex,
   Loader,
   MyButton,
@@ -14,16 +15,25 @@ import { CommandMenu } from "../../components/presentational";
 import { useSelector, useDispatch } from "react-redux";
 import { checkOneFile, uncheckAllFiles } from "../../store/foldersDataSlice";
 import { filesAPI } from "../../services/api/api";
-import { createDir, getAllFiles } from "../../store/filesSlice";
+import {
+  createDir,
+  getAllFiles,
+  popToStack,
+  setCurrentDir,
+  deleteFile,
+  checkToDeleteFile
+} from "../../store/filesSlice";
 
 const MainContent = (props) => {
   const currentDir = useSelector((state) => state.filesReducer.currentDir);
   const files = useSelector((state) => state.filesReducer.files);
+  const dirStack = useSelector((state) => state.filesReducer.dirStack);
+  const checkedToDelete = useSelector((state) => state.filesReducer.checkToDelete) 
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAllFiles({currentDir}));
+    dispatch(getAllFiles({ currentDir }));
     console.log("RENDER COMPONENT");
   }, [currentDir]);
 
@@ -131,6 +141,14 @@ const MainContent = (props) => {
     setShowCommandMenu(false);
   };
 
+  const backClickHandler = () => {
+    const copyOfArray = [...dirStack]
+    copyOfArray.pop()
+    const lastElementOfArray = copyOfArray.pop()
+    dispatch(popToStack())
+    dispatch(setCurrentDir(lastElementOfArray));
+  };
+
   const sortFilter = () => {
     console.log("sort");
   };
@@ -144,7 +162,11 @@ const MainContent = (props) => {
     console.log("uploadfile");
   };
 
-  const deleteFile = () => {
+  const deleteFileHandler = (e, id) => {
+    e.stopPropagation()
+    dispatch(checkToDeleteFile(id))
+    dispatch(deleteFile(id))
+    
     console.log("deletefile");
   };
 
@@ -156,7 +178,7 @@ const MainContent = (props) => {
     <S.MainContent>
       {showCommandMenu ? (
         <CommandMenu
-          deleteFile={deleteFile}
+        deleteFileHandler={deleteFileHandler}
           renameFile={renameFile}
           cancelSelectionFile={cancelSelectionFile}
           selectedElementsNumber={selectedElementsNumber}
@@ -178,6 +200,10 @@ const MainContent = (props) => {
       )}
 
       {/* <S.AllContent> */}
+      <Box>
+        <MyButton clickButton={() => backClickHandler()}>Back</MyButton>
+      </Box>
+
       <S.Title>All files</S.Title>
 
       {isLoading ? (

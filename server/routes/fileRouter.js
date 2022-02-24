@@ -9,7 +9,7 @@ router.get('/getAllFiles', authMiddleware, fileController.getAllFiles)
 
 
 router.post('/upload', authMiddleware, fileController.uploadFile)
-router.delete('/', authMiddleware, fileController.deleteFolder)
+router.delete('/', authMiddleware, fileController.deleteFile)
 router.get('/renameFolder', authMiddleware, fileController.renameFolder)
 
 

@@ -21,8 +21,8 @@ export const filesAPI = {
   getAllFiles(dirId) {
     return instance.get(`files/getAllFiles${dirId ? "?parent=" + dirId : ""}`);
   },
-  deleteFolder() {
-    return instance.delete(`files/deleteFolder`);
+  deleteFile(id) {
+    return instance.delete(`files/?id=${id}`);
   },
   renameFolder() {
     return instance.get(`files/renameFolder`);
