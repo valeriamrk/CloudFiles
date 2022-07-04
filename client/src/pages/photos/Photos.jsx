@@ -1,5 +1,4 @@
 import React from "react";
-import { DragAndDrop, UploadNewFile } from "../../components/presentational";
 import * as S from './styles'
 
 const Photos = () => {

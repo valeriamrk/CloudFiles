@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import * as S from "./styles";
 
 const MyModal = (props) => {
-  // const {children } = props
   const { modalActive, handleClose, children } = props;
 
   return (

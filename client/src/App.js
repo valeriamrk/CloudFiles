@@ -18,10 +18,10 @@ import {
 import { authAsync } from "./store/authSlice";
 
 function App() {
-  // const isAuth = true;
+  const isAuth = true;
   // const isLoading = useSelector((state) => state.authReducer.loader);
 
-  const isAuth = useSelector((state) => state.authReducer.isAuth);
+  // const isAuth = useSelector((state) => state.authReducer.isAuth);
   const dispatch = useDispatch();
 
   useEffect(() => {

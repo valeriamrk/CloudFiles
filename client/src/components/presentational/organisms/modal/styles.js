@@ -19,11 +19,11 @@ pointer-events: ${props => props.modalActive ? "all" : "none"};
 export const ModalContent = styled.div`
 display: flex;
 flex-direction: column;
-
 align-items: center;
 justify-content: center;
 padding: 20px;
 background-color: white;
+border-radius: 20px;
 /* width: 50%; */
 box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.3);
 

@@ -2,7 +2,7 @@ import * as axios from "axios";
 import { loginAsync } from "../../store/authSlice";
 
 const instance = axios.create({
-  baseURL: "http://localhost:5000/",
+  baseURL: "http://localhost:5500/",
   headers: {
     Authorization: `Bearer ${localStorage.getItem("token")}`,
   },

@@ -7,6 +7,8 @@ export const MyButton = styled.button`
   align-items: center;
   background: none;
   color: black;
+  font-weight: 600;
+
   height: 100%;
   padding: ${(props) => (props.justIcon ? "8px" : "4")};
   /* padding: ${props => props.padding || "4px"} */
@@ -15,14 +17,18 @@ export const MyButton = styled.button`
   border: ${(props) => (props.premium ? "0.5px solid black" : "none")};
   font-size: 14px;
   cursor: pointer;
-  &:hover {
+  /* &:hover {
     background-color: ${(props) => (props.headerStyle ? "#45A29E" : "#d1e8e2")};
+  } */
+  &:hover {
+    font-weight: 600;
   }
 `;
 
 export const Icons = styled.div`
   padding-right: 4px;
   padding-left: 4px;
+  font-size: 18px;
   height: 100%;
   display: flex;
   align-items: center;

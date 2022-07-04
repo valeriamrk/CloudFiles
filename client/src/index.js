@@ -6,7 +6,6 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store/store";
-import {MyHeader, PageBasicLayout} from '../src/components/presentational'
 import {MainPage} from "../src/pages"
 
 ReactDOM.render(

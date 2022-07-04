@@ -1,6 +1,6 @@
 import React from "react";
 import * as S from "./styles";
-import { Box, Flex, MyButton} from "../../../presentational";
+import { Box, Flex, MyButton, Logo } from "../../../presentational";
 import { IoDiamondOutline } from "react-icons/io5";
 import { ProgressBar } from "../../../presentational";
 import { useNavigate } from "react-router-dom";
@@ -23,17 +23,20 @@ const NavigationSidebar = (props) => {
   return (
     <S.Sidebar>
       <S.LinksContainer>
-        <S.UserName>User Name</S.UserName>
+        <S.LogoWrapper>
+          <Logo />
+        </S.LogoWrapper>
         {sidebarLinks.map((element, index) => (
           <S.LinksWrapper
             onClick={(event) => handleListItemClick(event, index, element.path)}
             selected={selectedIndex === index}
-          ><Box ml={24}>
-            <Flex>
-            <S.Icons>{element.icon}</S.Icons>
-            <S.NavMenuItemLabel>{element.label}</S.NavMenuItemLabel>
-            {/* <S.Links to={element.path}> {element.label}</S.Links> */}
-            </Flex>
+          >
+            <Box ml={24}>
+              <Flex>
+                <S.Icons src={element.icon} alt="icon"/>
+                <S.NavMenuItemLabel>{element.label}</S.NavMenuItemLabel>
+                {/* <S.Links to={element.path}> {element.label}</S.Links> */}
+              </Flex>
             </Box>
           </S.LinksWrapper>
         ))}
@@ -41,7 +44,11 @@ const NavigationSidebar = (props) => {
 
       <S.BottomContent>
         <S.PremiumContainer>
-          <MyButton startIcon={<IoDiamondOutline />} premium={"premium"} clickButton={() => handleModalState({id: 3})}>
+          <MyButton
+            startIcon={<IoDiamondOutline />}
+            premium={"premium"}
+            clickButton={() => handleModalState({ id: 3 })}
+          >
             Buy Premium Cloud
           </MyButton>
         </S.PremiumContainer>

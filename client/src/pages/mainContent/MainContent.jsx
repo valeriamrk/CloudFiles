@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
   Box,
+  ButtonBlock,
   Flex,
   Loader,
   MyButton,
@@ -80,6 +81,7 @@ const MainContent = (props) => {
       { id: uuidv4(), value: "Smaller to larger" },
       { id: uuidv4(), value: "Larger to smaller" },
     ],
+
   });
 
   const [checkedElementsArray, setCheckedElementsArray] = useState([]);
@@ -190,13 +192,14 @@ const MainContent = (props) => {
         //     cancelSelectionFile={cancelSelectionFile}
         //     selectedElementsNumber={selectedElementsNumber}
         //   />)
-        <CommandBar
-          dropdownButtonsData={dropdownButtonsData}
-          changeView={changeView}
-          sortFilter={sortFilter}
-          addNewFile={addNewFile}
-          uploadFile={uploadFile}
-        />
+        // <CommandBar
+        //   dropdownButtonsData={dropdownButtonsData}
+        //   changeView={changeView}
+        //   sortFilter={sortFilter}
+        //   addNewFile={addNewFile}
+        //   uploadFile={uploadFile}
+        // />
+        <ButtonBlock/>
       )}
 
       {/* <S.AllContent> */}
@@ -217,6 +220,7 @@ const MainContent = (props) => {
           gridView={gridView}
           sortFilter={sortFilter}
           checkFile={checkFile}
+          changeView={changeView}
         />
       )}
       {/* </S.AllContent> */}

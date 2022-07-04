@@ -3,7 +3,7 @@
     "url": "mongodb+srv://clouduser:db%215835File@cluster0.ampiz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
   },
   "srvConfig": {
-    "port": 5000
+    "port": 5500
   },
   "secretKey": "SECRET_KEY_RANDOM",
   "filePath": "C:\\Users\\valeria\\Documents\\react-learning\\cloud-files\\server\\data",

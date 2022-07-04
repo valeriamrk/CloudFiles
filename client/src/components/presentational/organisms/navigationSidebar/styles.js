@@ -13,17 +13,19 @@ export const Sidebar = styled.div`
 export const LinksContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-
 `;
 
 export const UserName = styled.div`
-  margin: 16px 0px 24px 24px;
+  margin: 16px 0px 24px 0px;
+  font-weight: 600;
 `;
 
-export const Icons = styled.div`
+export const Icons = styled.img`
   padding-right: 10px;
-  height: 100%;
+  width: 20px;
   display: flex;
   align-items: center;
 `;
@@ -37,16 +39,18 @@ export const LinksWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* padding-left: 24px; */
+  justify-content: flex-start;
+  padding-left: 32px;
   height: 40px;
   width: 100%;
   text-decoration: none;
   color: black;
   &:hover {
-    background-color: #d1e8e2;
+    /* background-color: #d1e8e2; */
+    font-weight: 600;
   };
   cursor: pointer;
-  background-color: ${(props) => (props.selected ? "#3aafa9" : "")};
+  font-weight: ${(props) => (props.selected ? "800" : "")};
 `;
 
 export const BottomContent = styled.div`
@@ -69,3 +73,9 @@ export const TextContainer = styled.div`
   margin-top: 8px;
   font-size: 12px;
 `;
+export const LogoWrapper = styled.div`
+margin-top: 16px;
+  margin-bottom: 48px;
+
+`;
+

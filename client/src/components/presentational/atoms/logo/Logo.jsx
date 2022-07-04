@@ -4,9 +4,13 @@ import * as S from "./styles";
 const Logo = () => {
   return (
     <S.Logo
-      src="https://icon-library.com/images/white-cloud-icon-png/white-cloud-icon-png-18.jpg"
+      src="https://pic.onlinewebfonts.com/svg/img_7140.png"
       alt="logo"
     />
+    // <S.Logo
+    //   src="https://icon-library.com/images/white-cloud-icon-png/white-cloud-icon-png-18.jpg"
+    //   alt="logo"
+    // />
   );
 };
 

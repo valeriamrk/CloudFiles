@@ -8,10 +8,11 @@ import helmet from "helmet";
 // import { fileURLToPath } from "url";
 import config from "config";
 import fileUpload from "express-fileupload"
+import { dangerouslyDisableDefaultSrc } from "helmet/dist/middlewares/content-security-policy";
 
 // настройки, конфигурации (добавить конфиг)
 const dbURL = config.get("dbConfig.url");
-const srvPort = config.get("srvConfig.port");
+const srvPort = config.get("srvConfig.port")
 
 //  путь к текущей директории
 // const directoryName = dirname(fileURLToPath(import.meta.url));

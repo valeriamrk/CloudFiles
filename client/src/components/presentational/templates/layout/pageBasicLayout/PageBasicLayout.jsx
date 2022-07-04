@@ -8,6 +8,10 @@ const PageHeader = ({ children }) => {
 const PageSidebar = ({ children }) => {
   return <S.Sidebar>{children}</S.Sidebar>;
 };
+
+const PageSidebarRight = ({ children }) => {
+  return <S.SidebarRight>{children}</S.SidebarRight>;
+};
 const PageContent = ({ children }) => {
   return <S.Content>{children}</S.Content>;
 };
@@ -19,6 +23,7 @@ const PageLayout = ({ children }) => {
 const PageBasicLayout = PageLayout;
 PageBasicLayout.PageHeader = PageHeader;
 PageBasicLayout.PageSidebar = PageSidebar;
+PageBasicLayout.PageSidebarRight = PageSidebarRight;
 PageBasicLayout.PageContent = PageContent;
 
 export { PageBasicLayout };

@@ -40,6 +40,7 @@ background-color: #feffff;
 
 /* background-color: lightgray; */
 border-bottom: 1px solid #2B7A78;
+
 `
 
 export const Title = styled.div`

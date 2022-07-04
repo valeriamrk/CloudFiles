@@ -76,9 +76,6 @@ const CommandBar = (props) => {
           </MyButton>
         </MyDropdown>
 
-        <MyButton justIcon={"justIcon"}>
-          <BsInfoCircle />
-        </MyButton>
       </S.LeftButtons>
       <MyModal
         modalActive={modalsData[4].opened}
