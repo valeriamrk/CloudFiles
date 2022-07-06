@@ -10,7 +10,8 @@ import {
 } from "../../components/presentational";
 import { CommandBar } from "../../components/presentational";
 import { AllFiles } from "../../components/presentational";
-import * as S from "../../components/presentational/organisms/commandBar/styles";
+// import * as S from "../../components/presentational/organisms/commandBar/styles";
+import * as S from "./styles";
 import { v4 as uuidv4 } from "uuid";
 import { CommandMenu } from "../../components/presentational";
 import { useSelector, useDispatch } from "react-redux";
@@ -22,14 +23,22 @@ import {
   popToStack,
   setCurrentDir,
   deleteFile,
-  checkToDeleteFile
+  checkToDeleteFile,
 } from "../../store/filesSlice";
+import { useOutletContext } from "react-router-dom";
+
 
 const MainContent = (props) => {
+  const { testData, filteredFolders } = useOutletContext();
+
+  
   const currentDir = useSelector((state) => state.filesReducer.currentDir);
   const files = useSelector((state) => state.filesReducer.files);
   const dirStack = useSelector((state) => state.filesReducer.dirStack);
-  const checkedToDelete = useSelector((state) => state.filesReducer.checkToDelete) 
+  const checkedToDelete = useSelector(
+    (state) => state.filesReducer.checkToDelete
+  );
+  // const testData = useSelector((state) => state.foldersData.allFolders);
 
   const dispatch = useDispatch();
 
@@ -81,7 +90,6 @@ const MainContent = (props) => {
       { id: uuidv4(), value: "Smaller to larger" },
       { id: uuidv4(), value: "Larger to smaller" },
     ],
-
   });
 
   const [checkedElementsArray, setCheckedElementsArray] = useState([]);
@@ -109,7 +117,6 @@ const MainContent = (props) => {
 
   const checkFile = (id, checked) => {
     dispatch(checkOneFile({ id, checked }));
-
     //считаем кол-во чекнутых элементов
 
     let transformedArray = [];
@@ -122,13 +129,9 @@ const MainContent = (props) => {
     }
 
     // показывать комманд меню или нет
-
-    // if (transformedArray.length > 0) {
-    //   setshowOneElementCommandMenu(true);
+    
     if (transformedArray.length > 0) {
       setShowCommandMenu(true);
-      // } else if (transformedArray.length > 1) {
-      //   setShowCommandMenu(true);
     } else {
       setShowCommandMenu(false);
     }
@@ -144,10 +147,10 @@ const MainContent = (props) => {
   };
 
   const backClickHandler = () => {
-    const copyOfArray = [...dirStack]
-    copyOfArray.pop()
-    const lastElementOfArray = copyOfArray.pop()
-    dispatch(popToStack())
+    const copyOfArray = [...dirStack];
+    copyOfArray.pop();
+    const lastElementOfArray = copyOfArray.pop();
+    dispatch(popToStack());
     dispatch(setCurrentDir(lastElementOfArray));
   };
 
@@ -165,10 +168,10 @@ const MainContent = (props) => {
   };
 
   const deleteFileHandler = (e, id) => {
-    e.stopPropagation()
-    dispatch(checkToDeleteFile(id))
-    dispatch(deleteFile(id))
-    
+    e.stopPropagation();
+    dispatch(checkToDeleteFile(id));
+    dispatch(deleteFile(id));
+
     console.log("deletefile");
   };
 
@@ -178,52 +181,32 @@ const MainContent = (props) => {
 
   return (
     <S.MainContent>
-      {showCommandMenu ? (
-        <CommandMenu
-        deleteFileHandler={deleteFileHandler}
-          renameFile={renameFile}
-          cancelSelectionFile={cancelSelectionFile}
-          selectedElementsNumber={selectedElementsNumber}
-        />
-      ) : (
-        // ) : showCommandMenu ? (
-        //   <OneElementCommandMenu
-        //     deleteFile={deleteFile}
-        //     cancelSelectionFile={cancelSelectionFile}
-        //     selectedElementsNumber={selectedElementsNumber}
-        //   />)
-        // <CommandBar
-        //   dropdownButtonsData={dropdownButtonsData}
-        //   changeView={changeView}
-        //   sortFilter={sortFilter}
-        //   addNewFile={addNewFile}
-        //   uploadFile={uploadFile}
-        // />
-        <ButtonBlock/>
-      )}
-
-      {/* <S.AllContent> */}
-      <Box>
+      <S.Wrapper>
+          <ButtonBlock addNewFile={addNewFile} uploadFile={uploadFile} />
+        {/* <Box>
         <MyButton clickButton={() => backClickHandler()}>Back</MyButton>
-      </Box>
-
-      <S.Title>All files</S.Title>
-
-      {isLoading ? (
-        <Flex justifyContent="center">
-          <Loader />
-        </Flex>
-      ) : (
-        <AllFiles
-          dropdownButtonsData={dropdownButtonsData}
-          data={files}
-          gridView={gridView}
-          sortFilter={sortFilter}
-          checkFile={checkFile}
-          changeView={changeView}
-        />
-      )}
-      {/* </S.AllContent> */}
+      </Box> */}
+        <S.Title>All files</S.Title>
+        {isLoading ? (
+          <Flex justifyContent="center">
+            <Loader />
+          </Flex>
+        ) : (
+          <Flex justifyContent="center">
+            <AllFiles
+            showCommandMenu={showCommandMenu}
+              dropdownButtonsData={dropdownButtonsData}
+              data={testData}
+              // data={files}
+              gridView={gridView}
+              sortFilter={sortFilter}
+              checkFile={checkFile}
+              changeView={changeView}
+              filteredData={filteredFolders}
+            />
+          </Flex>
+        )}
+      </S.Wrapper>
     </S.MainContent>
   );
 };

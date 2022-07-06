@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  InfoBlock,
-  UserCard,
-} from "../../../presentational";
+import { InfoBlock, UserCard } from "../../../presentational";
 import { Flex } from "../../templates/flex/Flex.styled";
 
 const SidebarRight = (props) => {
@@ -27,8 +24,7 @@ const SidebarRight = (props) => {
         setPopupOpen={setPopupOpen}
         clickButton={clickButton}
       />
-
-      <InfoBlock />
+      <InfoBlock handleModalState={handleModalState} />
     </Flex>
   );
 };

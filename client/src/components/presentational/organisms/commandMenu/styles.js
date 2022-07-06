@@ -11,6 +11,7 @@ export const LeftButtons = styled.div`
 display: flex;
 flex-direction: row;
 /* border: 1px solid black; */
+margin-left: 16px;
 height: 100%;
 `
 
@@ -22,8 +23,6 @@ justify-content: space-between;
 height: 44px;
 /* padding: 8px; */
 /* background-color: #fffffb; */
-background-color: #DEF2F1;
-/* background-color: lightgray; */
-border-bottom: 1px solid #2B7A78;
+
 
 `

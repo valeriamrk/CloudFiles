@@ -28,6 +28,7 @@ const CreateNewFolder = (props) => {
           <Flex flexDirection={"column"} alignItems={"flex-end"}>
             <S.Field>
               <InputField
+              input
                 placeholder="Enter your folder name"
                 value={dirName}
                 setValue={setDirName}

@@ -19,11 +19,10 @@ import {
 import { UploadNewFile } from "../uploadNewFile/UploadNewFile";
 import { CreateNewFolder } from "../createNewFolder/CreateNewFolder";
 
-
 const CommandBar = (props) => {
   const dispatch = useDispatch();
 
-  const { changeView, dropdownButtonsData, sortFilter, addNewFile  } = props;
+  const { changeView, dropdownButtonsData, sortFilter, addNewFile } = props;
   const modalsData = useSelector((state) => state.modalsData.allModals);
 
   const handleModalState = (id) => {
@@ -33,11 +32,9 @@ const CommandBar = (props) => {
     dispatch(changeModalStateClose());
   };
 
-
   return (
     <S.CommandBar>
       <S.RightButtons>
-
         <MyButton
           startIcon={<BsUpload />}
           clickButton={() => addNewFile("vbn", "dir")}
@@ -75,7 +72,6 @@ const CommandBar = (props) => {
             View
           </MyButton>
         </MyDropdown>
-
       </S.LeftButtons>
       <MyModal
         modalActive={modalsData[4].opened}
@@ -89,7 +85,7 @@ const CommandBar = (props) => {
         handleClose={handleModalStateClose}
         modalsData={modalsData}
       >
-        <CreateNewFolder addNewFile={addNewFile}/>
+        <CreateNewFolder addNewFile={addNewFile} />
       </MyModal>
     </S.CommandBar>
   );

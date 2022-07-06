@@ -5,10 +5,6 @@ import styled from "styled-components/macro";
 export const ListView = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  width: 80%;
-  /* padding: 15px; */
-  margin: 48px;
 `;
 
 export const HeaderStyle = styled.div`
@@ -16,8 +12,14 @@ export const HeaderStyle = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgb(237, 235, 233);
-  padding: 0 64px 0 0;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  position: sticky;
+  top: 0;
+  z-index: 5;
 `;
 
 export const HeaderLeftContainer = styled.div`
@@ -27,14 +29,8 @@ export const HeaderLeftContainer = styled.div`
   align-items: center;
   flex-grow: 3;
   width: 460px;
-  /* height: 100%;
-  width: 100%; */
-  padding: 8px 64px 8px 24px;
-
-  &:hover {
-    background-color: #def2f1;
-    cursor: pointer;
-  }
+  /* width: 100%; */
+  /* padding: 8px 64px 8px 24px; */
 `;
 export const HeaderFolderImg = styled.img`
   visibility: hidden;
@@ -54,11 +50,6 @@ export const ModContainer = styled.div`
   flex-direction: row;
   width: 150px;
   padding: 8px 0 8px 0;
-
-  &:hover {
-    background-color: #def2f1;
-    cursor: pointer;
-  }
 `;
 
 export const HeaderModified = styled.div`
@@ -74,19 +65,14 @@ export const SizeContainer = styled.div`
   flex-direction: row;
   width: 150px;
   padding: 8px 0 8px 0;
-
-  &:hover {
-    background-color: #def2f1;
-    cursor: pointer;
-  }
 `;
+
 export const HeaderSize = styled.div`
   display: flex;
   flex-direction: row;
   font-weight: bold;
   margin-left: 16px;
   padding: 8px 0 8px 0;
-  
 `;
 
 export const HeaderIcon = styled.div`
@@ -95,13 +81,13 @@ export const HeaderIcon = styled.div`
   display: flex;
   align-items: center;
   padding-top: 2px;
-
 `;
 
 // 2. FolderListViewItem
 
 export const CheckboxContainer = styled.div`
   display: block;
+  margin-left: 16px;
   /* visibility: hidden; */
   visibility: ${(props) => (props.checked ? "visible" : "hidden")};
 `;
@@ -116,17 +102,23 @@ export const ListStyle = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  padding: 8px 64px 8px 24px;
+  /* padding: 8px 64px 8px 24px; */
+  padding-top: 8px;
+  padding-bottom: 8px;
   &:hover {
     background-color: #def2f1;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     cursor: pointer;
     ${CheckboxContainer} {
       visibility: visible;
     }
   }
-  border-bottom: 1px solid rgb(237, 235, 233);
-  background-color: ${(props) => (props.checked ? "#def2f1" : "")};
-
+  background: ${(props) => (props.checked ? "rgba(255, 255, 255, 0.4)" : "")};
+  backdrop-filter: ${(props) => (props.checked ? "blur(4px)" : "")};
+  -webkit-backdrop-filter: ${(props) => (props.checked ? "blur(4px)" : "")};
 `;
 export const Container = styled.div`
   display: flex;
@@ -158,4 +150,15 @@ export const Size = styled.div`
 
 export const Table = styled.table`
   margin-left: 40px;
+`;
+
+export const NotFound = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 18px;
+  margin-top: 40px;
 `;

@@ -2,8 +2,11 @@ import React from "react";
 import * as S from "./styles";
 
 const InputField = (props) => {
+  const {inputValue, setInputValue, handleFilter, ...other} = props
+
   return (
-      <S.InputField {...props}  onChange={(event) => props.setValue(event.target.value)}  />
+      <S.InputField {...other} value={inputValue}
+      onChange={handleFilter} />
   );
 };
 

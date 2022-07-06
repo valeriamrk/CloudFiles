@@ -5,20 +5,23 @@ export const MainContent = styled.div`
 grid-area: c;
 display: flex;
 flex-direction: column;
-/* position: relative; */
 width: 100%;
-/* height: 100%; */
-/* height: 660px; */
-background-color: #FEFFFF;
+
 `
 
 export const AllContent = styled.div `
 
 `
 
+export const Wrapper = styled.div `
+display: flex;
+flex-direction: column;
+
+`
+
 export const Title = styled.div`
 font-size: 24px;
-margin: 36px 36px 16px 48px;
+margin: 24px 0px 16px 32px;
 /* margin-bottom: 8px; */
 
 `

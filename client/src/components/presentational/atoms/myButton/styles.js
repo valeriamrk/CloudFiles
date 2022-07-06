@@ -1,27 +1,36 @@
 import styled from "styled-components/macro";
 
 export const MyButton = styled.button`
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   display: flex;
   flex-direction: row;
   align-items: center;
   background: none;
   color: black;
   font-weight: 600;
-
   height: 100%;
-  padding: ${(props) => (props.justIcon ? "8px" : "4")};
-  /* padding: ${props => props.padding || "4px"} */
   margin: 0;
-  /* padding: 16px 8px 16px 8px; */
-  border: ${(props) => (props.premium ? "0.5px solid black" : "none")};
+  border: none;
   font-size: 14px;
   cursor: pointer;
-  /* &:hover {
-    background-color: ${(props) => (props.headerStyle ? "#45A29E" : "#d1e8e2")};
-  } */
+  -webkit-box-shadow: ${(props) =>
+    props.primary ? "0px 5px 10px 2px rgba(34, 60, 80, 0.2)" : ""};
+  -moz-box-shadow: ${(props) =>
+    props.primary ? "0px 5px 10px 2px rgba(34, 60, 80, 0.2)" : ""};
+  box-shadow: ${(props) =>
+    props.primary ? "0px 0px 10px 0px rgba(34, 60, 80, 0.2)" : ""};
+  background: ${(props) =>
+    props.primary ? "rgba( 255, 255, 255, 0.25 )" : ""};
+  border-radius: ${(props) => (props.primary ? "10px" : "")};
+  padding: ${(props) => (props.primary ? "8px 4px" : "")};
+
   &:hover {
-    font-weight: 600;
+    -webkit-box-shadow: ${(props) =>
+      props.primary ? "0px 5px 10px 2px rgba(34, 60, 80, 0.2)" : ""};
+    -moz-box-shadow: ${(props) =>
+      props.primary ? "0px 5px 10px 2px rgba(34, 60, 80, 0.2)" : ""};
+    box-shadow: ${(props) =>
+      props.primary ? "0px 5px 10px 2px rgba(34, 60, 80, 0.2)" : ""};
   }
 `;
 

@@ -1,24 +1,22 @@
 import styled from "styled-components";
 
 export const FolderImg = styled.img`
-  width: 120px;
+  width: 100px;
 `;
-
 
 export const CheckboxContainer = styled.div`
   display: block;
   align-self: flex-end;
-margin-right: 8px;
+  margin-right: 8px;
 
   visibility: ${(props) => (props.checked ? "visible" : "hidden")};
 `;
 
-
 export const GridView = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   /* padding: 15px; */
-  margin: 16px 36px 36px 36px
+  /* margin: 16px 36px 36px 36px */
 `;
 
 export const GridStyle = styled.div`
@@ -34,13 +32,22 @@ margin: 15px; */
   margin: 8px;
   &:hover {
     background-color: #def2f1;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 5px;
+    /* border: 1px solid rgba(255, 255, 255, 0.18); */
     cursor: pointer;
     ${CheckboxContainer} {
-      visibility: visible
-    };
+      visibility: visible;
+    }
   }
-  background-color: ${(props) => (props.checked ? "#def2f1" : "")};
-
+  background: ${(props) => (props.checked ? "rgba(255, 255, 255, 0.1)" : "")};
+  box-shadow: ${(props) =>
+    props.checked ? "0 8px 32px 0 rgba(31, 38, 135, 0.37)" : ""};
+  backdrop-filter: ${(props) => (props.checked ? "blur(4px)" : "")};
+  -webkit-backdrop-filter: ${(props) => (props.checked ? "blur(4px)" : "")};
 `;
 
 export const FolderName = styled.div`
@@ -57,4 +64,13 @@ export const TextContainer = styled.div`
   margin: 0 15px 0 15px;
 `;
 
-
+export const NotFound = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  font-size: 18px;
+  margin-top: 40px;
+`;

@@ -5,7 +5,6 @@ import { Box, Flex } from "../..";
 
 const RenameFolder = () => {
   return (
-    // <S.Modal>
     <S.RenameFolderBody>
       <Box m={32}>
         <Flex
@@ -21,7 +20,6 @@ const RenameFolder = () => {
         </Flex>
       </Box>
     </S.RenameFolderBody>
-    // </S.Modal>
   );
 };
 

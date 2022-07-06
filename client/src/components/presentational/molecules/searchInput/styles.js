@@ -6,6 +6,11 @@ export const InputItem = styled.div`
   background-color: #f7f5f2;
   border: none;
   outline: none;
-  border-radius: 40px;
+  border-radius: 20px;
   padding-right: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 `;

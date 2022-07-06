@@ -5,17 +5,18 @@ import { InputField } from "../../../presentational";
 import { BsSearch } from "react-icons/bs";
 
 const SearchInput = (props) => {
-  const [valueInput, setValueInput] = useState("");
-  // console.log({valueInput})
+  const { inputValue, setInputValue, handleFilter } = props;
 
   return (
     <S.InputItem>
       <InputField
         placeholder="search all you need"
         type="text"
-        onChange={(e) => setValueInput(e.target.value)}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        handleFilter={handleFilter}
       />
-      <MyButton justIcon={"justIcon"} headerStyle={"headerStyle"}>
+      <MyButton headerStyle={"headerStyle"}>
         <BsSearch />
       </MyButton>
     </S.InputItem>

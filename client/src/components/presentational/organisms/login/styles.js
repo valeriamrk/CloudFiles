@@ -9,6 +9,11 @@ export const LoginForm = styled.div`
   align-items: center;
   padding: 70px;
   width: 300px;
+  background: rgba( 255, 255, 255, 0.25 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 4px );
+-webkit-backdrop-filter: blur( 4px );
+border-radius: 10px;
 `;
 
 export const FormStyle = styled.form`
@@ -24,7 +29,6 @@ export const InputContainer = styled.div`
   margin-top: 16px;
 `;
 export const LoginText = styled.div`
-  color: #feffff;
   font-weight: 630;
   font-size: 30px;
 `;

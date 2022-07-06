@@ -13,13 +13,15 @@ import {
 
 import * as S from "./styles";
 import { Flex } from "../../templates/flex/Flex.styled";
+import { CommandMenu } from "../commandMenu/CommandMenu";
 
 const AllFiles = (props) => {
-  const { gridView, data, dropdownButtonsData, sortFilter, checkFile, changeView } = props;
+  const { gridView, data, dropdownButtonsData, sortFilter, checkFile, changeView, showCommandMenu, filteredData } = props;
 
   return (
     <S.UploadedContent>
-      <Flex display="row">
+      <S.Bar>
+        <S.LeftButtons>
       <MyDropdown
         buttonClick={sortFilter}
         dropdownButtonsData={dropdownButtonsData.sortButtonsData}
@@ -36,16 +38,16 @@ const AllFiles = (props) => {
           View
         </MyButton>
       </MyDropdown>
-      <MyButton>Delete</MyButton>
-      <MyButton>Rename</MyButton>
-      <MyButton>Cancel selection</MyButton>
-      <div>selected: 1</div>
-      </Flex>
+      </S.LeftButtons>
+      {showCommandMenu ? (<CommandMenu/>) : (<></>)}
+      </S.Bar>
+      <S.Content>
       {gridView ? (
         <FolderGridView
           data={data}
           sortFilter={sortFilter}
           checkFile={checkFile}
+          filteredData={filteredData}
         />
       ) : (
         <FolderListView
@@ -53,8 +55,10 @@ const AllFiles = (props) => {
           data={data}
           sortFilter={sortFilter}
           checkFile={checkFile}
+          filteredData={filteredData}
         />
       )}
+      </S.Content>
     </S.UploadedContent>
   );
 };

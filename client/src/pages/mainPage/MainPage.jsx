@@ -18,11 +18,26 @@ import {
 
 const MainPage = (props) => {
   const {} = props;
+
   const dispatch = useDispatch();
-
   const modalsData = useSelector((state) => state.modalsData.allModals);
-
   const sidebarLinks = useSelector((state) => state.sidebarLinks.sidebarLinks);
+  const testData = useSelector((state) => state.foldersData.allFolders);
+
+
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+  // const [filteredData, setFilteredData] = useState([]);
+
+  const filteredFolders = testData.filter((element) => {
+    return element.title.toLowerCase().includes(inputValue.toLowerCase());
+  });
+
+  const folderFilter = (event) => {
+    const searchItem = event.target.value;
+    setInputValue(searchItem);
+  };
+
 
   const handleModalState = (id) => {
     dispatch(changeModalState(id));
@@ -31,7 +46,6 @@ const MainPage = (props) => {
     dispatch(changeModalStateClose());
   };
 
-  const [popupOpen, setPopupOpen] = useState(false);
   const handlePopupOpen = () => {
     setPopupOpen(!popupOpen);
   };
@@ -42,11 +56,10 @@ const MainPage = (props) => {
   };
   return (
     <PageBasicLayout>
-
       <PageBasicLayout.PageHeader>
         <Box ml={16} width={1}>
           <Flex justifyContent="space-around" alignItems="center">
-            <SearchInput />
+            <SearchInput inputValue={inputValue} setInputValue={setInputValue} handleFilter={folderFilter}/>
           </Flex>
         </Box>
       </PageBasicLayout.PageHeader>
@@ -69,7 +82,7 @@ const MainPage = (props) => {
       </PageBasicLayout.PageSidebarRight>
 
       <PageBasicLayout.PageContent>
-        <Outlet />
+        <Outlet context={{testData, filteredFolders}}/>
       </PageBasicLayout.PageContent>
 
       <MyModal
@@ -98,7 +111,6 @@ const MainPage = (props) => {
         <div>Buy Premium Cloud</div>
         <UnderConstruction />
       </MyModal>
-
     </PageBasicLayout>
   );
 };

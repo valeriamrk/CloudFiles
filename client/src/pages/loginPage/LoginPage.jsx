@@ -9,15 +9,15 @@ import { useDispatch } from "react-redux";
 import { loginAsync } from "../../store/authSlice";
 
 const LoginPage = () => {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     <S.LoginPage>
-      <InputField
+      <S.Container>
+       <InputField
         placeholder="Enter your email"
         type="text"
         value={email}
@@ -30,8 +30,11 @@ const LoginPage = () => {
         setValue={setPassword}
       />
       <MyButton
-      clickButton={() => dispatch(loginAsync({ email, password }))}>Login</MyButton>
+      clickButton={() => dispatch(loginAsync({ email, password }))}>Login</MyButton> 
+      </S.Container>
       {/* <LoginForm  sendLoginRequest={sendLoginRequest} /> */}
+
+      {/* <LoginForm /> */}
     </S.LoginPage>
   );
 };

@@ -17,28 +17,31 @@ const CommandMenu = (props) => {
     cancelSelectionFile,
     selectedElementsNumber,
   } = props;
+
+  const isOneEl = true;
+
   return (
     <S.CommandMenu>
       <S.RightButtons>
-        {/* <MyButton clickButton={shareFile} startIcon={<BsShare />}>
-          Share
-        </MyButton> */}
-        <MyButton clickButton={deleteFileHandler} startIcon={<BsBucket />}>
-          Delete
-        </MyButton>
-        {/* <MyButton clickButton={moveFile} startIcon={<BsFolderSymlink />}>
-          Move to
-        </MyButton> */}
-        {/* <MyButton clickButton={copyFile} startIcon={<BsFiles />}>
-          Copy
-        </MyButton> */}
-        <MyButton clickButton={renameFile} startIcon={<BsPencilSquare />}>
-          Rename
-        </MyButton>
+        {isOneEl ? (
+          <>
+            <MyButton clickButton={deleteFileHandler} startIcon={<BsBucket />}>
+              Delete
+            </MyButton>
+            <MyButton clickButton={renameFile} startIcon={<BsPencilSquare />}>
+              Rename
+            </MyButton>
+          </>
+        ) : (
+          <MyButton clickButton={deleteFileHandler} startIcon={<BsBucket />}>
+            Delete
+          </MyButton>
+        )}
       </S.RightButtons>
+      
       <S.LeftButtons>
         <MyButton clickButton={cancelSelectionFile} endIcon={<BsXLg />}>
-          Selected {selectedElementsNumber}
+          Selected: {selectedElementsNumber}
         </MyButton>
       </S.LeftButtons>
     </S.CommandMenu>

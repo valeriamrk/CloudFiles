@@ -13,10 +13,9 @@ export const MainContainer = styled.div`
 export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 250px;
-  padding-bottom: 8px;
 `;
 
 export const Avatar = styled.img`

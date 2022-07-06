@@ -9,7 +9,7 @@ import { LoginPage } from "./pages";
 import { MyModal } from "./components/presentational";
 import { useEffect, useState } from "react";
 import { UserCard } from "./components/presentational";
-import { MainPage } from "./pages";
+import { MainPage, PageNotFound } from "./pages";
 import { useSelector, useDispatch } from "react-redux";
 import {
   changeModalState,
@@ -29,51 +29,6 @@ function App() {
     console.log("AUTH RENDER")
   }, []);
 
-  // const showContent = (isLoading) => {
-  //   if (!isLoading) {
-  //     return (
-  //       <div className="App">
-  //           <MyRoutes
-  //             handlePopupOpen={handlePopupOpen}
-  //             handleModalState={handleModalState}
-  //           />
-  //           {/* </div> */}
-  //           <MyModal
-  //             modalActive={modalsData[0].opened}
-  //             handleClose={handleModalStateClose}
-  //             modalsData={modalsData}
-  //           >
-  //             <div>Settings</div>
-  //             <UnderConstruction />
-  //           </MyModal>
-
-  //           <MyModal
-  //             modalActive={modalsData[1].opened}
-  //             handleClose={handleModalStateClose}
-  //             modalsData={modalsData}
-  //           >
-  //             <div>Questions</div>
-  //             <UnderConstruction />
-  //           </MyModal>
-
-  //           <MyModal
-  //             modalActive={modalsData[2].opened}
-  //             handleClose={handleModalStateClose}
-  //             modalsData={modalsData}
-  //           >
-  //             <div>Buy Premium Cloud</div>
-  //             <UnderConstruction />
-  //           </MyModal>
-  //           <UserCard popupOpen={popupOpen} setPopupOpen={setPopupOpen} />
-  //         </div>
-  //     )
-  //   } else {
-  //     return (
-  //       <Loader/>
-  //     )
-  //   }
-  // }
-
   return (
     <Routes>
       {isAuth ? (
@@ -83,7 +38,7 @@ function App() {
           <Route path="/photos" element={<Photos />} />
           <Route path="/sharedfiles" element={<SharedFiles />} />
           <Route path="/recyclebin" element={<RecycleBin />} />
-          {/* <Route path="*" element={<NotFound />} /> */}
+          <Route path="*" element={<PageNotFound />} />
         </Route>
       ) : (
         <Route index element={<LoginPage />} />
@@ -91,61 +46,6 @@ function App() {
         // <Route path="*" element={<NotFound />} />
       )}
     </Routes>
-    // <>
-    //   {isAuth ? (
-    //     <div className="App">
-    //       <Routes>
-    //         <Route
-    //           path="/"
-    //           element={
-    //             <MainPage
-    //               handlePopupOpen={handlePopupOpen}
-    //               handleModalState={handleModalState}
-    //             />
-    //           }
-    //         >
-    //           <Route path="/allfiles" element={<MainContent />} />
-    //           <Route path="/photos" element={<Photos />} />
-    //           <Route path="/sharedfiles" element={<SharedFiles />} />
-    //           <Route path="/recyclebin" element={<RecycleBin />} />
-    //         </Route>
-    //       </Routes>
-    //       {/* </div> */}
-    //       <MyModal
-    //         modalActive={modalsData[0].opened}
-    //         handleClose={handleModalStateClose}
-    //         modalsData={modalsData}
-    //       >
-    //         <div>Settings</div>
-    //         <UnderConstruction />
-    //       </MyModal>
-
-    //       <MyModal
-    //         modalActive={modalsData[1].opened}
-    //         handleClose={handleModalStateClose}
-    //         modalsData={modalsData}
-    //       >
-    //         <div>Questions</div>
-    //         <UnderConstruction />
-    //       </MyModal>
-
-    //       <MyModal
-    //         modalActive={modalsData[2].opened}
-    //         handleClose={handleModalStateClose}
-    //         modalsData={modalsData}
-    //       >
-    //         <div>Buy Premium Cloud</div>
-    //         <UnderConstruction />
-    //       </MyModal>
-    //       <UserCard popupOpen={popupOpen} setPopupOpen={setPopupOpen} />
-    //     </div>
-    //   ) : (
-    //     <div className="loginPage">
-    //       <LoginPage />
-    //       {/* <RegistrationPage/> */}
-    //     </div>
-    //   )}
-    // </>
   );
 }
 

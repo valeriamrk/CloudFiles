@@ -1,24 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import * as S from "./styles";
 import { Box, Flex, MyButton, Logo } from "../../../presentational";
 import { IoDiamondOutline } from "react-icons/io5";
 import { ProgressBar } from "../../../presentational";
 import { useNavigate } from "react-router-dom";
 
-const NavigationSidebar = (props) => {
-  const { sidebarLinks, handleModalState } = props;
 
-  // const history = useHistory();
+const NavigationSidebar = (props) => {
+  const { sidebarLinks, handleModalState,
+} = props;
+
   const navigate = useNavigate();
 
-  const [selectedIndex, setSelectedIndex] = React.useState();
+  const [selectedIndex, setSelectedIndex] = useState()
 
   const handleListItemClick = (event, index, path) => {
     console.log("click");
     setSelectedIndex(index);
-    // history.push(path);
     navigate(path);
   };
+
+
 
   return (
     <S.Sidebar>
@@ -46,7 +48,7 @@ const NavigationSidebar = (props) => {
         <S.PremiumContainer>
           <MyButton
             startIcon={<IoDiamondOutline />}
-            premium={"premium"}
+            primary
             clickButton={() => handleModalState({ id: 3 })}
           >
             Buy Premium Cloud
@@ -62,3 +64,4 @@ const NavigationSidebar = (props) => {
 };
 
 export { NavigationSidebar };
+

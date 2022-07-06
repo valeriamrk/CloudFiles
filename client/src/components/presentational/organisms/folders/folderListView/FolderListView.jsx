@@ -14,7 +14,10 @@ import {
 } from "react-icons/bs";
 
 const FolderListView = (props) => {
-  const { data, dropdownButtonsData, sortFilter, checkFile } = props;
+  const { data, dropdownButtonsData, sortFilter, checkFile, filteredData } = props;
+  if (!filteredData.length) {
+    return <S.NotFound>Files not found</S.NotFound>;
+  }
 
   return (
     <S.ListView>
@@ -30,6 +33,7 @@ const FolderListView = (props) => {
           <MyDropdown
             buttonClick={sortFilter}
             dropdownButtonsData={dropdownButtonsData.sortButtonsData}
+            noHover
           >
             <S.HeaderTitle>
               <div>Name</div>
@@ -40,6 +44,7 @@ const FolderListView = (props) => {
           </MyDropdown>
         </S.HeaderLeftContainer>
         <MyDropdown
+          noHover
           buttonClick={sortFilter}
           dropdownButtonsData={dropdownButtonsData.modifiedButtonsData}
         >
@@ -53,6 +58,7 @@ const FolderListView = (props) => {
           </S.ModContainer>
         </MyDropdown>
         <MyDropdown
+          noHover
           buttonClick={sortFilter}
           dropdownButtonsData={dropdownButtonsData.sizeButtonsData}
         >
@@ -66,7 +72,7 @@ const FolderListView = (props) => {
           </S.SizeContainer>
         </MyDropdown>
       </S.HeaderStyle>
-      {data.map((element) => (
+      {filteredData.map((element) => (
         <FolderListViewItem
           id={element.id}
           title={element.title}

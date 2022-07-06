@@ -7,18 +7,13 @@ const MyButton = (props) => {
     endIcon,
     children,
     clickButton,
-    justIcon,
-    headerStyle,
-    premium,
+    ...other
   } = props;
 
   return (
     <S.MyButton
       onClick={clickButton && ((event) => clickButton(event))}
-      // justIcon={justIcon}
-      headerStyle={headerStyle}
-      premium={premium}
-      {...props}
+      {...other}
     >
       {startIcon && <S.Icons>{startIcon}</S.Icons>}
       <S.Value>{children}</S.Value>

@@ -24,17 +24,17 @@ const UserCard = (props) => {
           <S.UsernameContent>User Name</S.UsernameContent>
           <S.Description>Active user</S.Description>
         </S.UserInfo>
-        <S.Icon onClick={() => handlePopupOpen()}>
+        {/* <S.Icon onClick={() => handlePopupOpen()}>
           <BsChevronDown />
-        </S.Icon>
+        </S.Icon> */}
       </S.ContentWrapper>
-      <UserCardMenu
+      {/* <UserCardMenu
         handlePopupOpen={handlePopupOpen}
         handleModalState={handleModalState}
         popupOpen={popupOpen}
         setPopupOpen={setPopupOpen}
         clickButton={clickButton}
-      />
+      /> */}
     </S.MainContainer>
   );
 };

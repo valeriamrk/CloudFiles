@@ -1,21 +1,19 @@
 import React from "react";
-import {Checkbox} from "../../../../presentational";
+import { Checkbox } from "../../../../presentational";
 import * as S from "./styles";
 
 const FolderListViewItem = (props) => {
-
-const {checkFile, checked, id} = props
-console.log(checked)
+  const { checkFile, checked, id } = props;
+  
   const checkboxActive = (id, checked) => {
-    checkFile(id, checked)
-    console.log("checkboxActive");
+    checkFile(id, checked);
   };
   return (
     <S.ListStyle onClick={() => checkboxActive(id, checked)} checked={checked}>
       <S.Container>
         <S.LeftContainer>
           <S.CheckboxContainer checked={checked}>
-          <Checkbox checked={checked} checkFile={checkFile} id={id}/>
+            <Checkbox checked={checked} checkFile={checkFile} id={id} />
           </S.CheckboxContainer>
           <S.FolderImg
             onDoubleClick={() => console.log("openfile")}
@@ -25,10 +23,10 @@ console.log(checked)
           <S.Title>{props.title}</S.Title>
         </S.LeftContainer>
         <S.ModContainer>
-        <S.Modified>{props.modified}</S.Modified>
+          <S.Modified>{props.modified}</S.Modified>
         </S.ModContainer>
         <S.SizeContainer>
-        <S.Size>{props.size}</S.Size>
+          <S.Size>{props.size}</S.Size>
         </S.SizeContainer>
       </S.Container>
     </S.ListStyle>
