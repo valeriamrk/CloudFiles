@@ -1,5 +1,5 @@
 import React from "react";
-import { Checkbox } from "../../../../presentational";
+import { StyledCheckbox } from "../../../../presentational";
 import * as S from "./styles";
 
 const FolderListViewItem = (props) => {
@@ -13,7 +13,7 @@ const FolderListViewItem = (props) => {
       <S.Container>
         <S.LeftContainer>
           <S.CheckboxContainer checked={checked}>
-            <Checkbox checked={checked} checkFile={checkFile} id={id} />
+            <StyledCheckbox checked={checked} checkFile={checkFile} id={id} />
           </S.CheckboxContainer>
           <S.FolderImg
             onDoubleClick={() => console.log("openfile")}

@@ -60,7 +60,7 @@ const MainContent = (props) => {
   const [showCommandMenu, setShowCommandMenu] = useState(false);
   const [showOneElementCommandMenu, setshowOneElementCommandMenu] =
     useState(false);
-  const [gridView, setGridView] = useState(true);
+  const [gridView, setGridView] = useState(false);
   const [viewButtonsData, setViewButtonsData] = useState([
     { id: uuidv4(), value: "List", checked: false },
     { id: uuidv4(), value: "Tiles", checked: true },
