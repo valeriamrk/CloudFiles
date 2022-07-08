@@ -18,18 +18,16 @@ const CommandMenu = (props) => {
     selectedElementsNumber,
   } = props;
 
-  const isOneEl = true;
-
   return (
     <S.CommandMenu>
       <S.RightButtons>
-        {isOneEl ? (
+        {selectedElementsNumber === 1 ? (
           <>
-            <MyButton clickButton={deleteFileHandler} startIcon={<BsBucket />}>
-              Delete
-            </MyButton>
             <MyButton clickButton={renameFile} startIcon={<BsPencilSquare />}>
               Rename
+            </MyButton>
+            <MyButton clickButton={deleteFileHandler} startIcon={<BsBucket />}>
+              Delete
             </MyButton>
           </>
         ) : (
@@ -38,7 +36,7 @@ const CommandMenu = (props) => {
           </MyButton>
         )}
       </S.RightButtons>
-      
+
       <S.LeftButtons>
         <MyButton clickButton={cancelSelectionFile} endIcon={<BsXLg />}>
           Selected: {selectedElementsNumber}

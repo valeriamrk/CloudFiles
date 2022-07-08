@@ -22,7 +22,7 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
-padding: 60px;
+padding: 20px;
 background-color: white;
 border-radius: 20px;
 /* width: 50%; */
@@ -33,4 +33,10 @@ backdrop-filter: blur( 4px );
 -webkit-backdrop-filter: blur( 4px );
 border-radius: 10px;
 border: 1px solid rgba( 255, 255, 255, 0.18 );
+`
+
+export const CloseBtn = styled.div`
+display: flex;
+flex-direction: row;
+align-self: flex-end;
 `

@@ -14,3 +14,13 @@ export const InputItem = styled.div`
   -webkit-backdrop-filter: blur(4px);
   border: 1px solid rgba(255, 255, 255, 0.18);
 `;
+
+export const CloseIcon = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.125rem; /* 18px */
+  line-height: 1.75rem;
+  cursor: pointer;
+
+`;

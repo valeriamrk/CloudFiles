@@ -36,7 +36,7 @@ const CreateNewFolder = (props) => {
             </S.Field>
             <MyButton
           clickButton={() => handleButtonClick(dirName, "dir")}
-          premium="premium"
+          primary
             >
               Create
             </MyButton>

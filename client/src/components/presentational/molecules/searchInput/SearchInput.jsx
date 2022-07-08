@@ -3,9 +3,10 @@ import * as S from "./styles";
 import { MyButton } from "../../../presentational";
 import { InputField } from "../../../presentational";
 import { BsSearch } from "react-icons/bs";
+import { MdClear } from "react-icons/md";
 
 const SearchInput = (props) => {
-  const { inputValue, setInputValue, handleFilter } = props;
+  const { inputValue, setInputValue, handleFilter, clearInput } = props;
 
   return (
     <S.InputItem>
@@ -16,9 +17,16 @@ const SearchInput = (props) => {
         setInputValue={setInputValue}
         handleFilter={handleFilter}
       />
-      <MyButton headerStyle={"headerStyle"}>
-        <BsSearch />
-      </MyButton>
+
+      {inputValue.length === 0 ? (
+        <MyButton>
+          <BsSearch />
+        </MyButton>
+      ) : (
+        <MyButton clickButton={() => clearInput()}>
+          <MdClear />
+        </MyButton>
+      )}
     </S.InputItem>
   );
 };

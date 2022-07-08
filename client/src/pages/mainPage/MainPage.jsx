@@ -27,7 +27,6 @@ const MainPage = (props) => {
 
   const [popupOpen, setPopupOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  // const [filteredData, setFilteredData] = useState([]);
 
   const filteredFolders = testData.filter((element) => {
     return element.title.toLowerCase().includes(inputValue.toLowerCase());
@@ -38,6 +37,9 @@ const MainPage = (props) => {
     setInputValue(searchItem);
   };
 
+  const clearInput = () => {
+    setInputValue("");
+  };
 
   const handleModalState = (id) => {
     dispatch(changeModalState(id));
@@ -59,7 +61,7 @@ const MainPage = (props) => {
       <PageBasicLayout.PageHeader>
         <Box ml={16} width={1}>
           <Flex justifyContent="space-around" alignItems="center">
-            <SearchInput inputValue={inputValue} setInputValue={setInputValue} handleFilter={folderFilter}/>
+            <SearchInput inputValue={inputValue} setInputValue={setInputValue} handleFilter={folderFilter} clearInput={clearInput}/>
           </Flex>
         </Box>
       </PageBasicLayout.PageHeader>

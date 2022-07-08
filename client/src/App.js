@@ -1,4 +1,3 @@
-import { Loader, UnderConstruction } from "./components/presentational";
 import { MainContent, RegistrationPage } from "./pages";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
@@ -6,15 +5,9 @@ import { Photos } from "./pages";
 import { RecycleBin } from "./pages";
 import { SharedFiles } from "./pages";
 import { LoginPage } from "./pages";
-import { MyModal } from "./components/presentational";
 import { useEffect, useState } from "react";
-import { UserCard } from "./components/presentational";
 import { MainPage, PageNotFound } from "./pages";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  changeModalState,
-  changeModalStateClose,
-} from "./store/modalsDataSlice";
 import { authAsync } from "./store/authSlice";
 
 function App() {

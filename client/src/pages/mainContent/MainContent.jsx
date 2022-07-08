@@ -1,19 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  ButtonBlock,
-  Flex,
-  Loader,
-  MyButton,
-  OneElementCommandMenu,
-} from "../../components/presentational";
-import { CommandBar } from "../../components/presentational";
+import { ButtonBlock, Flex, Loader } from "../../components/presentational";
 import { AllFiles } from "../../components/presentational";
-// import * as S from "../../components/presentational/organisms/commandBar/styles";
 import * as S from "./styles";
 import { v4 as uuidv4 } from "uuid";
-import { CommandMenu } from "../../components/presentational";
 import { useSelector, useDispatch } from "react-redux";
 import { checkOneFile, uncheckAllFiles } from "../../store/foldersDataSlice";
 import { filesAPI } from "../../services/api/api";
@@ -27,11 +17,9 @@ import {
 } from "../../store/filesSlice";
 import { useOutletContext } from "react-router-dom";
 
-
 const MainContent = (props) => {
   const { testData, filteredFolders } = useOutletContext();
 
-  
   const currentDir = useSelector((state) => state.filesReducer.currentDir);
   const files = useSelector((state) => state.filesReducer.files);
   const dirStack = useSelector((state) => state.filesReducer.dirStack);
@@ -57,10 +45,10 @@ const MainContent = (props) => {
   // тестовый стейт для получения постов
 
   const [isLoading, setIsLoading] = useState(false);
-  const [showCommandMenu, setShowCommandMenu] = useState(false);
-  const [showOneElementCommandMenu, setshowOneElementCommandMenu] =
+  const [isShowCommandMenu, setIsShowCommandMenu] = useState(false);
+  const [isShowOneElementCommandMenu, setIsShowOneElementCommandMenu] =
     useState(false);
-  const [gridView, setGridView] = useState(false);
+  const [isGridView, setIsGridView] = useState(true);
   const [viewButtonsData, setViewButtonsData] = useState([
     { id: uuidv4(), value: "List", checked: false },
     { id: uuidv4(), value: "Tiles", checked: true },
@@ -92,8 +80,7 @@ const MainContent = (props) => {
     ],
   });
 
-  const [checkedElementsArray, setCheckedElementsArray] = useState([]);
-  const [selectedElementsNumber, setSelectedElementsNumber] = useState("");
+  // Change view: list or grid
 
   const changeView = (id, value) => {
     const changedViewButtonsData = dropdownButtonsData.viewButtonsData.map(
@@ -109,15 +96,22 @@ const MainContent = (props) => {
     setViewButtonsData(changedViewButtonsData);
 
     if (value === "Tiles") {
-      setGridView(true);
+      setIsGridView(true);
     } else if (value === "List") {
-      setGridView(false);
+      setIsGridView(false);
     }
+    cancelSelectionFile()
   };
+
+  // 2. Check files
+
+  const [checkedElementsArray, setCheckedElementsArray] = useState([]);
+  const [selectedElementsNumber, setSelectedElementsNumber] = useState("");
 
   const checkFile = (id, checked) => {
     dispatch(checkOneFile({ id, checked }));
-    //считаем кол-во чекнутых элементов
+
+    // Counting of checked elements
 
     let transformedArray = [];
     if (!checkedElementsArray.includes(id)) {
@@ -129,11 +123,11 @@ const MainContent = (props) => {
     }
 
     // показывать комманд меню или нет
-    
+
     if (transformedArray.length > 0) {
-      setShowCommandMenu(true);
+      setIsShowCommandMenu(true);
     } else {
-      setShowCommandMenu(false);
+      setIsShowCommandMenu(false);
     }
 
     setCheckedElementsArray([...transformedArray]);
@@ -142,8 +136,14 @@ const MainContent = (props) => {
 
   const cancelSelectionFile = () => {
     dispatch(uncheckAllFiles());
-    setCheckedElementsArray([]);
-    setShowCommandMenu(false);
+  //   const uncheckedFiles = testData.map((element) => {
+  //       element.checked = false;
+  //     return element
+  //   } 
+  // );
+  //   setCheckedElementsArray(uncheckedFiles);
+    setIsShowCommandMenu(false);
+    setCheckedElementsArray("");
   };
 
   const backClickHandler = () => {
@@ -182,7 +182,7 @@ const MainContent = (props) => {
   return (
     <S.MainContent>
       <S.Wrapper>
-          <ButtonBlock addNewFile={addNewFile} uploadFile={uploadFile} />
+        <ButtonBlock addNewFile={addNewFile} uploadFile={uploadFile} />
         {/* <Box>
         <MyButton clickButton={() => backClickHandler()}>Back</MyButton>
       </Box> */}
@@ -194,15 +194,18 @@ const MainContent = (props) => {
         ) : (
           <Flex justifyContent="center">
             <AllFiles
-            showCommandMenu={showCommandMenu}
+              isShowCommandMenu={isShowCommandMenu}
               dropdownButtonsData={dropdownButtonsData}
               data={testData}
               // data={files}
-              gridView={gridView}
+              isGridView={isGridView}
               sortFilter={sortFilter}
               checkFile={checkFile}
               changeView={changeView}
               filteredData={filteredFolders}
+              clickHandler={changeView}
+              selectedElementsNumber={selectedElementsNumber}
+              cancelSelectionFile={cancelSelectionFile}
             />
           </Flex>
         )}
