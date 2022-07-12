@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FolderGridView } from "../..";
 import { FolderListView } from "../..";
-import { MyDropdown, MyButton } from "../../../presentational";
+import { MyDropdown, MyButton, MyModal } from "../../../presentational";
 import {
   BsInfoCircle,
   BsChevronDown,
@@ -14,6 +14,7 @@ import {
 import * as S from "./styles";
 import { Flex } from "../../templates/flex/Flex.styled";
 import { CommandMenu } from "../commandMenu/CommandMenu";
+import { useSelector } from "react-redux";
 
 const AllFiles = (props) => {
   const {
@@ -28,8 +29,30 @@ const AllFiles = (props) => {
     viewButtonsData,
     clickHandler,
     selectedElementsNumber,
-    cancelSelectionFile
+    cancelSelectionFile,
+    deleteFileHandler,
+    handleModalState,
+    handleModalStateClose
   } = props;
+
+// sort
+const [sortConfig, setSortConfig] = useState({
+  sortKey: "sort",
+  direction: "ascending",
+});
+
+const handleItemClick = (sortKey) => {
+  let direction = "ascending";
+  if (
+    sortConfig &&
+    sortConfig.sortKey === sortKey &&
+    sortConfig.direction === "ascending"
+  ) {
+    direction = "descending";
+  }
+  setSortConfig({ sortKey, direction });
+};
+
 
 
   return (
@@ -55,7 +78,10 @@ const AllFiles = (props) => {
           </MyDropdown>
         </S.LeftButtons>
         {isShowCommandMenu ? (
-          <CommandMenu selectedElementsNumber={selectedElementsNumber} cancelSelectionFile={cancelSelectionFile}/>
+          <CommandMenu selectedElementsNumber={selectedElementsNumber} cancelSelectionFile={cancelSelectionFile}
+          deleteFileHandler={deleteFileHandler}
+          handleModalState={handleModalState}
+          />
         ) : (
           <></>
         )}
@@ -78,6 +104,7 @@ const AllFiles = (props) => {
           />
         )}
       </S.Content>
+
     </S.UploadedContent>
   );
 };

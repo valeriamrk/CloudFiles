@@ -16,25 +16,26 @@ const CommandMenu = (props) => {
     renameFile,
     cancelSelectionFile,
     selectedElementsNumber,
+    handleModalState,
   } = props;
 
   return (
     <S.CommandMenu>
       <S.RightButtons>
         {selectedElementsNumber === 1 ? (
-          <>
-            <MyButton clickButton={renameFile} startIcon={<BsPencilSquare />}>
-              Rename
-            </MyButton>
-            <MyButton clickButton={deleteFileHandler} startIcon={<BsBucket />}>
-              Delete
-            </MyButton>
-          </>
-        ) : (
-          <MyButton clickButton={deleteFileHandler} startIcon={<BsBucket />}>
-            Delete
+          <MyButton clickButton={renameFile} startIcon={<BsPencilSquare />}>
+            Rename
           </MyButton>
+        ) : (
+          <></>
         )}
+        <MyButton
+          // clickButton={deleteFileHandler}
+          clickButton={() => handleModalState({ id: 7 })}
+          startIcon={<BsBucket />}
+        >
+          Delete
+        </MyButton>
       </S.RightButtons>
 
       <S.LeftButtons>

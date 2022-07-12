@@ -1,6 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { ButtonBlock, Flex, Loader } from "../../components/presentational";
+import {
+  ButtonBlock,
+  Flex,
+  Loader,
+  MyButton,
+  MyModal,
+} from "../../components/presentational";
 import { AllFiles } from "../../components/presentational";
 import * as S from "./styles";
 import { v4 as uuidv4 } from "uuid";
@@ -18,7 +24,8 @@ import {
 import { useOutletContext } from "react-router-dom";
 
 const MainContent = (props) => {
-  const { testData, filteredFolders } = useOutletContext();
+  const { testData, filteredFolders, handleModalState, handleModalStateClose } =
+    useOutletContext();
 
   const currentDir = useSelector((state) => state.filesReducer.currentDir);
   const files = useSelector((state) => state.filesReducer.files);
@@ -27,6 +34,7 @@ const MainContent = (props) => {
     (state) => state.filesReducer.checkToDelete
   );
   // const testData = useSelector((state) => state.foldersData.allFolders);
+  const modalsData = useSelector((state) => state.modalsData.allModals);
 
   const dispatch = useDispatch();
 
@@ -100,7 +108,7 @@ const MainContent = (props) => {
     } else if (value === "List") {
       setIsGridView(false);
     }
-    cancelSelectionFile()
+    cancelSelectionFile();
   };
 
   // 2. Check files
@@ -111,6 +119,14 @@ const MainContent = (props) => {
   const checkFile = (id, checked) => {
     dispatch(checkOneFile({ id, checked }));
 
+    //работает только если данные вне стейта
+    //     testData.map((element) => {
+    //       if (element.id === id) {
+    //         element.checked = !checked;
+    //       }
+    //       return element;
+    //   }
+    // );
     // Counting of checked elements
 
     let transformedArray = [];
@@ -136,12 +152,14 @@ const MainContent = (props) => {
 
   const cancelSelectionFile = () => {
     dispatch(uncheckAllFiles());
-  //   const uncheckedFiles = testData.map((element) => {
-  //       element.checked = false;
-  //     return element
-  //   } 
-  // );
-  //   setCheckedElementsArray(uncheckedFiles);
+
+    //работает только если данные вне стейта
+    //   const uncheckedFiles = testData.map((element) => {
+    //       element.checked = false;
+    //     return element
+    //   }
+    // );
+    //   setCheckedElementsArray(uncheckedFiles);
     setIsShowCommandMenu(false);
     setCheckedElementsArray("");
   };
@@ -154,9 +172,6 @@ const MainContent = (props) => {
     dispatch(setCurrentDir(lastElementOfArray));
   };
 
-  const sortFilter = () => {
-    console.log("sort");
-  };
 
   const addNewFile = (name, type) => {
     dispatch(createDir({ name, type, currentDir }));
@@ -168,10 +183,9 @@ const MainContent = (props) => {
   };
 
   const deleteFileHandler = (e, id) => {
-    e.stopPropagation();
-    dispatch(checkToDeleteFile(id));
-    dispatch(deleteFile(id));
-
+    // e.stopPropagation();
+    // dispatch(checkToDeleteFile(id));
+    // dispatch(deleteFile(id));
     console.log("deletefile");
   };
 
@@ -199,17 +213,29 @@ const MainContent = (props) => {
               data={testData}
               // data={files}
               isGridView={isGridView}
-              sortFilter={sortFilter}
               checkFile={checkFile}
               changeView={changeView}
               filteredData={filteredFolders}
               clickHandler={changeView}
               selectedElementsNumber={selectedElementsNumber}
               cancelSelectionFile={cancelSelectionFile}
+              deleteFileHandler={deleteFileHandler}
+              handleModalState={handleModalState}
+              handleModalStateClose={handleModalStateClose}
             />
           </Flex>
         )}
       </S.Wrapper>
+      <MyModal
+        modalActive={modalsData[6].opened}
+        handleClose={handleModalStateClose}
+        modalsData={modalsData}
+      >
+        <S.ModalText>Are you sure you want to delete files?</S.ModalText>
+        <MyButton primary clickButton={deleteFileHandler}>
+          Delete
+        </MyButton>
+      </MyModal>
     </S.MainContent>
   );
 };

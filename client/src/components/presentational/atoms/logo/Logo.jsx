@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import * as S from "./styles";
 
 const Logo = (props) => {
-  const {handleClick} = props
+  const {handleCancelSelection} = props
   const navigate = useNavigate();
   const path = "";
   const handleItemClick = (event, path) => {
     navigate(path);
+    handleCancelSelection()
   };
   return (
     <S.Logo

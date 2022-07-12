@@ -32,6 +32,11 @@ const initialState = {
       title: "create new folder",
       opened: false,
     },
+    {
+      id: 7,
+      title: "delete",
+      opened: false,
+    },
 
   ],
 };

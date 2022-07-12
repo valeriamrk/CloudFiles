@@ -20,13 +20,15 @@ const NavigationSidebar = (props) => {
     navigate(path);
   };
 
-
+const handleCancelSelection = () => {
+  setSelectedIndex("")
+}
 
   return (
     <S.Sidebar>
       <S.LinksContainer>
         <S.LogoWrapper>
-          <Logo />
+          <Logo handleCancelSelection={handleCancelSelection}/>
         </S.LogoWrapper>
         {sidebarLinks.map((element, index) => (
           <S.LinksWrapper
