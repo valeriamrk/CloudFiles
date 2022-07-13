@@ -3,7 +3,9 @@ import { MyButton } from "../..";
 import * as S from "./styles";
 import { Box, Flex } from "../..";
 
-const DeleteFolder = () => {
+const DeleteFolder = (props) => {
+
+  const {deleteFileHandler} = props
   return (
     <S.DeleteFolderBody>
       <Box m={32}>
@@ -12,10 +14,11 @@ const DeleteFolder = () => {
           justifyContent={"center"}
           alignItems={"flex-start"}
         >
-          <S.Name>Delete</S.Name>
           <Flex flexDirection={"column"} alignItems={"flex-end"}>
             <S.Field>Do you really want to delete file?</S.Field>
-            <MyButton premium="premium">Delete</MyButton>
+            <MyButton 
+            clickButton={deleteFileHandler}
+            primary>Delete</MyButton>
           </Flex>
         </Flex>
       </Box>

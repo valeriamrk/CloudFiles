@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FolderGridView } from "../..";
 import { FolderListView } from "../..";
-import { MyDropdown, MyButton, MyModal } from "../../../presentational";
+import { MyDropdown, MyButton, MyModal, Loader } from "../../../presentational";
 import {
   BsInfoCircle,
   BsChevronDown,
@@ -15,6 +15,7 @@ import * as S from "./styles";
 import { Flex } from "../../templates/flex/Flex.styled";
 import { CommandMenu } from "../commandMenu/CommandMenu";
 import { useSelector } from "react-redux";
+import { sortRows } from "../../../../utils/helpers/sortHelper";
 
 const AllFiles = (props) => {
   const {
@@ -32,28 +33,9 @@ const AllFiles = (props) => {
     cancelSelectionFile,
     deleteFileHandler,
     handleModalState,
-    handleModalStateClose
+    handleModalStateClose,
+    isLoading,
   } = props;
-
-// sort
-const [sortConfig, setSortConfig] = useState({
-  sortKey: "sort",
-  direction: "ascending",
-});
-
-const handleItemClick = (sortKey) => {
-  let direction = "ascending";
-  if (
-    sortConfig &&
-    sortConfig.sortKey === sortKey &&
-    sortConfig.direction === "ascending"
-  ) {
-    direction = "descending";
-  }
-  setSortConfig({ sortKey, direction });
-};
-
-
 
   return (
     <S.UploadedContent>
@@ -78,33 +60,42 @@ const handleItemClick = (sortKey) => {
           </MyDropdown>
         </S.LeftButtons>
         {isShowCommandMenu ? (
-          <CommandMenu selectedElementsNumber={selectedElementsNumber} cancelSelectionFile={cancelSelectionFile}
-          deleteFileHandler={deleteFileHandler}
-          handleModalState={handleModalState}
+          <CommandMenu
+            selectedElementsNumber={selectedElementsNumber}
+            cancelSelectionFile={cancelSelectionFile}
+            deleteFileHandler={deleteFileHandler}
+            handleModalState={handleModalState}
           />
         ) : (
           <></>
         )}
       </S.Bar>
       <S.Content>
-        {isGridView ? (
-          <FolderGridView
-            data={data}
-            sortFilter={sortFilter}
-            checkFile={checkFile}
-            filteredData={filteredData}
-          />
+        {isLoading ? (
+          <Flex justifyContent="center">
+            <Loader />
+          </Flex>
         ) : (
-          <FolderListView
-            dropdownButtonsData={dropdownButtonsData}
-            data={data}
-            sortFilter={sortFilter}
-            checkFile={checkFile}
-            filteredData={filteredData}
-          />
+          <>
+            {isGridView ? (
+              <FolderGridView
+                data={data}
+                sortFilter={sortFilter}
+                checkFile={checkFile}
+                filteredData={filteredData}
+              />
+            ) : (
+              <FolderListView
+                dropdownButtonsData={dropdownButtonsData}
+                data={data}
+                sortFilter={sortFilter}
+                checkFile={checkFile}
+                filteredData={filteredData}
+              />
+            )}
+          </>
         )}
       </S.Content>
-
     </S.UploadedContent>
   );
 };

@@ -4,7 +4,7 @@ import * as S from "./styles";
 import DropdownListItem from "./DropdownListItem";
 
 const MyDropdown = (props) => {
-  const { dropdownButtonsData, children, clickHandler, buttonClick, ...other } = props;
+  const { dropdownButtonsData, children, buttonClick, ...other } = props;
   const [openDropdown, setOpenDropdown] = useState(false);
   const ref = useRef();
   useOnClickOutside(ref, () => setOpenDropdown(false));
@@ -18,7 +18,6 @@ const MyDropdown = (props) => {
       <S.DropdownContent openDropdown={openDropdown}>
         {dropdownButtonsData.map((element) => (
           <DropdownListItem
-            clickHandler={clickHandler}
             buttonClick={buttonClick}
             element={element}
           ></DropdownListItem>

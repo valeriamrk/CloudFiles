@@ -2,10 +2,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
   ButtonBlock,
+  DeleteFolder,
   Flex,
+  InputField,
   Loader,
   MyButton,
   MyModal,
+  RenameFolder,
 } from "../../components/presentational";
 import { AllFiles } from "../../components/presentational";
 import * as S from "./styles";
@@ -54,8 +57,6 @@ const MainContent = (props) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [isShowCommandMenu, setIsShowCommandMenu] = useState(false);
-  const [isShowOneElementCommandMenu, setIsShowOneElementCommandMenu] =
-    useState(false);
   const [isGridView, setIsGridView] = useState(true);
   const [viewButtonsData, setViewButtonsData] = useState([
     { id: uuidv4(), value: "List", checked: false },
@@ -201,11 +202,6 @@ const MainContent = (props) => {
         <MyButton clickButton={() => backClickHandler()}>Back</MyButton>
       </Box> */}
         <S.Title>All files</S.Title>
-        {isLoading ? (
-          <Flex justifyContent="center">
-            <Loader />
-          </Flex>
-        ) : (
           <Flex justifyContent="center">
             <AllFiles
               isShowCommandMenu={isShowCommandMenu}
@@ -222,19 +218,24 @@ const MainContent = (props) => {
               deleteFileHandler={deleteFileHandler}
               handleModalState={handleModalState}
               handleModalStateClose={handleModalStateClose}
+              isLoading={isLoading}
             />
           </Flex>
-        )}
       </S.Wrapper>
       <MyModal
         modalActive={modalsData[6].opened}
         handleClose={handleModalStateClose}
         modalsData={modalsData}
       >
-        <S.ModalText>Are you sure you want to delete files?</S.ModalText>
-        <MyButton primary clickButton={deleteFileHandler}>
-          Delete
-        </MyButton>
+        <DeleteFolder deleteFileHandler={deleteFileHandler}/>
+      </MyModal>
+
+      <MyModal
+        modalActive={modalsData[7].opened}
+        handleClose={handleModalStateClose}
+        modalsData={modalsData}
+      >
+        <RenameFolder renameFile={renameFile}/>
       </MyModal>
     </S.MainContent>
   );

@@ -23,7 +23,10 @@ const CommandMenu = (props) => {
     <S.CommandMenu>
       <S.RightButtons>
         {selectedElementsNumber === 1 ? (
-          <MyButton clickButton={renameFile} startIcon={<BsPencilSquare />}>
+          <MyButton
+            clickButton={() => handleModalState({ id: 8 })}
+            startIcon={<BsPencilSquare />}
+          >
             Rename
           </MyButton>
         ) : (

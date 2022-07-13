@@ -5,7 +5,7 @@ import { BsCheck2 } from "react-icons/bs";
 
 const DropdownListItem = (props) => {
 
-  const { element, clickHandler, buttonClick} = props;
+  const { element, buttonClick} = props;
 
 
   return (

@@ -37,6 +37,11 @@ const initialState = {
       title: "delete",
       opened: false,
     },
+    {
+      id: 8,
+      title: "rename",
+      opened: false,
+    },
 
   ],
 };
