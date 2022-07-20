@@ -8,16 +8,16 @@ const sortRows = (rows, sort) => {
     }
   };
 
-  const ascSort = (a, b) => {
-    if (b < a) return -1;
-    if (b > a) return 1;
-    if (a === b) return 0;
+  const ascSort = (a, b, sortKey) => {
+    if (b[sortKey] < a[sortKey]) return -1;
+    if (b[sortKey] > a[sortKey]) return 1;
+    if (a[sortKey] === b[sortKey]) return 0;
   };
 
-  const descSort = (a, b) => {
-    if (b < a) return 1;
-    if (b > a) return -1;
-    if (a === b) return 0;
+  const descSort = (a, b, sortKey) => {
+    if (b[sortKey] < a[sortKey]) return 1;
+    if (b[sortKey] > a[sortKey]) return -1;
+    if (a[sortKey] === b[sortKey]) return 0;
   };
   return rows.sort(getComparator(sort.sortKey, sort.direction));
 };

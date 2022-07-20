@@ -3,7 +3,7 @@ import FolderGridViewItem from "./FolderGridViewItem";
 import * as S from "./styles";
 
 const FolderGridView = (props) => {
-  const { data, checkFile, filteredData } = props;
+  const { data, checkFile, filteredData, sortedData } = props;
   if (!filteredData.length) {
     return <S.NotFound>Files not found</S.NotFound>;
   }

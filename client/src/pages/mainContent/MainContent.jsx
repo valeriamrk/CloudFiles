@@ -25,6 +25,7 @@ import {
   checkToDeleteFile,
 } from "../../store/filesSlice";
 import { useOutletContext } from "react-router-dom";
+import { changeViewCheck } from "../../store/dropdownButtonsSlice";
 
 const MainContent = (props) => {
   const { testData, filteredFolders, handleModalState, handleModalStateClose } =
@@ -38,6 +39,7 @@ const MainContent = (props) => {
   );
   // const testData = useSelector((state) => state.foldersData.allFolders);
   const modalsData = useSelector((state) => state.modalsData.allModals);
+  const dropdownButtons = useSelector((state) => state.dropdownButtonsData);
 
   const dispatch = useDispatch();
 
@@ -62,51 +64,42 @@ const MainContent = (props) => {
     { id: uuidv4(), value: "List", checked: false },
     { id: uuidv4(), value: "Tiles", checked: true },
   ]);
-  const [dropdownButtonsData, setDropdownButtonsData] = useState({
-    viewButtonsData: [
-      { id: uuidv4(), value: "List", checked: false },
-      { id: uuidv4(), value: "Tiles", checked: true },
-    ],
-    sortButtonsData: [
-      { id: uuidv4(), value: "A - Z", checked: true },
-      { id: uuidv4(), value: "Z - A", checked: false },
-    ],
-    newFileButtonsData: [
-      { id: uuidv4(), value: "Folder" },
-      { id: uuidv4(), value: "TXT file" },
-    ],
-    uploadFileButtonsData: [
-      { id: uuidv4(), value: "File", clickHandler: fileClickHandler },
-      { id: uuidv4(), value: "Folder", clickHandler: folderClickHandler },
-    ],
-    modifiedButtonsData: [
-      { id: uuidv4(), value: "Older to newer" },
-      { id: uuidv4(), value: "Newer to older" },
-    ],
-    sizeButtonsData: [
-      { id: uuidv4(), value: "Smaller to larger" },
-      { id: uuidv4(), value: "Larger to smaller" },
-    ],
-  });
+  // const [dropdownButtonsData, setDropdownButtonsData] = useState({
+  //   viewButtonsData: [
+  //     { id: uuidv4(), value: "List", checked: false },
+  //     { id: uuidv4(), value: "Tiles", checked: true },
+  //   ],
+  //   sortButtonsData: [
+  //     { id: uuidv4(), value: "A - Z", checked: true, direction: "ascending" },
+  //     { id: uuidv4(), value: "Z - A", checked: false, direction: "descending" },
+  //   ],
+  //   newFileButtonsData: [
+  //     { id: uuidv4(), value: "Folder" },
+  //     { id: uuidv4(), value: "TXT file" },
+  //   ],
+  //   uploadFileButtonsData: [
+  //     { id: uuidv4(), value: "File", clickHandler: fileClickHandler },
+  //     { id: uuidv4(), value: "Folder", clickHandler: folderClickHandler },
+  //   ],
+  //   modifiedButtonsData: [
+  //     { id: uuidv4(), value: "Older to newer" },
+  //     { id: uuidv4(), value: "Newer to older" },
+  //   ],
+  //   sizeButtonsData: [
+  //     { id: uuidv4(), value: "Smaller to larger" },
+  //     { id: uuidv4(), value: "Larger to smaller" },
+  //   ],
+  // });
 
-  // Change view: list or grid
+  
+  // 1. Change view: list or grid
 
-  const changeView = (id, value) => {
-    const changedViewButtonsData = dropdownButtonsData.viewButtonsData.map(
-      (element) => {
-        if (element.id === id) {
-          element.checked = true;
-        } else {
-          element.checked = false;
-        }
-        return element;
-      }
-    );
-    setViewButtonsData(changedViewButtonsData);
+  const changeView = (element) => {
+    dispatch(changeViewCheck(element.id));
 
-    if (value === "Tiles") {
+    if (element.value === "Tiles") {
       setIsGridView(true);
-    } else if (value === "List") {
+    } else if (element.value === "List") {
       setIsGridView(false);
     }
     cancelSelectionFile();
@@ -205,7 +198,7 @@ const MainContent = (props) => {
           <Flex justifyContent="center">
             <AllFiles
               isShowCommandMenu={isShowCommandMenu}
-              dropdownButtonsData={dropdownButtonsData}
+              dropdownButtonsData={dropdownButtons}
               data={testData}
               // data={files}
               isGridView={isGridView}

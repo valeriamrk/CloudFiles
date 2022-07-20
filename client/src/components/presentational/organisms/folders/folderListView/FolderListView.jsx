@@ -14,7 +14,7 @@ import {
 } from "react-icons/bs";
 
 const FolderListView = (props) => {
-  const { data, dropdownButtonsData, sortFilter, checkFile, filteredData } = props;
+  const { data, dropdownButtonsData, sortFilter, checkFile, filteredData, sortedData } = props;
   if (!filteredData.length) {
     return <S.NotFound>Files not found</S.NotFound>;
   }

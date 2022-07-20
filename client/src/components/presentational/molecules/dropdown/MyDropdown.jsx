@@ -18,6 +18,7 @@ const MyDropdown = (props) => {
       <S.DropdownContent openDropdown={openDropdown}>
         {dropdownButtonsData.map((element) => (
           <DropdownListItem
+            key={element.id}
             buttonClick={buttonClick}
             element={element}
           ></DropdownListItem>

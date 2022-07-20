@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { FolderGridView } from "../..";
 import { FolderListView } from "../..";
-import { MyDropdown, MyButton, MyModal, Loader } from "../../../presentational";
-import {
-  BsInfoCircle,
-  BsChevronDown,
-  BsPlusSquare,
-  BsUpload,
-  BsGrid,
-  BsSortDown,
-} from "react-icons/bs";
-
+import { MyDropdown, MyButton, Loader } from "../../../presentational";
+import { BsChevronDown, BsGrid, BsSortDown } from "react-icons/bs";
 import * as S from "./styles";
 import { Flex } from "../../templates/flex/Flex.styled";
 import { CommandMenu } from "../commandMenu/CommandMenu";
-import { useSelector } from "react-redux";
 import { sortRows } from "../../../../utils/helpers/sortHelper";
+import { useDispatch } from "react-redux";
+import { sortCheck } from "../../../../store/dropdownButtonsSlice";
 
 const AllFiles = (props) => {
   const {
@@ -27,22 +20,62 @@ const AllFiles = (props) => {
     changeView,
     isShowCommandMenu,
     filteredData,
-    viewButtonsData,
     clickHandler,
     selectedElementsNumber,
     cancelSelectionFile,
     deleteFileHandler,
     handleModalState,
-    handleModalStateClose,
     isLoading,
   } = props;
+  
+
+  // const [sortedData, setSortedData] = useState(data);
+  const [sortedData, setSortedData] = useState(filteredData);
+  const [sortConfig, setSortConfig] = useState({
+    sortKey: "title",
+    direction: "ascending",
+  });
+
+  useEffect(() => {
+    sortedAndFilteredData();
+  }, [sortConfig]);
+
+  const dispatch = useDispatch();
+
+  const sortedAndFilteredData = () => {
+    const sortedRows = sortRows(filteredData, sortConfig);
+    setSortedData(sortedRows);
+  };
+
+  // const sortedAndFilteredData = () => {
+  //   const changedData = [...data];
+
+  //   if (filteredData) {
+  //     const sortedRows = sortRows(filteredData, sortConfig);
+  //     setSortedData(sortedRows);
+  //   } else {
+  //     const sortedRows = sortRows(changedData, sortConfig);
+  //     setSortedData(sortedRows);
+  //   }
+  // };
+
+  const handleSortClick = (direction, id) => {
+    dispatch(sortCheck(id));
+    
+    setSortConfig({
+      sortKey: "title",
+      direction,
+    });
+  };
 
   return (
     <S.UploadedContent>
       <S.Bar>
         <S.LeftButtons>
           <MyDropdown
-            buttonClick={sortFilter}
+            buttonClick={(element) =>
+              handleSortClick(element.direction, element.id)
+            }
             dropdownButtonsData={dropdownButtonsData.sortButtonsData}
           >
             <MyButton startIcon={<BsSortDown />} endIcon={<BsChevronDown />}>
@@ -83,6 +116,7 @@ const AllFiles = (props) => {
                 sortFilter={sortFilter}
                 checkFile={checkFile}
                 filteredData={filteredData}
+                sortedData={sortedData}
               />
             ) : (
               <FolderListView
@@ -91,6 +125,7 @@ const AllFiles = (props) => {
                 sortFilter={sortFilter}
                 checkFile={checkFile}
                 filteredData={filteredData}
+                sortedData={sortedData}
               />
             )}
           </>

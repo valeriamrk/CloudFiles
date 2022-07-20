@@ -9,7 +9,7 @@ const DropdownListItem = (props) => {
 
 
   return (
-    <S.DropdownListItem onClick={() => buttonClick(element.id, element.value)}
+    <S.DropdownListItem onClick={() => buttonClick(element)}
     href="#">
       <S.Checked checked="checked">{element.checked && <BsCheck2 />}</S.Checked>
       <div>{element.value}</div>
