@@ -27,7 +27,6 @@ const AllFiles = (props) => {
     handleModalState,
     isLoading,
   } = props;
-  
 
   // const [sortedData, setSortedData] = useState(data);
   const [sortedData, setSortedData] = useState(filteredData);
@@ -40,10 +39,15 @@ const AllFiles = (props) => {
     sortedAndFilteredData();
   }, [sortConfig]);
 
+  useEffect(() => {
+    setSortedData(filteredData);
+  }, [filteredData]);
+
   const dispatch = useDispatch();
 
   const sortedAndFilteredData = () => {
-    const sortedRows = sortRows(filteredData, sortConfig);
+    // const sortedRows = sortRows(filteredData, sortConfig);
+    const sortedRows = sortRows(sortedData, sortConfig);
     setSortedData(sortedRows);
   };
 
@@ -61,7 +65,7 @@ const AllFiles = (props) => {
 
   const handleSortClick = (direction, id) => {
     dispatch(sortCheck(id));
-    
+
     setSortConfig({
       sortKey: "title",
       direction,
@@ -112,10 +116,10 @@ const AllFiles = (props) => {
           <>
             {isGridView ? (
               <FolderGridView
-                data={data}
-                sortFilter={sortFilter}
+                // data={data}
+                // sortFilter={sortFilter}
                 checkFile={checkFile}
-                filteredData={filteredData}
+                // filteredData={filteredData}
                 sortedData={sortedData}
               />
             ) : (
@@ -124,7 +128,7 @@ const AllFiles = (props) => {
                 data={data}
                 sortFilter={sortFilter}
                 checkFile={checkFile}
-                filteredData={filteredData}
+                // filteredData={filteredData}
                 sortedData={sortedData}
               />
             )}

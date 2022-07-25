@@ -15,7 +15,7 @@ import {
 
 const FolderListView = (props) => {
   const { data, dropdownButtonsData, sortFilter, checkFile, filteredData, sortedData } = props;
-  if (!filteredData.length) {
+  if (!sortedData.length) {
     return <S.NotFound>Files not found</S.NotFound>;
   }
 
@@ -72,7 +72,7 @@ const FolderListView = (props) => {
           </S.SizeContainer>
         </MyDropdown>
       </S.HeaderStyle>
-      {filteredData.map((element) => (
+      {sortedData.map((element) => (
         <FolderListViewItem
           id={element.id}
           title={element.title}
