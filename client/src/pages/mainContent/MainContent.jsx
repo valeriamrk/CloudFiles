@@ -17,6 +17,10 @@ import { CommandMenu } from "../../components/presentational";
 import { useSelector, useDispatch } from "react-redux";
 import { checkOneFile, uncheckAllFiles } from "../../store/foldersDataSlice";
 import { filesAPI } from "../../services/api/api";
+
+import { collection, addDoc, getDocs } from "firebase/firestore";
+import { db } from "../../services/dbConnect";
+
 import {
   createDir,
   getAllFiles,
@@ -27,11 +31,9 @@ import {
 } from "../../store/filesSlice";
 import { useOutletContext } from "react-router-dom";
 
-
 const MainContent = (props) => {
   const { testData, filteredFolders } = useOutletContext();
 
-  
   const currentDir = useSelector((state) => state.filesReducer.currentDir);
   const files = useSelector((state) => state.filesReducer.files);
   const dirStack = useSelector((state) => state.filesReducer.dirStack);
@@ -129,7 +131,7 @@ const MainContent = (props) => {
     }
 
     // показывать комманд меню или нет
-    
+
     if (transformedArray.length > 0) {
       setShowCommandMenu(true);
     } else {
@@ -162,6 +164,30 @@ const MainContent = (props) => {
     dispatch(createDir({ name, type, currentDir }));
     console.log("newfile", name, type);
   };
+  const someButton = async () => {
+    console.log("TEST Button");
+    const savedUser = localStorage.getItem("user");
+    console.log(savedUser);
+    // try {
+    //   const docRef = await addDoc(collection(db, "Files"), {
+    //     first: "Ada",
+    //     last: "Lovelace",
+    //     born: 1815
+    //   });
+    //   console.log("Document written with ID: ", docRef.id);
+    // } catch (error) {
+    //   console.error("Error adding document: ", error);
+    // }
+
+    // try {
+    //   const querySnapshot = await getDocs(collection(db, "Files"));
+    //   querySnapshot.forEach((doc) => {
+    //     console.log(`${doc.id} => ${doc.data()}`);
+    //   });
+    // } catch (error) {
+    //   console.error("Error adding document: ", error);
+    // }
+  };
 
   const uploadFile = () => {
     console.log("uploadfile");
@@ -182,7 +208,11 @@ const MainContent = (props) => {
   return (
     <S.MainContent>
       <S.Wrapper>
-          <ButtonBlock addNewFile={addNewFile} uploadFile={uploadFile} />
+        <ButtonBlock
+          addNewFile={addNewFile}
+          uploadFile={uploadFile}
+          someButton={someButton}
+        />
         {/* <Box>
         <MyButton clickButton={() => backClickHandler()}>Back</MyButton>
       </Box> */}
@@ -194,7 +224,7 @@ const MainContent = (props) => {
         ) : (
           <Flex justifyContent="center">
             <AllFiles
-            showCommandMenu={showCommandMenu}
+              showCommandMenu={showCommandMenu}
               dropdownButtonsData={dropdownButtonsData}
               data={testData}
               // data={files}

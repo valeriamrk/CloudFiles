@@ -21,7 +21,7 @@ import {
 } from "../../../../store/modalsDataSlice";
 
 const ButtonBlock = (props) => {
-  const { addNewFile, uploadFile } = props;
+  const { addNewFile, uploadFile, someButton } = props;
   const dispatch = useDispatch();
   const modalsData = useSelector((state) => state.modalsData.allModals);
 
@@ -50,7 +50,9 @@ const ButtonBlock = (props) => {
         </MyButton>
       </S.SecondBlock>
       <S.ThirdBlock>
-        <MyButton startIcon={<BsUpload />}>Some button</MyButton>
+        <MyButton startIcon={<BsUpload />} clickButton={() => someButton()}>
+          Some button
+        </MyButton>
       </S.ThirdBlock>
       <MyModal
         modalActive={modalsData[4].opened}

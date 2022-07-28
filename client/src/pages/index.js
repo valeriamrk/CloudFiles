@@ -1,8 +1,9 @@
-export * from "./loginPage/LoginPage"
 export * from "./photos/Photos"
 export * from "./recycleBin/RecycleBin"
 export * from "./sharedFiles/SharedFiles"
 export * from "./mainContent/MainContent"
 export * from "./mainPage/MainPage"
 export * from "./pageNotFound/PageNotFound"
-export * from ".//registrationPage/RegistrationPage"
+
+export * from "./signIn/SignIn"
+export * from "./signUp/SignUp"

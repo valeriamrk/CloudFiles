@@ -1,33 +1,21 @@
-import { Loader, UnderConstruction } from "./components/presentational";
-import { MainContent, RegistrationPage } from "./pages";
-import "./App.css";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Photos } from "./pages";
-import { RecycleBin } from "./pages";
-import { SharedFiles } from "./pages";
-import { LoginPage } from "./pages";
-import { MyModal } from "./components/presentational";
-import { useEffect, useState } from "react";
-import { UserCard } from "./components/presentational";
-import { MainPage, PageNotFound } from "./pages";
-import { useSelector, useDispatch } from "react-redux";
+import { useAuth } from "./utils/hooks/useAuth";
 import {
-  changeModalState,
-  changeModalStateClose,
-} from "./store/modalsDataSlice";
-import { authAsync } from "./store/authSlice";
+  MainPage,
+  MainContent,
+  SignIn,
+  SignUp,
+  PageNotFound,
+  Photos,
+  RecycleBin,
+  SharedFiles,
+} from "./pages";
+import "./App.css";
 
 function App() {
-  const isAuth = true;
-  // const isLoading = useSelector((state) => state.authReducer.loader);
-
-  // const isAuth = useSelector((state) => state.authReducer.isAuth);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(authAsync());
-    console.log("AUTH RENDER")
-  }, []);
+  const { isAuth } = useAuth();
+  console.log(isAuth)
 
   return (
     <Routes>
@@ -41,7 +29,7 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Route>
       ) : (
-        <Route index element={<LoginPage />} />
+        <Route index element={<SignIn />} />
         // <Route path="/" element={<LoginPage />} />
         // <Route path="*" element={<NotFound />} />
       )}

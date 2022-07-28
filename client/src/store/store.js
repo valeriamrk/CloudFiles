@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import foldersDataSlice from "./foldersDataSlice";
 import modalsDataSlice from "./modalsDataSlice";
 import sidebarLinksSlice from "./sidebarLinksSlice";
+import authSlice from "./authSlice";
 
 // test slice
 import filesReducerSlice from "./filesSlice";
@@ -14,6 +15,7 @@ const store = configureStore({
     modalsData: modalsDataSlice,
     filesReducer: filesReducerSlice,
     authReducer: authReducerSlice,
+    auth: authSlice,
   },
 });
 

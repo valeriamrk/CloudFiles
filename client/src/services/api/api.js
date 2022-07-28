@@ -1,5 +1,5 @@
 import * as axios from "axios";
-import { loginAsync } from "../../store/authSlice";
+// import { loginAsync } from "../../store/authSlice_OLD";
 
 const instance = axios.create({
   baseURL: "http://localhost:5500/",

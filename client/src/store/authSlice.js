@@ -1,40 +1,42 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { usersAPI } from "../services/api/api";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../dbConnect";
 
-export const registrationAsync = createAsyncThunk(
-  "auth/registration",
-  async (params, {rejectWithValue}) => {
+export const userLogin = createAsyncThunk(
+  "user/login",
+  async (params) => {
+      const auth = getAuth();
+      const { user } = await signInWithEmailAndPassword(auth, params.email, params.password);
+      return user;
+  }
+);
+
+export const userRegister = createAsyncThunk(
+  "user/register",
+  async (params, { rejectWithValue }) => {
     try {
-      const response = await usersAPI.registration(
-        params.email,
-        params.password
-      );
-      return response.data;
+      const auth = getAuth();
+      const { user } = await createUserWithEmailAndPassword(auth, params.email, params.password);
+      return user;
     } catch (error) {
-      return rejectWithValue(error.response.data)
+      return rejectWithValue(error);
     }
   }
 );
 
-export const loginAsync = createAsyncThunk("auth/login", async (params, {rejectWithValue}) => {
-  try {
-    const response = await usersAPI.login(params.email, params.password);
-    localStorage.setItem("token", response.data.token);
-    return response.data.user;
-  } catch (error) {
-    return rejectWithValue(error.response.data)
+export const userFetch = createAsyncThunk(
+  "user/fetch",
+  async (params) => {
+      onAuthStateChanged(auth, (currentUser) => {
+        if (currentUser) {
+          localStorage.setItem("isAuthenticated", true);
+        } else {
+          localStorage.removeItem("isAuthenticated");
+        }
+      });
   }
-});
-export const authAsync = createAsyncThunk("auth/auth", async ({ rejectWithValue }) => {
-  try {
-    const response = await usersAPI.auth();
-    localStorage.setItem("token");
-    return response.data.user;
-  } catch (error) {
-    localStorage.removeItem('token');
-    return rejectWithValue(error.response.data)
-  }
-});
+
+);
 
 const setError = (state, action) => {
   state.status = "rejected";
@@ -42,50 +44,42 @@ const setError = (state, action) => {
 };
 
 const initialState = {
-  currentUser: {},
-  isAuth: false,
-  loader: false
+  email: null,
+  token: null,
+  id: null,
+  user: null,
+  userAsync: null
 };
 
-export const authReducerSlice = createSlice({
-  name: "authReducer",
+export const authSlice = createSlice({
+  name: "auth",
   initialState,
   reducers: {
+    login: (state, action) => {
+      state.email = action.payload.email;
+      state.token = action.payload.token;
+      state.id = action.payload.id;
+    },
     logout: (state, action) => {
-      state.currentUser = {};
-      localStorage.removeItem("token");
-      state.isAuth = false;
+      state.email = null;
+      state.token = null;
+      state.id = null;
     },
   },
   extraReducers: {
-    [registrationAsync.fulfilled]: (state, action) => {
-      state.currentUser = action.payload;
+    [userLogin.fulfilled]: (state, action) => {
+      state.userAsync = action.payload
     },
-    [registrationAsync.rejected]: setError,
+    // [userLogin.rejected]: setError,
+    // [userLogin.rejected]: setError,
 
-    [loginAsync.fulfilled]: (state, action) => {
-      state.currentUser = action.payload;
-      state.isAuth = true;
+    [userRegister.fulfilled]: (state, action) => {
+      state.userAsync = action.payload
     },
-    [loginAsync.rejected]: setError,
-
-    [authAsync.pending]: (state, action) => {
-      state.loader = true;
-    },
-    [authAsync.fulfilled]: (state, action) => {
-      state.currentUser = action.payload;
-      state.isAuth = true;
-      state.loader = false;
-    },
-    [authAsync.rejected] : (state, action) => {
-      state.isAuth = false;
-      state.loader = false;
-      state.status = "rejected";
-      state.error = action.payload;
-    }
+    [userRegister.rejected]: setError,
   },
 });
 
-export const { logout } = authReducerSlice.actions;
+export const { login, logout } = authSlice.actions;
 
-export default authReducerSlice.reducer;
+export default authSlice.reducer;

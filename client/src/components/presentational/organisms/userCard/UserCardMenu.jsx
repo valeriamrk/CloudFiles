@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { MyButton } from "../..";
-import { logout } from "../../../../store/authSlice";
+// import { logout } from "../../../../store/authSlice_OLD";
 import { useOnClickOutside } from "../../../../utils/hooks/useOnClickOutside";
 import * as S from "./styles";
 import { BsGear, BsQuestionCircle, BsBoxArrowRight } from "react-icons/bs";
@@ -40,17 +40,17 @@ const UserCardMenu = (props) => {
         </MyButton>
       </S.UserMenuItem>
       <S.UserMenuItem
-        onClick={() => {
-          dispatch(logout());
-          navigate("/");
-        }}
+      // onClick={() => {
+      //   dispatch(logout());
+      //   navigate("/");
+      // }}
       >
         <MyButton
           startIcon={<BsBoxArrowRight />}
-          clickButton={() => {
-            dispatch(logout());
-            navigate("/");
-          }}
+          // clickButton={() => {
+          //   dispatch(logout());
+          //   navigate("/");
+          // }}
         >
           Logout
         </MyButton>

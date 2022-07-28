@@ -45,16 +45,16 @@ const InfoBlock = (props) => {
       >
         Help Center
       </MyButton>
-            <Box mt={16}>
-      <MyButton
-        startIcon={<BsBoxArrowRight />}
-        clickButton={() => {
-          dispatch(logout());
-          navigate("/");
-        }}
-      >
-        Logout
-      </MyButton>
+      <Box mt={16}>
+        <MyButton
+          startIcon={<BsBoxArrowRight />}
+          clickButton={() => {
+            dispatch(logout());
+            navigate("/");
+          }}
+        >
+          Logout
+        </MyButton>
       </Box>
     </S.BlocksWrapper>
   );
