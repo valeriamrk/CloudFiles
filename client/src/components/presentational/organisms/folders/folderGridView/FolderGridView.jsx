@@ -3,14 +3,14 @@ import FolderGridViewItem from "./FolderGridViewItem";
 import * as S from "./styles";
 
 const FolderGridView = (props) => {
-  const { data, checkFile, filteredData } = props;
-  if (!filteredData.length) {
+  const { checkFile, sortedData } = props;
+  if (!sortedData.length) {
     return <S.NotFound>Files not found</S.NotFound>;
   }
 
   return (
     <S.GridView>
-      {filteredData.map((element) => (
+      {sortedData.map((element) => (
         <FolderGridViewItem
           id={element.id}
           name={element.title}

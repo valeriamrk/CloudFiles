@@ -5,13 +5,9 @@ export const DeleteFolderBody = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
 
-`;
-export const Name = styled.div`
-  font-size: 20px;
-  font-weight: 500;
-  margin-bottom: 12px;
-`;
+
 export const Field = styled.div`
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 `;

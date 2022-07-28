@@ -25,3 +25,7 @@ margin: 24px 0px 16px 32px;
 /* margin-bottom: 8px; */
 
 `
+
+export const ModalText = styled.div `
+margin: 16px;
+`

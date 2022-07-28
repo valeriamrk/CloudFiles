@@ -5,6 +5,7 @@ export const CreateNewFolderBody = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 30px;
 `;
 export const Name = styled.div`
   font-size: 20px;

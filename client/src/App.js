@@ -12,6 +12,17 @@ import {
   SharedFiles,
 } from "./pages";
 import "./App.css";
+import { MainContent, RegistrationPage } from "./pages";
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import { Photos } from "./pages";
+import { RecycleBin } from "./pages";
+import { SharedFiles } from "./pages";
+import { LoginPage } from "./pages";
+import { useEffect, useState } from "react";
+import { MainPage, PageNotFound } from "./pages";
+import { useSelector, useDispatch } from "react-redux";
+import { authAsync } from "./store/authSlice";
 
 function App() {
   const { isAuth } = useAuth();

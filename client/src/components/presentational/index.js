@@ -1,4 +1,5 @@
 export * from "./atoms/checkbox/Checkbox";
+export * from "./atoms/checkbox/StyledCheckbox";
 export * from "./atoms/inputField/InputField";
 export * from "./atoms/loader/Loader";
 export * from "./atoms/myButton/MyButton";

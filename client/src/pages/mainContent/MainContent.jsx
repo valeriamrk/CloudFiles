@@ -1,19 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
-  Box,
   ButtonBlock,
+  DeleteFolder,
   Flex,
+  InputField,
   Loader,
   MyButton,
-  OneElementCommandMenu,
+  MyModal,
+  RenameFolder,
 } from "../../components/presentational";
-import { CommandBar } from "../../components/presentational";
 import { AllFiles } from "../../components/presentational";
-// import * as S from "../../components/presentational/organisms/commandBar/styles";
 import * as S from "./styles";
 import { v4 as uuidv4 } from "uuid";
-import { CommandMenu } from "../../components/presentational";
 import { useSelector, useDispatch } from "react-redux";
 import { checkOneFile, uncheckAllFiles } from "../../store/foldersDataSlice";
 import { filesAPI } from "../../services/api/api";
@@ -30,9 +29,11 @@ import {
   checkToDeleteFile,
 } from "../../store/filesSlice";
 import { useOutletContext } from "react-router-dom";
+import { changeViewCheck } from "../../store/dropdownButtonsSlice";
 
 const MainContent = (props) => {
-  const { testData, filteredFolders } = useOutletContext();
+  const { testData, filteredFolders, handleModalState, handleModalStateClose } =
+    useOutletContext();
 
   const currentDir = useSelector((state) => state.filesReducer.currentDir);
   const files = useSelector((state) => state.filesReducer.files);
@@ -41,6 +42,8 @@ const MainContent = (props) => {
     (state) => state.filesReducer.checkToDelete
   );
   // const testData = useSelector((state) => state.foldersData.allFolders);
+  const modalsData = useSelector((state) => state.modalsData.allModals);
+  const dropdownButtons = useSelector((state) => state.dropdownButtonsData);
 
   const dispatch = useDispatch();
 
@@ -59,67 +62,69 @@ const MainContent = (props) => {
   // тестовый стейт для получения постов
 
   const [isLoading, setIsLoading] = useState(false);
-  const [showCommandMenu, setShowCommandMenu] = useState(false);
-  const [showOneElementCommandMenu, setshowOneElementCommandMenu] =
-    useState(false);
-  const [gridView, setGridView] = useState(true);
+  const [isShowCommandMenu, setIsShowCommandMenu] = useState(false);
+  const [isGridView, setIsGridView] = useState(true);
   const [viewButtonsData, setViewButtonsData] = useState([
     { id: uuidv4(), value: "List", checked: false },
     { id: uuidv4(), value: "Tiles", checked: true },
   ]);
-  const [dropdownButtonsData, setDropdownButtonsData] = useState({
-    viewButtonsData: [
-      { id: uuidv4(), value: "List", checked: false },
-      { id: uuidv4(), value: "Tiles", checked: true },
-    ],
-    sortButtonsData: [
-      { id: uuidv4(), value: "A - Z", checked: true },
-      { id: uuidv4(), value: "Z - A", checked: false },
-    ],
-    newFileButtonsData: [
-      { id: uuidv4(), value: "Folder" },
-      { id: uuidv4(), value: "TXT file" },
-    ],
-    uploadFileButtonsData: [
-      { id: uuidv4(), value: "File", clickHandler: fileClickHandler },
-      { id: uuidv4(), value: "Folder", clickHandler: folderClickHandler },
-    ],
-    modifiedButtonsData: [
-      { id: uuidv4(), value: "Older to newer" },
-      { id: uuidv4(), value: "Newer to older" },
-    ],
-    sizeButtonsData: [
-      { id: uuidv4(), value: "Smaller to larger" },
-      { id: uuidv4(), value: "Larger to smaller" },
-    ],
-  });
+  // const [dropdownButtonsData, setDropdownButtonsData] = useState({
+  //   viewButtonsData: [
+  //     { id: uuidv4(), value: "List", checked: false },
+  //     { id: uuidv4(), value: "Tiles", checked: true },
+  //   ],
+  //   sortButtonsData: [
+  //     { id: uuidv4(), value: "A - Z", checked: true, direction: "ascending" },
+  //     { id: uuidv4(), value: "Z - A", checked: false, direction: "descending" },
+  //   ],
+  //   newFileButtonsData: [
+  //     { id: uuidv4(), value: "Folder" },
+  //     { id: uuidv4(), value: "TXT file" },
+  //   ],
+  //   uploadFileButtonsData: [
+  //     { id: uuidv4(), value: "File", clickHandler: fileClickHandler },
+  //     { id: uuidv4(), value: "Folder", clickHandler: folderClickHandler },
+  //   ],
+  //   modifiedButtonsData: [
+  //     { id: uuidv4(), value: "Older to newer" },
+  //     { id: uuidv4(), value: "Newer to older" },
+  //   ],
+  //   sizeButtonsData: [
+  //     { id: uuidv4(), value: "Smaller to larger" },
+  //     { id: uuidv4(), value: "Larger to smaller" },
+  //   ],
+  // });
+
+  // 1. Change view: list or grid
+
+  const changeView = (element) => {
+    dispatch(changeViewCheck(element.id));
+
+    if (element.value === "Tiles") {
+      setIsGridView(true);
+    } else if (element.value === "List") {
+      setIsGridView(false);
+    }
+    cancelSelectionFile();
+  };
+
+  // 2. Check files
 
   const [checkedElementsArray, setCheckedElementsArray] = useState([]);
   const [selectedElementsNumber, setSelectedElementsNumber] = useState("");
 
-  const changeView = (id, value) => {
-    const changedViewButtonsData = dropdownButtonsData.viewButtonsData.map(
-      (element) => {
-        if (element.id === id) {
-          element.checked = true;
-        } else {
-          element.checked = false;
-        }
-        return element;
-      }
-    );
-    setViewButtonsData(changedViewButtonsData);
-
-    if (value === "Tiles") {
-      setGridView(true);
-    } else if (value === "List") {
-      setGridView(false);
-    }
-  };
-
   const checkFile = (id, checked) => {
     dispatch(checkOneFile({ id, checked }));
-    //считаем кол-во чекнутых элементов
+
+    //работает только если данные вне стейта
+    //     testData.map((element) => {
+    //       if (element.id === id) {
+    //         element.checked = !checked;
+    //       }
+    //       return element;
+    //   }
+    // );
+    // Counting of checked elements
 
     let transformedArray = [];
     if (!checkedElementsArray.includes(id)) {
@@ -133,9 +138,9 @@ const MainContent = (props) => {
     // показывать комманд меню или нет
 
     if (transformedArray.length > 0) {
-      setShowCommandMenu(true);
+      setIsShowCommandMenu(true);
     } else {
-      setShowCommandMenu(false);
+      setIsShowCommandMenu(false);
     }
 
     setCheckedElementsArray([...transformedArray]);
@@ -144,8 +149,16 @@ const MainContent = (props) => {
 
   const cancelSelectionFile = () => {
     dispatch(uncheckAllFiles());
-    setCheckedElementsArray([]);
-    setShowCommandMenu(false);
+
+    //работает только если данные вне стейта
+    //   const uncheckedFiles = testData.map((element) => {
+    //       element.checked = false;
+    //     return element
+    //   }
+    // );
+    //   setCheckedElementsArray(uncheckedFiles);
+    setIsShowCommandMenu(false);
+    setCheckedElementsArray("");
   };
 
   const backClickHandler = () => {
@@ -154,10 +167,6 @@ const MainContent = (props) => {
     const lastElementOfArray = copyOfArray.pop();
     dispatch(popToStack());
     dispatch(setCurrentDir(lastElementOfArray));
-  };
-
-  const sortFilter = () => {
-    console.log("sort");
   };
 
   const addNewFile = (name, type) => {
@@ -194,10 +203,9 @@ const MainContent = (props) => {
   };
 
   const deleteFileHandler = (e, id) => {
-    e.stopPropagation();
-    dispatch(checkToDeleteFile(id));
-    dispatch(deleteFile(id));
-
+    // e.stopPropagation();
+    // dispatch(checkToDeleteFile(id));
+    // dispatch(deleteFile(id));
     console.log("deletefile");
   };
 
@@ -213,30 +221,48 @@ const MainContent = (props) => {
           uploadFile={uploadFile}
           someButton={someButton}
         />
+        <ButtonBlock addNewFile={addNewFile} uploadFile={uploadFile} />
         {/* <Box>
         <MyButton clickButton={() => backClickHandler()}>Back</MyButton>
       </Box> */}
         <S.Title>All files</S.Title>
-        {isLoading ? (
-          <Flex justifyContent="center">
-            <Loader />
-          </Flex>
-        ) : (
-          <Flex justifyContent="center">
-            <AllFiles
-              showCommandMenu={showCommandMenu}
-              dropdownButtonsData={dropdownButtonsData}
-              data={testData}
-              // data={files}
-              gridView={gridView}
-              sortFilter={sortFilter}
-              checkFile={checkFile}
-              changeView={changeView}
-              filteredData={filteredFolders}
-            />
-          </Flex>
-        )}
+        <Flex justifyContent="center">
+          <AllFiles
+            showCommandMenu={showCommandMenu}
+            dropdownButtonsData={dropdownButtonsData}
+            isShowCommandMenu={isShowCommandMenu}
+            dropdownButtonsData={dropdownButtons}
+            data={testData}
+            // data={files}
+            isGridView={isGridView}
+            checkFile={checkFile}
+            changeView={changeView}
+            filteredData={filteredFolders}
+            clickHandler={changeView}
+            selectedElementsNumber={selectedElementsNumber}
+            cancelSelectionFile={cancelSelectionFile}
+            deleteFileHandler={deleteFileHandler}
+            handleModalState={handleModalState}
+            handleModalStateClose={handleModalStateClose}
+            isLoading={isLoading}
+          />
+        </Flex>
       </S.Wrapper>
+      <MyModal
+        modalActive={modalsData[6].opened}
+        handleClose={handleModalStateClose}
+        modalsData={modalsData}
+      >
+        <DeleteFolder deleteFileHandler={deleteFileHandler} />
+      </MyModal>
+
+      <MyModal
+        modalActive={modalsData[7].opened}
+        handleClose={handleModalStateClose}
+        modalsData={modalsData}
+      >
+        <RenameFolder renameFile={renameFile} />
+      </MyModal>
     </S.MainContent>
   );
 };

@@ -1,5 +1,4 @@
 import React from "react";
-import * as S from "./styles"
 
 
 const Checkbox = (props) => {
@@ -10,15 +9,12 @@ const Checkbox = (props) => {
   };
 
   return (
-    <div>
-      <S.Checkbox
+      <input
         id="checkbox"
         type="checkbox"
         checked={checked}
         onChange={() => changeCheckbox(id, checked)}
       />
-      <S.StyledCheckbox for="checkbox"></S.StyledCheckbox>
-    </div>
   );
 };
 

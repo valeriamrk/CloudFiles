@@ -16,29 +16,31 @@ const CommandMenu = (props) => {
     renameFile,
     cancelSelectionFile,
     selectedElementsNumber,
+    handleModalState,
   } = props;
-
-  const isOneEl = true;
 
   return (
     <S.CommandMenu>
       <S.RightButtons>
-        {isOneEl ? (
-          <>
-            <MyButton clickButton={deleteFileHandler} startIcon={<BsBucket />}>
-              Delete
-            </MyButton>
-            <MyButton clickButton={renameFile} startIcon={<BsPencilSquare />}>
-              Rename
-            </MyButton>
-          </>
-        ) : (
-          <MyButton clickButton={deleteFileHandler} startIcon={<BsBucket />}>
-            Delete
+        {selectedElementsNumber === 1 ? (
+          <MyButton
+            clickButton={() => handleModalState({ id: 8 })}
+            startIcon={<BsPencilSquare />}
+          >
+            Rename
           </MyButton>
+        ) : (
+          <></>
         )}
+        <MyButton
+          // clickButton={deleteFileHandler}
+          clickButton={() => handleModalState({ id: 7 })}
+          startIcon={<BsBucket />}
+        >
+          Delete
+        </MyButton>
       </S.RightButtons>
-      
+
       <S.LeftButtons>
         <MyButton clickButton={cancelSelectionFile} endIcon={<BsXLg />}>
           Selected: {selectedElementsNumber}
